@@ -2318,7 +2318,7 @@ h2 {
     font-size: 19px;
   }
   .brand-name > span {
-    font-size: 10px;
+    font-size: 12px;
   }
   .logo-mark {
     width: 35px;
@@ -2328,21 +2328,35 @@ h2 {
   .sidebar-bottom {
     display: none;
   }
+  .sidebar {
+    padding-bottom: 16px;
+  }
+  /* Меню закреплено внизу экрана, как таб-бар в мобильных приложениях */
   .sidebar nav {
+    position: fixed;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    z-index: 50;
     display: grid;
     grid-template-columns: repeat(4, 1fr);
-    gap: 5px;
-    margin-top: 20px;
+    gap: 4px;
+    margin: 0;
+    padding: 6px 8px calc(6px + env(safe-area-inset-bottom));
+    background: rgb(255 255 255 / 96%);
+    backdrop-filter: blur(12px);
+    border-top: 1px solid var(--border);
+    box-shadow: 0 -6px 24px rgb(29 56 35 / 8%);
   }
   .nav-item {
     flex-direction: column;
     justify-content: center;
-    gap: 6px;
+    gap: 4px;
     font-size: 12px;
-    padding: 10px 5px;
-    min-height: 66px;
-    margin: 0 0 9px;
-    border-radius: 8px;
+    padding: 6px 4px;
+    min-height: 58px;
+    margin: 0;
+    border-radius: 12px;
   }
   .nav-item.active::before,
   .nav-item > svg:last-child:not(:first-child) {
@@ -2360,23 +2374,23 @@ h2 {
     padding: 0 20px;
   }
   .topbar-product {
-    font-size: 10px;
+    font-size: 12px;
   }
   .topbar-product > svg {
     width: 16px;
   }
   .access-top {
-    font-size: 10px;
+    font-size: 12px;
     gap: 5px;
   }
   .access-top > svg {
     width: 19px;
   }
   main {
-    padding: 20px 20px 0;
+    padding: 20px 20px calc(84px + env(safe-area-inset-bottom));
   }
   .breadcrumb {
-    font-size: 10px;
+    font-size: 12px;
   }
   .page-heading {
     margin: 20px 0 22px;
@@ -2413,7 +2427,7 @@ h2 {
   .save-status {
     max-width: none;
     padding-bottom: 0;
-    font-size: 9px;
+    font-size: 12px;
   }
   .creator-grid {
     margin-top: 25px;
@@ -2422,38 +2436,39 @@ h2 {
   h2 {
     font-size: 17px;
   }
+  .catalog {
+    grid-template-columns: 1fr;
+    gap: 10px;
+  }
   .catalog-card {
-    min-height: 96px;
-    padding: 12px;
-    flex-wrap: wrap;
-    position: relative;
-    gap: 9px;
+    min-height: 72px;
+    padding: 12px 14px;
+    gap: 12px;
   }
   .catalog-icon {
-    width: 33px;
-    height: 33px;
-    border-radius: 7px;
-  }
-  .catalog-icon > svg {
-    width: 21px;
-  }
-  .catalog-text {
-    width: 100%;
+    width: 40px;
+    height: 40px;
+    border-radius: 10px;
     flex: none;
   }
+  .catalog-icon > svg {
+    width: 22px;
+  }
+  .catalog-text {
+    flex: 1;
+    min-width: 0;
+  }
   .catalog-text strong {
-    font-size: 12px;
+    font-size: 15px;
   }
   .catalog-text > span {
-    font-size: 9px;
-    line-height: 1.5;
-    margin-top: 5px;
+    font-size: 13px;
+    line-height: 1.4;
+    margin-top: 3px;
   }
   .catalog-plus {
-    position: absolute;
-    right: 12px;
-    top: 20px;
-    width: 18px;
+    flex: none;
+    width: 20px;
   }
   .workspace-heading {
     align-items: center;
@@ -2466,7 +2481,7 @@ h2 {
     display: none;
   }
   .edit-mode {
-    font-size: 8px;
+    font-size: 12px;
     gap: 4px;
     padding: 4px 6px;
   }
@@ -2481,7 +2496,12 @@ h2 {
     padding-bottom: 17px;
   }
   .widget-grid {
+    grid-template-columns: 1fr;
     gap: 10px;
+  }
+  .widget-grid > .wide,
+  .workspace-widget.wide {
+    grid-column: auto;
   }
   .workspace-widget {
     padding: 12px;
@@ -2496,7 +2516,7 @@ h2 {
     margin-top: 24px;
   }
   .balance-bottom {
-    font-size: 7px;
+    font-size: 12px;
     gap: 3px;
     margin-top: 16px;
   }
@@ -2504,7 +2524,7 @@ h2 {
     display: none;
   }
   .widget-topline {
-    font-size: 9px;
+    font-size: 12px;
     gap: 4px;
   }
   .widget-topline svg {
@@ -2518,33 +2538,33 @@ h2 {
     height: 35px;
   }
   .qr-content h3 {
-    font-size: 10px;
+    font-size: 12px;
     margin-top: 13px;
   }
   .qr-content p {
-    font-size: 8px;
+    font-size: 12px;
   }
   .history-heading h3 {
-    font-size: 11px;
+    font-size: 13px;
   }
   .transaction strong {
-    font-size: 11px;
+    font-size: 13px;
   }
   .transaction div > span {
-    font-size: 9px;
+    font-size: 12px;
   }
   .transaction > b {
-    font-size: 11px;
+    font-size: 13px;
   }
   .preview-bottom {
-    font-size: 7px;
+    font-size: 12px;
   }
   .editing-toolbar > div {
     width: 100%;
     justify-content: space-between;
   }
   .editing-toolbar button {
-    font-size: 9px;
+    font-size: 12px;
     padding: 8px 2px;
     min-height: 44px;
     gap: 4px;
@@ -2558,7 +2578,7 @@ h2 {
     gap: 17px;
   }
   .save-bar > span {
-    font-size: 9px;
+    font-size: 12px;
   }
   .save-bar > div {
     width: 100%;
@@ -2567,7 +2587,7 @@ h2 {
   .save-bar .button {
     flex: 1;
     min-width: 0;
-    font-size: 11px;
+    font-size: 13px;
     padding: 12px 10px;
     min-height: 49px;
     gap: 6px;
@@ -2576,11 +2596,11 @@ h2 {
     width: 17px;
   }
   .main-footer {
-    font-size: 8px;
+    font-size: 12px;
     padding: 17px 0;
   }
   .main-footer > span:last-child {
-    font-size: 7px;
+    font-size: 12px;
     gap: 3px;
   }
   .saved-grid {
@@ -2603,7 +2623,7 @@ h2 {
     min-height: 47px;
   }
   .saved-card-body > p {
-    font-size: 11px;
+    font-size: 13px;
   }
   .template-grid {
     grid-template-columns: 1fr;
@@ -2630,7 +2650,7 @@ h2 {
     min-height: 46px;
   }
   .template-tag {
-    font-size: 10px;
+    font-size: 12px;
   }
   .templates-heading {
     margin-top: 28px;
@@ -2654,7 +2674,7 @@ h2 {
     min-width: 0;
   }
   .export-config label {
-    font-size: 10px;
+    font-size: 12px;
   }
   .select-wrap select {
     font-size: 12px;
@@ -2682,13 +2702,13 @@ h2 {
   .format-card p {
     margin-top: 8px;
     min-height: auto;
-    font-size: 11px;
+    font-size: 13px;
     line-height: 1.8;
   }
   .format-details {
     grid-column: 1 / -1;
     margin: 20px 0 14px;
-    font-size: 11px;
+    font-size: 13px;
   }
   .format-card .button {
     grid-column: 1 / -1;
@@ -2703,7 +2723,7 @@ h2 {
     width: 21px;
   }
   .export-info p {
-    font-size: 11px;
+    font-size: 13px;
   }
   .format-heading p {
     font-size: 12px;
@@ -2726,7 +2746,8 @@ h2 {
   }
   .toast {
     left: 50%;
-    bottom: 15px;
+    bottom: calc(86px + env(safe-area-inset-bottom));
+    width: calc(100% - 32px);
     font-size: 12px;
     padding-left: 13px;
   }
@@ -2918,7 +2939,7 @@ h2 {
     line-height: 1.6;
   }
   .catalog-card {
-    min-height: 140px;
+    min-height: 72px;
   }
   .save-status,
   .saved-card-body > p,
@@ -3897,5 +3918,20 @@ h2 {
   }
   .subscription-list b {
     font-size: 16px;
+  }
+}
+
+/* Телефоны: текст не мельче 12px — продукт для людей со слабым зрением */
+@media (max-width: 700px) {
+  .count-badge,
+  .edit-mode,
+  .selected-label,
+  .editing-toolbar button {
+    font-size: 12px;
+  }
+  .main-footer {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 8px;
   }
 }
