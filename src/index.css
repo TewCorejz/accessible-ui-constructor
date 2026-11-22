@@ -2377,483 +2377,6 @@ h2 {
     font-size: 12px;
   }
 }
-@media (max-width: 700px) {
-  .sidebar {
-    position: static;
-    width: 100%;
-    padding: 19px 18px 0;
-    border-right: none;
-    border-bottom: 1px solid var(--border);
-  }
-  .brand {
-    align-self: flex-start;
-  }
-  .brand-name {
-    font-size: 19px;
-  }
-  .brand-name > span {
-    font-size: 12px;
-  }
-  .logo-mark {
-    width: 35px;
-    height: 35px;
-  }
-  .sidebar-label,
-  .sidebar-bottom {
-    display: none;
-  }
-  .sidebar {
-    padding-bottom: 16px;
-  }
-  /* Меню закреплено внизу экрана, как таб-бар в мобильных приложениях */
-  .sidebar nav {
-    position: fixed;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    z-index: 50;
-    display: grid;
-    grid-template-columns: repeat(4, 1fr);
-    gap: 4px;
-    margin: 0;
-    padding: 6px 8px calc(6px + env(safe-area-inset-bottom));
-    background: rgb(255 255 255 / 96%);
-    backdrop-filter: blur(12px);
-    border-top: 1px solid var(--border);
-    box-shadow: 0 -6px 24px rgb(29 56 35 / 8%);
-  }
-  .nav-item {
-    flex-direction: column;
-    justify-content: center;
-    gap: 4px;
-    font-size: 12px;
-    padding: 6px 4px;
-    min-height: 58px;
-    margin: 0;
-    border-radius: 12px;
-  }
-  .nav-item.active::before,
-  .nav-item > svg:last-child:not(:first-child) {
-    display: none;
-  }
-  .nav-item > svg {
-    width: 21px;
-    height: 21px;
-  }
-  .app-body {
-    margin: 0;
-  }
-  .topbar {
-    height: 52px;
-    padding: 0 20px;
-  }
-  .topbar-product {
-    font-size: 12px;
-  }
-  .topbar-product > svg {
-    width: 16px;
-  }
-  .access-top {
-    font-size: 12px;
-    gap: 5px;
-  }
-  .access-top > svg {
-    width: 19px;
-  }
-  main {
-    padding: 20px 20px calc(84px + env(safe-area-inset-bottom));
-  }
-  .breadcrumb {
-    font-size: 12px;
-  }
-  .page-heading {
-    margin: 20px 0 22px;
-  }
-  h1 {
-    font-size: 27px;
-    letter-spacing: -0.8px;
-  }
-  .page-heading p {
-    font-size: 12px;
-    line-height: 1.8;
-    margin-top: 10px;
-  }
-  .page-step {
-    display: none;
-  }
-  .name-panel {
-    padding: 17px;
-    flex-wrap: wrap;
-    gap: 11px;
-  }
-  .name-input-area {
-    width: 100%;
-  }
-  .name-input-area label {
-    font-size: 12px;
-  }
-  .name-input-wrap {
-    height: 50px;
-  }
-  .name-input-wrap input {
-    font-size: 16px;
-  }
-  .save-status {
-    max-width: none;
-    padding-bottom: 0;
-    font-size: 12px;
-  }
-  .creator-grid {
-    margin-top: 25px;
-    gap: 25px;
-  }
-  h2 {
-    font-size: 17px;
-  }
-  .catalog {
-    grid-template-columns: 1fr;
-    gap: 10px;
-  }
-  .catalog-card {
-    min-height: 72px;
-    padding: 12px 14px;
-    gap: 12px;
-  }
-  .catalog-icon {
-    width: 40px;
-    height: 40px;
-    border-radius: 10px;
-    flex: none;
-  }
-  .catalog-icon > svg {
-    width: 22px;
-  }
-  .catalog-text {
-    flex: 1;
-    min-width: 0;
-  }
-  .catalog-text strong {
-    font-size: 15px;
-  }
-  .catalog-text > span {
-    font-size: 13px;
-    line-height: 1.4;
-    margin-top: 3px;
-  }
-  .catalog-plus {
-    flex: none;
-    width: 20px;
-  }
-  .workspace-heading {
-    align-items: center;
-    gap: 6px;
-  }
-  .workspace-heading h2 {
-    font-size: 16px;
-  }
-  .workspace-heading .count-badge {
-    display: none;
-  }
-  .edit-mode {
-    font-size: 12px;
-    gap: 4px;
-    padding: 4px 6px;
-  }
-  .edit-mode > svg {
-    width: 13px;
-  }
-  .workspace {
-    padding: 12px;
-    min-height: 0;
-  }
-  .preview-header {
-    padding-bottom: 17px;
-  }
-  .widget-grid {
-    grid-template-columns: 1fr;
-    gap: 10px;
-  }
-  .widget-grid > .wide,
-  .workspace-widget.wide {
-    grid-column: auto;
-  }
-  .workspace-widget {
-    padding: 12px;
-  }
-  .workspace-widget.balance,
-  .workspace-widget.qr {
-    min-height: 165px;
-  }
-  .balance-value {
-    font-size: 23px;
-    letter-spacing: -0.8px;
-    margin-top: 24px;
-  }
-  .balance-bottom {
-    font-size: 12px;
-    gap: 3px;
-    margin-top: 16px;
-  }
-  .widget-topline {
-    font-size: 12px;
-    gap: 4px;
-  }
-  .widget-topline svg {
-    width: 15px;
-  }
-  .qr-symbol {
-    padding: 7px;
-  }
-  .qr-symbol svg {
-    width: 35px;
-    height: 35px;
-  }
-  .qr-content h3 {
-    font-size: 12px;
-    margin-top: 13px;
-  }
-  .qr-content p {
-    font-size: 12px;
-  }
-  .history-heading h3 {
-    font-size: 13px;
-  }
-  .transaction strong {
-    font-size: 13px;
-  }
-  .transaction div > span {
-    font-size: 12px;
-  }
-  .transaction > b {
-    font-size: 13px;
-  }
-  .preview-bottom {
-    font-size: 12px;
-  }
-  .editing-toolbar > div {
-    width: 100%;
-    justify-content: space-between;
-  }
-  .editing-toolbar button {
-    font-size: 12px;
-    padding: 8px 2px;
-    min-height: 44px;
-    gap: 4px;
-  }
-  .editing-toolbar button svg {
-    width: 14px;
-  }
-  .save-bar {
-    margin-top: 18px;
-    padding: 18px 0 24px;
-    gap: 17px;
-  }
-  .save-bar > span {
-    font-size: 12px;
-  }
-  .save-bar > div {
-    width: 100%;
-    gap: 8px;
-  }
-  .save-bar .button {
-    flex: 1;
-    min-width: 0;
-    font-size: 13px;
-    padding: 12px 10px;
-    min-height: 49px;
-    gap: 6px;
-  }
-  .save-bar .button > svg {
-    width: 17px;
-  }
-  .main-footer {
-    font-size: 12px;
-    padding: 17px 0;
-  }
-  .main-footer > span:last-child {
-    font-size: 12px;
-    gap: 3px;
-  }
-  .saved-grid {
-    grid-template-columns: 1fr;
-  }
-  .new-interface {
-    grid-column: auto;
-  }
-  .saved-card .mini-preview {
-    padding: 20px 35px;
-  }
-  .saved-card h3 {
-    font-size: 18px;
-  }
-  .saved-card-body {
-    padding: 20px;
-  }
-  .card-actions .button {
-    font-size: 12px;
-    min-height: 47px;
-  }
-  .saved-card-body > p {
-    font-size: 13px;
-  }
-  .template-grid {
-    grid-template-columns: 1fr;
-  }
-  .template-card:last-child {
-    grid-column: auto;
-    display: flex;
-  }
-  .template-card .mini-preview {
-    padding: 20px 35px;
-  }
-  .template-body {
-    padding: 20px;
-  }
-  .template-body h3,
-  .template-card:last-child .template-body h3 {
-    font-size: 18px;
-  }
-  .template-body p {
-    font-size: 12px;
-  }
-  .template-body .button {
-    font-size: 12px;
-    min-height: 46px;
-  }
-  .template-tag {
-    font-size: 12px;
-  }
-  .templates-heading {
-    margin-top: 28px;
-  }
-  .templates-heading p {
-    font-size: 12px;
-  }
-  .export-config {
-    padding: 18px;
-    gap: 12px;
-  }
-  .export-config-icon {
-    width: 43px;
-    height: 47px;
-    border-radius: 10px;
-  }
-  .export-config-icon svg {
-    width: 22px;
-  }
-  .export-config > div {
-    min-width: 0;
-  }
-  .export-config label {
-    font-size: 12px;
-  }
-  .select-wrap select {
-    font-size: 12px;
-    padding-left: 8px;
-  }
-  .format-grid {
-    grid-template-columns: 1fr;
-    gap: 17px;
-  }
-  .format-card {
-    padding: 23px;
-    display: grid;
-    grid-template-columns: 65px 1fr;
-    gap: 0 19px;
-  }
-  .file-icon {
-    grid-row: 1 / 3;
-    width: 62px;
-    height: 70px;
-  }
-  .format-card h3 {
-    margin-top: 3px;
-    font-size: 23px;
-  }
-  .format-card p {
-    margin-top: 8px;
-    min-height: auto;
-    font-size: 13px;
-    line-height: 1.8;
-  }
-  .format-details {
-    grid-column: 1 / -1;
-    margin: 20px 0 14px;
-    font-size: 13px;
-  }
-  .format-card .button {
-    grid-column: 1 / -1;
-    min-height: 46px;
-    font-size: 12px;
-  }
-  .export-info {
-    padding: 18px;
-    gap: 12px;
-  }
-  .export-info > svg {
-    width: 21px;
-  }
-  .export-info p {
-    font-size: 13px;
-  }
-  .format-heading p {
-    font-size: 12px;
-  }
-  .import-zone {
-    padding: 35px 18px;
-  }
-  .import-zone h2 {
-    font-size: 22px;
-  }
-  .import-zone p {
-    font-size: 12px;
-  }
-  .import-result {
-    padding: 16px;
-    flex-wrap: wrap;
-  }
-  .import-result .button {
-    width: 100%;
-  }
-  .toast {
-    left: 50%;
-    bottom: calc(86px + env(safe-area-inset-bottom));
-    width: calc(100% - 32px);
-    font-size: 12px;
-    padding-left: 13px;
-  }
-  .modal {
-    padding: 21px;
-  }
-  .modal-heading h2 {
-    font-size: 19px;
-  }
-  .modal-description {
-    font-size: 14px;
-  }
-  .setting-row small {
-    font-size: 12px;
-    line-height: 1.6;
-  }
-  .setting-row strong {
-    font-size: 16px;
-  }
-  .large-text .catalog-text strong {
-    font-size: 16px;
-  }
-  .large-text .workspace .widget-grid {
-    grid-template-columns: 1fr;
-  }
-  .large-text .catalog {
-    grid-template-columns: 1fr;
-  }
-  .large-text .save-bar > div {
-    flex-direction: column;
-  }
-  .large-text .editing-toolbar > div {
-    flex-wrap: wrap;
-  }
-}
 .quick-options {
   display: flex;
   gap: 20px;
@@ -2989,56 +2512,6 @@ h2 {
   max-height: 55vh;
   overflow: auto;
 }
-@media (max-width: 700px) {
-  .large-text .sidebar nav {
-    grid-template-columns: repeat(2, minmax(0, 1fr));
-  }
-  .page-heading p,
-  .section-description,
-  .name-input-area label,
-  .catalog-text strong,
-  .templates-heading p,
-  .template-body p,
-  .format-heading p,
-  .format-card p,
-  .export-info p,
-  .import-zone p {
-    font-size: 16px;
-  }
-  .catalog-text > span {
-    font-size: 13px;
-    line-height: 1.6;
-  }
-  .catalog-card {
-    min-height: 72px;
-  }
-  .save-status,
-  .saved-card-body > p,
-  .save-bar > span {
-    font-size: 12px;
-  }
-  .save-bar .button,
-  .card-actions .button,
-  .template-body .button,
-  .format-card .button {
-    font-size: 16px;
-    min-height: 50px;
-  }
-  .template-card:last-child .template-body h3 {
-    font-size: 18px;
-  }
-  .edit-mode {
-    font-size: 10px;
-    min-height: 44px;
-  }
-  .section-description {
-    line-height: 1.65;
-  }
-  .editing-toolbar button {
-    font-size: 11px;
-  }
-}
-
 /* Each preset has a distinct composition, not just a different accent color. */
 .template-grid {
   grid-template-columns: repeat(2, minmax(0, 1fr));
@@ -3914,99 +3387,6 @@ h2 {
     padding: 24px;
   }
 }
-@media (max-width: 700px) {
-  .template-grid {
-    gap: 22px;
-  }
-  .template-body {
-    padding: 20px;
-  }
-  .template-card .preset-preview {
-    padding: 19px;
-    min-height: 420px;
-  }
-  .preset-balance strong,
-  .preset-contrast .preset-balance strong {
-    font-size: clamp(29px, 9vw, 39px);
-  }
-  .preset-qr {
-    grid-template-columns: 48px minmax(0, 1fr);
-    font-size: 18px;
-    gap: 9px;
-    padding: 12px;
-  }
-  .preset-qr > svg {
-    width: 44px;
-    height: 44px;
-  }
-  .preset-action {
-    font-size: 15px;
-    gap: 8px;
-    padding: 12px 10px;
-  }
-  .workspace:is(.senior, .contrast) .workspace-widget {
-    padding: 20px 16px;
-  }
-  .workspace:is(.senior, .contrast) :is(.bank-action, .quick-service-button) {
-    padding-left: 12px;
-    padding-right: 12px;
-    font-size: 24px;
-  }
-  .workspace:is(.senior, .contrast) .balance-value {
-    font-size: 35px;
-  }
-  .workspace:is(.senior, .contrast) .workspace-widget:has(.widget-grip),
-  .workspace:is(.senior, .contrast) .workspace-widget.widget-drag-overlay {
-    padding-bottom: 68px;
-  }
-  .workspace.focus {
-    padding: 14px;
-  }
-  .workspace.focus .workspace-widget {
-    padding: 20px 16px;
-  }
-  .workspace.student {
-    padding: 12px;
-  }
-  .workspace.student .workspace-widget {
-    padding: 18px 14px;
-  }
-  .workspace.student .workspace-widget:has(.widget-grip) {
-    padding-bottom: 52px;
-  }
-  .student-qr-tabs > button {
-    flex-direction: column;
-    font-size: 12px;
-    padding: 8px 3px;
-    gap: 5px;
-    min-height: 68px;
-  }
-  .student-widget-heading h3 {
-    font-size: 19px;
-  }
-  .subscription-list li {
-    flex-wrap: wrap;
-  }
-  .subscription-list b {
-    font-size: 16px;
-  }
-}
-
-/* Телефоны: текст не мельче 12px — продукт для людей со слабым зрением */
-@media (max-width: 700px) {
-  .count-badge,
-  .edit-mode,
-  .selected-label,
-  .editing-toolbar button {
-    font-size: 12px;
-  }
-  .main-footer {
-    flex-direction: column;
-    align-items: flex-start;
-    gap: 8px;
-  }
-}
-
 /* ===================================================================
    Оформление и доступность собираемого интерфейса
    =================================================================== */
@@ -4336,21 +3716,87 @@ h2 {
     grid-column: 1 / -1;
   }
 }
-@media (max-width: 700px) {
-  .appearance-panel {
-    padding: 17px;
-  }
-  .appearance-grid {
-    grid-template-columns: minmax(0, 1fr);
-  }
-  .widget-grid > .workspace-widget:is(.col-1, .col-2) {
-    grid-column: auto;
-  }
-  .editing-toolbar .column-button {
-    display: none;
-  }
-}
 /* Открытое превью одного шаблона не растягивает соседние карточки */
 .template-grid:has(.template-card.with-preview) {
   align-items: start;
+}
+
+/* ===================================================================
+   Телефоны: вместо конструктора — экран с мобильным приложением
+   =================================================================== */
+.mobile-gate {
+  display: none;
+}
+@media (max-width: 700px) {
+  .app {
+    display: none;
+  }
+  .mobile-gate {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    min-height: 100dvh;
+    padding: 32px 20px calc(32px + env(safe-area-inset-bottom));
+    background: #f6f8f7;
+    color: #28332f;
+  }
+}
+.mobile-gate-card {
+  background: #fff;
+  border: 1px solid var(--border);
+  border-radius: 20px;
+  padding: 28px 22px;
+  text-align: center;
+}
+.mobile-gate .logo-mark {
+  margin: 0 auto;
+  width: 72px;
+  height: 72px;
+}
+.mobile-gate h1 {
+  font-size: 26px;
+  line-height: 1.25;
+  letter-spacing: -0.5px;
+  margin-top: 20px;
+}
+.mobile-gate p {
+  font-size: 17px;
+  line-height: 1.55;
+  color: #4d5a52;
+  margin-top: 12px;
+}
+.mobile-gate-action {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  min-height: 56px;
+  margin-top: 24px;
+  border-radius: 14px;
+  background: #157838;
+  color: #fff;
+  font-size: 18px;
+  font-weight: 650;
+  text-decoration: none;
+}
+.mobile-gate-action:focus-visible {
+  outline: 3px solid #1b1f1d;
+  outline-offset: 3px;
+}
+.mobile-gate-note {
+  display: flex;
+  align-items: flex-start;
+  gap: 10px;
+  margin-top: 18px;
+  padding: 14px;
+  border-radius: 12px;
+  background: #eef4ec;
+  text-align: left;
+  font-size: 15px;
+  line-height: 1.5;
+  color: #3a4a3f;
+}
+.mobile-gate-note svg {
+  flex: none;
+  margin-top: 2px;
 }
