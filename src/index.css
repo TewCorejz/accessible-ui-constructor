@@ -71,37 +71,26 @@
   text-decoration: none;
   color: #25332d;
 }
-.sber-mark {
-  width: 44px;
-  height: 44px;
-  border: 5px solid #21a447;
-  border-right-color: #8dc63f;
-  border-radius: 50%;
-  display: grid;
-  place-items: center;
-  position: relative;
-}
-.sber-mark svg {
-  width: 33px;
-  height: 33px;
-  margin-top: -9px;
-  margin-right: -8px;
-  color: #20a447;
-  background: white;
-  border-radius: 5px;
+.logo-mark {
+  flex: none;
+  display: block;
+  border-radius: 22.3%;
+  box-shadow: 0 4px 10px rgb(11 122 92 / 22%);
 }
 .brand-name {
-  font-size: 30px;
+  font-size: 21px;
   font-weight: 800;
   line-height: 1;
-  letter-spacing: -1.3px;
+  letter-spacing: -0.6px;
 }
 .brand-name > span {
   display: block;
-  font-size: 12px;
+  font-size: 11px;
   font-weight: 550;
-  letter-spacing: 0.3px;
-  margin-top: 6px;
+  letter-spacing: 0.2px;
+  margin-top: 5px;
+  color: #5f6b64;
+  white-space: nowrap;
 }
 .sidebar-label {
   font-size: 9px;
@@ -543,9 +532,9 @@ h2 {
 .preview-logo {
   width: 22px;
   height: 22px;
-  background: linear-gradient(130deg, #22a54d, #8dcf4b);
+  background: #2f4a40;
   color: white;
-  border-radius: 50%;
+  border-radius: 7px;
   display: grid;
   place-items: center;
 }
@@ -970,11 +959,11 @@ h2 {
 .mini-logo {
   width: 17px;
   height: 17px;
-  border-radius: 50%;
+  border-radius: 5px;
   display: grid;
   place-items: center;
   color: white;
-  background: #40a452;
+  background: #2f4a40;
 }
 .mini-dots {
   margin-left: auto;
@@ -2037,6 +2026,9 @@ h2 {
   }
 }
 @media (max-width: 1200px) {
+  .brand-name > span {
+    white-space: normal;
+  }
   .sidebar {
     width: 216px;
     padding-left: 15px;
@@ -2150,12 +2142,12 @@ h2 {
     padding: 0 5px;
   }
   .brand-name {
-    font-size: 27px;
+    font-size: 18px;
   }
   .brand-name > span {
-    font-size: 11px;
+    font-size: 10px;
   }
-  .sber-mark {
+  .logo-mark {
     width: 37px;
     height: 37px;
   }
@@ -2308,12 +2300,12 @@ h2 {
     align-self: flex-start;
   }
   .brand-name {
-    font-size: 25px;
+    font-size: 19px;
   }
   .brand-name > span {
     font-size: 10px;
   }
-  .sber-mark {
+  .logo-mark {
     width: 35px;
     height: 35px;
   }
