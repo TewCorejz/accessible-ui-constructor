@@ -2303,6 +2303,84 @@ h2 {
     left: calc(50% + 95px);
   }
 }
+
+/* Планшет: боковая панель сворачивается в узкую полосу «иконка + подпись»,
+   чтобы освободить место под рабочую область. Подписи остаются видимыми —
+   меню из одних иконок хуже понимают пожилые пользователи. */
+@media (min-width: 701px) and (max-width: 1000px) {
+  .sidebar {
+    width: 96px;
+    padding: 20px 8px 16px;
+    align-items: center;
+  }
+  .app-body {
+    margin-left: 96px;
+  }
+  .brand {
+    padding: 0;
+    justify-content: center;
+  }
+  .brand-name,
+  .sidebar-label,
+  .access-card,
+  .sidebar-version,
+  .help-label-rest {
+    display: none;
+  }
+  .logo-mark {
+    width: 44px;
+    height: 44px;
+  }
+  .sidebar nav {
+    width: 100%;
+    margin-top: 28px;
+  }
+  .nav-item {
+    flex-direction: column;
+    justify-content: center;
+    gap: 5px;
+    min-height: 68px;
+    padding: 8px 4px;
+    margin-bottom: 6px;
+    font-size: 13px;
+    border-radius: 12px;
+  }
+  .nav-item > svg:last-child:not(:first-child) {
+    display: none;
+  }
+  .nav-item.active::before {
+    left: -8px;
+  }
+  .sidebar-bottom {
+    width: 100%;
+    padding-top: 16px;
+  }
+  .help-button {
+    width: 100%;
+    flex-direction: column;
+    justify-content: center;
+    gap: 5px;
+    min-height: 64px;
+    padding: 8px 4px;
+    font-size: 13px;
+    border-radius: 12px;
+  }
+  /* Текст на планшете не мельче 12px (уменьшенные превью-миниатюры не в счёт) */
+  .save-status,
+  .count-badge,
+  .section-description,
+  .selected-label,
+  .preview-bottom,
+  .qr-content p,
+  .format-details,
+  .format-card .button,
+  .main-footer,
+  .main-footer > span:last-child,
+  .app .topbar-product,
+  .app .preset-preview .preset-preview-footer {
+    font-size: 12px;
+  }
+}
 @media (max-width: 700px) {
   .sidebar {
     position: static;

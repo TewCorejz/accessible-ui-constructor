@@ -539,7 +539,9 @@ export default function App() {
           </div>
           <button className="help-button" onClick={() => setModal("help")}>
             <CircleHelp size={21} />
-            Помощь с конструктором
+            <span>
+              Помощь<span className="help-label-rest"> с конструктором</span>
+            </span>
           </button>
           <div className="sidebar-version">
             <span className="local-dot" />
