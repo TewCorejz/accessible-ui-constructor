@@ -4006,3 +4006,351 @@ h2 {
     gap: 8px;
   }
 }
+
+/* ===================================================================
+   Оформление и доступность собираемого интерфейса
+   =================================================================== */
+.appearance-panel {
+  margin-top: 20px;
+  background: #fff;
+  border: 1px solid var(--border);
+  border-radius: 13px;
+  padding: 20px 24px 18px;
+}
+.appearance-heading {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+}
+.appearance-heading h2 {
+  display: flex;
+  align-items: center;
+  gap: 9px;
+}
+.appearance-heading h2 svg {
+  color: var(--green);
+}
+.appearance-reset {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  min-height: 44px;
+  padding: 0 14px;
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  background: #fff;
+  color: #3f4b44;
+  font-size: 14px;
+  font-weight: 550;
+}
+.appearance-reset:disabled {
+  opacity: 0.45;
+  cursor: default;
+}
+.appearance-grid {
+  display: grid;
+  grid-template-columns: minmax(0, 1.1fr) minmax(0, 1fr) minmax(0, 1fr);
+  gap: 22px 28px;
+  margin-top: 16px;
+}
+.appearance-size label,
+.appearance-colors legend {
+  display: flex;
+  align-items: center;
+  gap: 7px;
+  font-size: 15px;
+  font-weight: 650;
+  color: #28332f;
+}
+.appearance-colors {
+  border: 0;
+  padding: 0;
+  margin: 0;
+  min-width: 0;
+}
+.appearance-hint {
+  font-size: 13px;
+  line-height: 1.5;
+  color: #5f6b64;
+  margin-top: 6px;
+}
+.size-control {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-top: 12px;
+}
+.size-control input[type="range"] {
+  flex: 1;
+  min-width: 0;
+  height: 44px;
+  accent-color: var(--green);
+  cursor: pointer;
+}
+.size-a {
+  font-weight: 650;
+  color: #4d5a52;
+  line-height: 1;
+}
+.size-a.small {
+  font-size: 13px;
+}
+.size-a.large {
+  font-size: 22px;
+}
+.size-value {
+  min-width: 56px;
+  text-align: center;
+  font-size: 15px;
+  font-weight: 700;
+  color: #16753b;
+  background: #eaf6e9;
+  border-radius: 8px;
+  padding: 6px 8px;
+}
+.swatches {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 8px;
+  margin-top: 10px;
+}
+.swatch {
+  width: 44px;
+  height: 44px;
+  border-radius: 12px;
+  border: 1px solid rgb(0 0 0 / 18%);
+  display: grid;
+  place-items: center;
+  color: #fff;
+  cursor: pointer;
+}
+.swatch.active {
+  outline: 3px solid #1b1f1d;
+  outline-offset: 2px;
+}
+.swatch.active svg {
+  filter: drop-shadow(0 0 1px #000) drop-shadow(0 0 1px #000);
+}
+.swatch-custom {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  min-height: 44px;
+  padding: 0 12px 0 6px;
+  border: 1px dashed #b9c6b4;
+  border-radius: 12px;
+  font-size: 14px;
+  color: #3f4b44;
+  cursor: pointer;
+}
+.swatch-custom input[type="color"] {
+  width: 32px;
+  height: 32px;
+  border: 0;
+  padding: 0;
+  background: none;
+  cursor: pointer;
+}
+.swatch-custom:focus-within {
+  outline: 3px solid #1b1f1d;
+  outline-offset: 2px;
+}
+.contrast-status {
+  display: flex;
+  align-items: flex-start;
+  gap: 8px;
+  margin-top: 16px;
+  padding: 10px 12px;
+  border-radius: 10px;
+  font-size: 14px;
+  line-height: 1.5;
+}
+.contrast-status svg {
+  flex: none;
+  margin-top: 2px;
+}
+.contrast-status.good {
+  background: #eef7ec;
+  color: #23552f;
+}
+.contrast-status.low {
+  background: #fdf1e3;
+  color: #7a3d00;
+}
+
+/* Размер текста: содержимое виджетов масштабируется целиком, текст переносится */
+.workspace .workspace-widget > :not(.selected-label, .widget-grip, .widget-drop-label) {
+  zoom: var(--ws-zoom, 1);
+}
+
+/* Свой основной цвет */
+.app .workspace.custom-primary .bank-action {
+  background: var(--ws-primary);
+  border-color: var(--ws-primary);
+  color: var(--ws-on-primary);
+}
+.app .workspace.custom-primary .preview-logo {
+  background: var(--ws-primary);
+  color: var(--ws-on-primary);
+}
+.app .workspace.custom-primary
+  :is(
+    .bank-text-button,
+    .small-icon,
+    .history-heading > svg:first-child,
+    .student-widget-heading > svg,
+    .quick-options svg
+  ) {
+  color: var(--ws-primary);
+}
+.app .workspace.custom-primary .transaction > b:not(.expense) {
+  color: var(--ws-primary);
+}
+.app .workspace.custom-primary .quick-options > .quick-service-button {
+  border-color: color-mix(in srgb, var(--ws-primary) 45%, transparent);
+}
+.app .workspace.custom-primary :is(.transaction-avatar:not(.neutral), .qr-symbol) {
+  background: color-mix(in srgb, var(--ws-primary) 12%, var(--ws-surface, #fff));
+  color: var(--ws-primary);
+}
+
+/* Свой дополнительный цвет (фон виджетов); цвет текста подбирается автоматически */
+.app .workspace.custom-surface .workspace-widget {
+  background: var(--ws-surface);
+  color: var(--ws-on-surface);
+  border-color: color-mix(in srgb, var(--ws-on-surface) 16%, var(--ws-surface));
+}
+.app .workspace.custom-surface .workspace-widget.balance {
+  background: color-mix(in srgb, var(--ws-primary, #157838) 9%, var(--ws-surface));
+}
+.app .workspace.custom-surface
+  .workspace-widget
+  :where(:not(.bank-action, .bank-action *, .selected-label, .selected-label *)) {
+  color: inherit;
+}
+.app .workspace.custom-surface .quick-options > .quick-service-button {
+  background: transparent;
+}
+.app .workspace.custom-surface .transaction-avatar.neutral {
+  background: color-mix(in srgb, var(--ws-on-surface) 12%, var(--ws-surface));
+}
+
+/* Виджеты в левой или правой колонке (только в двухколоночной сетке) */
+.widget-grid > .workspace-widget.col-1 {
+  grid-column: 1;
+}
+.widget-grid > .workspace-widget.col-2 {
+  grid-column: 2;
+}
+.large-text .widget-grid > .workspace-widget:is(.col-1, .col-2) {
+  grid-column: auto;
+}
+
+/* Панель «Добавить виджет» выдвигается по кнопке */
+.creator-grid.catalog-closed {
+  grid-template-columns: minmax(0, 1fr);
+}
+.widget-library:focus {
+  outline: none;
+}
+.widget-library:focus-visible {
+  outline: 3px solid #1b1f1d;
+  outline-offset: 6px;
+  border-radius: 8px;
+}
+.creator-grid.catalog-open .widget-library {
+  animation: library-in 0.22s ease-out;
+}
+@keyframes library-in {
+  from {
+    opacity: 0;
+    transform: translateX(-16px);
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .creator-grid.catalog-open .widget-library {
+    animation: none;
+  }
+}
+.library-close {
+  margin-left: auto;
+  width: 44px;
+  height: 44px;
+  display: grid;
+  place-items: center;
+  border-radius: 10px;
+  border: 1px solid var(--border);
+  background: #fff;
+  color: #3f4b44;
+}
+
+/* Шаблоны под шторкой, превью — по запросу */
+.templates-toggle {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  min-height: 44px;
+  padding: 0;
+  font: inherit;
+  color: inherit;
+  background: none;
+  border: 0;
+  cursor: pointer;
+}
+.templates-toggle > svg {
+  transition: transform 0.2s;
+}
+.templates-toggle[aria-expanded="true"] > svg {
+  transform: rotate(180deg);
+}
+@media (prefers-reduced-motion: reduce) {
+  .templates-toggle > svg {
+    transition: none;
+  }
+}
+.template-preview-toggle {
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  min-height: 44px;
+  margin: 4px 0 8px;
+  padding: 0;
+  border: 0;
+  background: none;
+  color: #16753b;
+  font-size: 14px;
+  font-weight: 600;
+  cursor: pointer;
+}
+.template-preview-toggle:hover {
+  text-decoration: underline;
+}
+
+@media (max-width: 1000px) {
+  .appearance-grid {
+    grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+  }
+  .appearance-size {
+    grid-column: 1 / -1;
+  }
+}
+@media (max-width: 700px) {
+  .appearance-panel {
+    padding: 17px;
+  }
+  .appearance-grid {
+    grid-template-columns: minmax(0, 1fr);
+  }
+  .widget-grid > .workspace-widget:is(.col-1, .col-2) {
+    grid-column: auto;
+  }
+  .editing-toolbar .column-button {
+    display: none;
+  }
+}
+/* Открытое превью одного шаблона не растягивает соседние карточки */
+.template-grid:has(.template-card.with-preview) {
+  align-items: start;
+}
