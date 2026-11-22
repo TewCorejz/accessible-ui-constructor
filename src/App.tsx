@@ -3,6 +3,7 @@ import { WidgetArrangement } from "./WidgetArrangement";
 import { StudentWidget, QuickActions, QrPayment, type StudentWidgetType } from "./StudentWidgets";
 import { TemplatePreview } from "./TemplatePreview";
 import { LogoMark } from "./Logo";
+import { clearSnapshot, loadSnapshot, saveSnapshot } from "./storage";
 import {
   Accessibility,
   ArrowDownToLine,
@@ -314,20 +315,24 @@ function WidgetContent({ type, theme = "default" }: { type: WidgetType; theme?: 
 }
 
 export default function App() {
+  // Состояние из прошлого визита (если есть) — читаем один раз при запуске.
+  const [stored] = useState(() => loadSnapshot(catalog.map((item) => item.type)));
   const [page, setPage] = useState<Page>("create");
-  const [name, setName] = useState("Мой удобный банк");
-  const [widgets, setWidgets] = useState<Widget[]>(startingWidgets);
-  const [selected, setSelected] = useState("qr-1");
-  const [saved, setSaved] = useState<Config[]>(initialConfigs);
-  const [activeId, setActiveId] = useState<string | null>(null);
-  const [theme, setTheme] = useState("default");
-  const [dirty, setDirty] = useState(true);
+  const [name, setName] = useState(stored?.name ?? "Мой удобный банк");
+  const [widgets, setWidgets] = useState<Widget[]>(
+    (stored?.widgets as Widget[] | undefined) ?? startingWidgets,
+  );
+  const [selected, setSelected] = useState(stored ? (stored.widgets[0]?.id ?? "") : "qr-1");
+  const [saved, setSaved] = useState<Config[]>((stored?.saved as Config[] | undefined) ?? initialConfigs);
+  const [activeId, setActiveId] = useState<string | null>(stored?.activeId ?? null);
+  const [theme, setTheme] = useState(stored?.theme ?? "default");
+  const [dirty, setDirty] = useState(stored?.dirty ?? true);
   const [editing, setEditing] = useState(true);
   const [modal, setModal] = useState<"access" | "help" | "preview" | null>(null);
   const [deleteId, setDeleteId] = useState<string | null>(null);
   const [notice, setNotice] = useState("");
-  const [largeText, setLargeText] = useState(false);
-  const [highContrast, setHighContrast] = useState(false);
+  const [largeText, setLargeText] = useState(stored?.largeText ?? false);
+  const [highContrast, setHighContrast] = useState(stored?.highContrast ?? false);
   const [exportId, setExportId] = useState("current");
   const [imported, setImported] = useState<Config | null>(null);
   const [importError, setImportError] = useState("");
@@ -336,6 +341,26 @@ export default function App() {
   const visibleCatalog = catalog.filter(
     (item) => theme === "student" || !["studentQr", "subscriptions", "mobile"].includes(item.type),
   );
+  useEffect(() => {
+    saveSnapshot({ name, widgets, theme, activeId, dirty, saved, largeText, highContrast });
+  }, [name, widgets, theme, activeId, dirty, saved, largeText, highContrast]);
+  function resetAll() {
+    if (!window.confirm("Удалить все сохранённые интерфейсы и настройки и начать заново?")) return;
+    clearSnapshot();
+    setName("Мой удобный банк");
+    setWidgets(startingWidgets);
+    setSelected("qr-1");
+    setSaved(initialConfigs);
+    setActiveId(null);
+    setTheme("default");
+    setDirty(true);
+    setLargeText(false);
+    setHighContrast(false);
+    setExportId("current");
+    setPage("create");
+    setModal(null);
+    setNotice("Всё сброшено. Можно начать с чистого листа.");
+  }
   useEffect(() => {
     if (!notice) return;
     const timer = window.setTimeout(() => setNotice(""), 5500);
@@ -768,7 +793,7 @@ export default function App() {
                           </span>
                         )}
                       </div>
-                      <p>Виджетов: {c.widgets.length} · Текущая сессия</p>
+                      <p>Виджетов: {c.widgets.length} · Сохранён на этом устройстве</p>
                       <div className="card-actions">
                         <button className="button primary" onClick={() => apply(c)}>
                           <Check size={19} />
@@ -1096,7 +1121,7 @@ export default function App() {
               },
               {
                 title: "Сохраните результат",
-                text: "Он появится в разделе «Выбрать». Для хранения после закрытия страницы скачайте файл в разделе «Экспорт».",
+                text: "Он появится в разделе «Выбрать» и останется в этом браузере после перезагрузки. Чтобы перенести интерфейс на другое устройство, скачайте файл в разделе «Экспорт».",
               },
             ].map((s, i) => (
               <li key={s.title}>
@@ -1108,10 +1133,16 @@ export default function App() {
               </li>
             ))}
           </ol>
-          <button className="button primary modal-done" onClick={() => setModal(null)}>
-            Всё понятно
-            <Check size={19} />
-          </button>
+          <div className="help-actions">
+            <button className="button secondary" onClick={resetAll}>
+              <Trash2 size={18} />
+              Начать заново
+            </button>
+            <button className="button primary modal-done" onClick={() => setModal(null)}>
+              Всё понятно
+              <Check size={19} />
+            </button>
+          </div>
         </Modal>
       )}
       {modal === "preview" && (
