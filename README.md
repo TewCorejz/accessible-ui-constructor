@@ -15,7 +15,7 @@
 ![Tailwind CSS](https://img.shields.io/badge/Tailwind_CSS-4-06B6D4?logo=tailwindcss&logoColor=white)
 [![CI](https://github.com/TewCorejz/accessible-ui-constructor/actions/workflows/ci.yml/badge.svg)](https://github.com/TewCorejz/accessible-ui-constructor/actions/workflows/ci.yml)
 
-[Прототип в Figma Make](https://www.figma.com/make/FzdRdXWTrVs7QtX0a9d9p8/) · [Быстрый старт](#-быстрый-старт) · [Дорожная карта](#-дорожная-карта)
+**[▶ Открыть демо](https://tewcorejz.github.io/accessible-ui-constructor/)** · [Прототип в Figma Make](https://www.figma.com/make/FzdRdXWTrVs7QtX0a9d9p8/) · [Быстрый старт](#-быстрый-старт) · [Дорожная карта](#-дорожная-карта)
 
 <img src="docs/screenshots/01-create.jpg" alt="Экран «Создать интерфейс»" width="820" />
 
@@ -69,7 +69,9 @@
 
 ## 🚀 Быстрый старт
 
-Нужны **Node.js 22** и **pnpm 10+**.
+**Без установки:** откройте [демо на GitHub Pages](https://tewcorejz.github.io/accessible-ui-constructor/) — оно обновляется автоматически после каждого слияния в `main`. Работает на компьютере, планшете и телефоне.
+
+**Локально** — нужны **Node.js 22** и **pnpm 10+**.
 
 ```bash
 git clone https://github.com/TewCorejz/accessible-ui-constructor.git
