@@ -3,6 +3,7 @@ import { WidgetArrangement } from "./WidgetArrangement";
 import { StudentWidget, QuickActions, QrPayment, type StudentWidgetType } from "./StudentWidgets";
 import { TemplatePreview } from "./TemplatePreview";
 import { LogoMark } from "./Logo";
+import { MobileGate } from "./MobileGate";
 import { clearSnapshot, loadSnapshot, saveSnapshot } from "./storage";
 import { AppearancePanel } from "./AppearancePanel";
 import {
@@ -564,7 +565,8 @@ export default function App() {
   }
 
   return (
-    <div className={`app ${largeText ? "large-text" : ""} ${highContrast ? "high-contrast" : ""}`}>
+    <>
+      <div className={`app ${largeText ? "large-text" : ""} ${highContrast ? "high-contrast" : ""}`}>
       <a href="#main" className="skip-link">
         Перейти к содержимому
       </a>
@@ -1374,6 +1376,8 @@ export default function App() {
           </div>
         </Modal>
       )}
-    </div>
+      </div>
+      <MobileGate />
+    </>
   );
 }
