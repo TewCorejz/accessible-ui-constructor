@@ -231,7 +231,7 @@ function MiniPreview({ theme = "default", types }: { theme?: string; types: Widg
           <div className="mini-balance">
             <span>Доступный баланс</span>
             <strong>128 450,00 ₽</strong>
-            <small>Карта Мир •• 4821</small>
+            <small>Дебетовая карта •• 4821</small>
           </div>
         )}
         {types.includes("qr") && (
@@ -275,9 +275,7 @@ function WidgetContent({ type, theme = "default" }: { type: WidgetType; theme?: 
           <span>
             <i className="card-chip" /> Дебетовая карта
           </span>
-          <span>
-            •• 4821 <b>МИР</b>
-          </span>
+          <span>•• 4821</span>
         </div>
       </>
     );
