@@ -83,7 +83,7 @@ export function TemplatePreview({
           {types.includes("mobile") && (
             <div>
               <Smartphone size={21} />
-              <span>СберМобайл</span>
+              <span>Мой оператор</span>
               <strong>290 ₽</strong>
               <span>18 из 30 ГБ</span>
               <span>Пополнить</span>

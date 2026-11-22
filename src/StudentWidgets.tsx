@@ -185,7 +185,7 @@ function Mobile() {
         <Smartphone size={22} />
         <h3>Мобильная связь</h3>
       </div>
-      <p className="student-widget-description">СберМобайл · +7 999 123-45-67</p>
+      <p className="student-widget-description">Мой оператор · +7 999 123-45-67</p>
       <div className="sim-balance">
         <span>Баланс сим-карты</span>
         <strong>{money(balance)} ₽</strong>

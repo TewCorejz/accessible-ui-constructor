@@ -2,6 +2,7 @@ import { useEffect, useRef, useState, type ReactNode } from "react";
 import { WidgetArrangement } from "./WidgetArrangement";
 import { StudentWidget, QuickActions, QrPayment, type StudentWidgetType } from "./StudentWidgets";
 import { TemplatePreview } from "./TemplatePreview";
+import { LogoMark } from "./Logo";
 import {
   Accessibility,
   ArrowDownToLine,
@@ -23,6 +24,7 @@ import {
   FileJson,
   GraduationCap,
   History,
+  Landmark,
   Info,
   LayoutGrid,
   Maximize2,
@@ -218,7 +220,7 @@ function MiniPreview({ theme = "default", types }: { theme?: string; types: Widg
     <div className={`mini-preview ${theme}`} aria-hidden="true">
       <div className="mini-top">
         <span className="mini-logo">
-          <Check size={12} strokeWidth={3} />
+          <Landmark size={10} strokeWidth={2.5} />
         </span>
         <span>Мой банк</span>
         <span className="mini-dots">•••</span>
@@ -270,7 +272,7 @@ function WidgetContent({ type, theme = "default" }: { type: WidgetType; theme?: 
         </div>
         <div className="balance-bottom">
           <span>
-            <i className="card-chip" /> СберКарта
+            <i className="card-chip" /> Дебетовая карта
           </span>
           <span>
             •• 4821 <b>МИР</b>
@@ -405,7 +407,7 @@ export default function App() {
     );
     const a = document.createElement("a");
     a.href = url;
-    a.download = `sber-interface.${format.toLowerCase()}`;
+    a.download = `my-interface.${format.toLowerCase()}`;
     a.click();
     URL.revokeObjectURL(url);
     setNotice(`Интерфейс экспортирован в ${format}`);
@@ -474,13 +476,11 @@ export default function App() {
             e.preventDefault();
             setPage("create");
           }}
-          aria-label="Сбер Конструктор — главная"
+          aria-label="Конструктор доступных интерфейсов — главная"
         >
-          <span className="sber-mark">
-            <Check strokeWidth={3.5} />
-          </span>
+          <LogoMark size={44} />
           <span className="brand-name">
-            сбер<span>Конструктор</span>
+            Конструктор<span>доступных интерфейсов</span>
           </span>
         </a>
         <div className="sidebar-label">ВАШЕ РАБОЧЕЕ ПРОСТРАНСТВО</div>
@@ -653,7 +653,7 @@ export default function App() {
                     <div className="preview-header">
                       <span className="preview-brand">
                         <span className="preview-logo">
-                          <Check size={15} strokeWidth={3} />
+                          <Landmark size={13} strokeWidth={2.5} />
                         </span>
                         Мой банк
                       </span>
@@ -1021,7 +1021,7 @@ export default function App() {
             </div>
           )}
           <footer className="main-footer">
-            <span>Сбер Конструктор</span>
+            <span>Конструктор доступных интерфейсов</span>
             <span>
               <ShieldCheck size={15} />
               Просто. Понятно. По-вашему.
@@ -1124,7 +1124,7 @@ export default function App() {
             <div className="preview-header">
               <span className="preview-brand">
                 <span className="preview-logo">
-                  <Check size={15} />
+                  <Landmark size={13} strokeWidth={2.5} />
                 </span>
                 Мой банк
               </span>
