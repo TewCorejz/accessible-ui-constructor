@@ -114,6 +114,7 @@ pnpm dev
 - **dnd-kit** — перетаскивание виджетов
 - **lucide-react** — иконки
 - **yaml** — экспорт/импорт в YAML
+- **Inter** ([@fontsource-variable/inter](https://fontsource.org/fonts/inter), лицензия OFL 1.1) — шрифт входит в сборку, без запросов к Google Fonts
 - **Figma Make** — исходный прототип ([как синхронизировать](docs/figma-make.md))
 
 ## 🧭 Дорожная карта
