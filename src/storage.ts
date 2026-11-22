@@ -7,15 +7,24 @@
  * не ломает приложение — просто используется состояние по умолчанию.
  */
 
+import { normalizeAppearance, type Appearance } from "./appearance";
+
 const STORAGE_KEY = "accessible-ui-constructor:v1";
 
-export type StoredWidget = { id: string; type: string; wide: boolean };
-export type StoredConfig = { id: string; name: string; widgets: StoredWidget[]; theme: string };
+export type StoredWidget = { id: string; type: string; wide: boolean; column?: 1 | 2 };
+export type StoredConfig = {
+  id: string;
+  name: string;
+  widgets: StoredWidget[];
+  theme: string;
+  appearance?: Appearance;
+};
 
 export type Snapshot = {
   name: string;
   widgets: StoredWidget[];
   theme: string;
+  appearance: Appearance;
   activeId: string | null;
   dirty: boolean;
   saved: StoredConfig[];
@@ -32,7 +41,8 @@ function isWidget(value: unknown, types: readonly string[]): value is StoredWidg
     typeof w.id === "string" &&
     typeof w.type === "string" &&
     types.includes(w.type) &&
-    typeof w.wide === "boolean"
+    typeof w.wide === "boolean" &&
+    (w.column === undefined || w.column === 1 || w.column === 2)
   );
 }
 
@@ -69,9 +79,13 @@ export function loadSnapshot(widgetTypes: readonly string[]): Snapshot | null {
       name: s.name,
       widgets: s.widgets,
       theme: s.theme,
+      appearance: normalizeAppearance(s.appearance),
       activeId: typeof s.activeId === "string" ? s.activeId : null,
       dirty: Boolean(s.dirty),
-      saved: s.saved,
+      saved: s.saved.map((c) => ({
+        ...c,
+        appearance: c.appearance ? normalizeAppearance(c.appearance) : undefined,
+      })),
       largeText: Boolean(s.largeText),
       highContrast: Boolean(s.highContrast),
     };

@@ -4,6 +4,13 @@ import { StudentWidget, QuickActions, QrPayment, type StudentWidgetType } from "
 import { TemplatePreview } from "./TemplatePreview";
 import { LogoMark } from "./Logo";
 import { clearSnapshot, loadSnapshot, saveSnapshot } from "./storage";
+import { AppearancePanel } from "./AppearancePanel";
+import {
+  DEFAULT_APPEARANCE,
+  appearanceProps,
+  normalizeAppearance,
+  type Appearance,
+} from "./appearance";
 import {
   Accessibility,
   ArrowDownToLine,
@@ -44,8 +51,23 @@ import {
 } from "lucide-react";
 
 type WidgetType = "balance" | "qr" | "history" | "quick" | StudentWidgetType;
-type Widget = { id: string; type: WidgetType; wide: boolean };
-type Config = { id: string; name: string; widgets: Widget[]; theme: string };
+type Widget = { id: string; type: WidgetType; wide: boolean; column?: 1 | 2 };
+type Config = {
+  id: string;
+  name: string;
+  widgets: Widget[];
+  theme: string;
+  appearance?: Appearance;
+};
+/** Цвета шаблонов по умолчанию — от них отсчитывается своя палитра. */
+const themeColors: Record<string, { primary: string; secondary: string }> = {
+  default: { primary: "#157838", secondary: "#ffffff" },
+  senior: { primary: "#157838", secondary: "#ffffff" },
+  focus: { primary: "#4b4f6b", secondary: "#ffffff" },
+  contrast: { primary: "#12150f", secondary: "#ffe784" },
+  student: { primary: "#157838", secondary: "#ffffff" },
+};
+const normalizeColumn = (value: unknown) => (value === 1 || value === 2 ? value : undefined);
 type Page = "create" | "select" | "export" | "import";
 const catalog = [
   {
@@ -324,6 +346,13 @@ export default function App() {
   const [saved, setSaved] = useState<Config[]>((stored?.saved as Config[] | undefined) ?? initialConfigs);
   const [activeId, setActiveId] = useState<string | null>(stored?.activeId ?? null);
   const [theme, setTheme] = useState(stored?.theme ?? "default");
+  const [appearance, setAppearance] = useState<Appearance>(
+    normalizeAppearance(stored?.appearance ?? DEFAULT_APPEARANCE),
+  );
+  const [catalogOpen, setCatalogOpen] = useState(false);
+  const [templatesOpen, setTemplatesOpen] = useState(false);
+  const [templatePreview, setTemplatePreview] = useState<string | null>(null);
+  const libraryRef = useRef<HTMLElement>(null);
   const [dirty, setDirty] = useState(stored?.dirty ?? true);
   const [editing, setEditing] = useState(true);
   const [modal, setModal] = useState<"access" | "help" | "preview" | null>(null);
@@ -340,8 +369,38 @@ export default function App() {
     (item) => theme === "student" || !["studentQr", "subscriptions", "mobile"].includes(item.type),
   );
   useEffect(() => {
-    saveSnapshot({ name, widgets, theme, activeId, dirty, saved, largeText, highContrast });
-  }, [name, widgets, theme, activeId, dirty, saved, largeText, highContrast]);
+    saveSnapshot({
+      name,
+      widgets,
+      theme,
+      appearance,
+      activeId,
+      dirty,
+      saved,
+      largeText,
+      highContrast,
+    });
+  }, [name, widgets, theme, appearance, activeId, dirty, saved, largeText, highContrast]);
+  const workspaceLook = appearanceProps(appearance);
+  const changeAppearance = (next: Appearance) => {
+    setAppearance(next);
+    setDirty(true);
+  };
+  const openCatalog = () => {
+    setCatalogOpen(true);
+    // Переводим фокус в открывшуюся панель — важно для клавиатуры и скринридеров.
+    requestAnimationFrame(() => {
+      libraryRef.current?.focus();
+      libraryRef.current?.scrollIntoView({ block: "nearest" });
+    });
+  };
+  const selectedWidget = widgets.find((w) => w.id === selected);
+  const placeWidget = (column: 1 | 2) => {
+    if (!selectedWidget || selectedWidget.wide) return;
+    updateWidgets(widgets.map((w) => (w.id === selected ? { ...w, column } : w)));
+    const title = catalog.find((item) => item.type === selectedWidget.type)!.title;
+    setNotice(`Виджет «${title}» перемещён ${column === 1 ? "влево" : "вправо"}.`);
+  };
   function resetAll() {
     if (!window.confirm("Удалить все сохранённые интерфейсы и настройки и начать заново?")) return;
     clearSnapshot();
@@ -351,6 +410,7 @@ export default function App() {
     setSaved(initialConfigs);
     setActiveId(null);
     setTheme("default");
+    setAppearance(DEFAULT_APPEARANCE);
     setDirty(true);
     setLargeText(false);
     setHighContrast(false);
@@ -384,6 +444,7 @@ export default function App() {
       name: name.trim(),
       widgets: structuredClone(widgets),
       theme,
+      appearance,
     };
     setSaved((prev) =>
       prev.some((c) => c.id === config.id)
@@ -398,6 +459,7 @@ export default function App() {
     setName(config.name);
     setWidgets(structuredClone(config.widgets));
     setTheme(config.theme);
+    setAppearance(normalizeAppearance(config.appearance ?? DEFAULT_APPEARANCE));
     setActiveId(saved.some((c) => c.id === config.id) ? config.id : null);
     setSelected(config.widgets[0]?.id || "");
     setDirty(false);
@@ -406,7 +468,9 @@ export default function App() {
   }
   async function download(format: string) {
     const config =
-      exportId === "current" ? { name, widgets, theme } : saved.find((c) => c.id === exportId)!;
+      exportId === "current"
+        ? { name, widgets, theme, appearance }
+        : saved.find((c) => c.id === exportId)!;
     const escapeXml = (text: string) =>
       text.replace(
         /[<>&"']/g,
@@ -417,7 +481,7 @@ export default function App() {
         ? JSON.stringify(config, null, 2)
         : format === "YAML"
           ? (await import("yaml")).stringify(config)
-          : `<?xml version="1.0" encoding="UTF-8"?>\n<interface><name>${escapeXml(config.name)}</name><theme>${config.theme}</theme><widgets>${config.widgets.map((w) => `<widget id="${escapeXml(w.id)}" type="${w.type}" wide="${w.wide}" />`).join("")}</widgets></interface>`;
+          : `<?xml version="1.0" encoding="UTF-8"?>\n<interface><name>${escapeXml(config.name)}</name><theme>${config.theme}</theme>${config.appearance ? `<appearance fontSize="${config.appearance.fontSize}"${config.appearance.primary ? ` primary="${config.appearance.primary}"` : ""}${config.appearance.secondary ? ` secondary="${config.appearance.secondary}"` : ""} />` : ""}<widgets>${config.widgets.map((w) => `<widget id="${escapeXml(w.id)}" type="${w.type}" wide="${w.wide}"${w.column ? ` column="${w.column}"` : ""} />`).join("")}</widgets></interface>`;
     const url = URL.createObjectURL(
       new Blob([content], {
         type:
@@ -449,10 +513,21 @@ export default function App() {
         data = {
           name: doc.querySelector("interface > name")?.textContent,
           theme: doc.querySelector("theme")?.textContent || "default",
+          appearance: (() => {
+            const a = doc.querySelector("appearance");
+            return a
+              ? {
+                  fontSize: a.getAttribute("fontSize"),
+                  primary: a.getAttribute("primary"),
+                  secondary: a.getAttribute("secondary"),
+                }
+              : undefined;
+          })(),
           widgets: [...doc.querySelectorAll("widget")].map((w) => ({
             id: w.getAttribute("id"),
             type: w.getAttribute("type"),
             wide: w.getAttribute("wide") === "true",
+            column: Number(w.getAttribute("column")) || undefined,
           })),
         };
       } else
@@ -475,10 +550,12 @@ export default function App() {
         theme: ["default", "senior", "focus", "contrast", "student"].includes(c.theme)
           ? c.theme
           : "default",
+        appearance: normalizeAppearance(c.appearance),
         widgets: c.widgets.map((w, i) => ({
           id: `import-widget-${i}`,
           type: w.type,
           wide: Boolean(w.wide),
+          column: normalizeColumn(w.column),
         })),
       });
     } catch (error) {
@@ -621,11 +698,31 @@ export default function App() {
                   )}
                 </span>
               </section>
-              <div className="creator-grid">
-                <section className="widget-library">
+              <AppearancePanel
+                value={appearance}
+                defaults={themeColors[theme] ?? themeColors.default}
+                onChange={changeAppearance}
+              />
+              <div className={`creator-grid ${catalogOpen ? "catalog-open" : "catalog-closed"}`}>
+                {catalogOpen && (
+                <section
+                  className="widget-library"
+                  id="widget-library"
+                  ref={libraryRef}
+                  tabIndex={-1}
+                  aria-labelledby="widget-library-title"
+                >
                   <div className="section-title">
-                    <h2>Добавить виджет</h2>
+                    <h2 id="widget-library-title">Добавить виджет</h2>
                     <span className="count-badge">{visibleCatalog.length}</span>
+                    <button
+                      type="button"
+                      className="library-close"
+                      onClick={() => setCatalogOpen(false)}
+                      aria-label="Скрыть панель «Добавить виджет»"
+                    >
+                      <X size={20} />
+                    </button>
                   </div>
                   <p className="section-description">
                     Нажмите на виджет, чтобы
@@ -658,6 +755,7 @@ export default function App() {
                     </p>
                   </div>
                 </section>
+                )}
                 <section className="workspace-section">
                   <div className="workspace-heading">
                     <div className="section-title">
@@ -674,7 +772,10 @@ export default function App() {
                       <Settings2 size={16} />
                     </button>
                   </div>
-                  <div className={`workspace ${theme}`}>
+                  <div
+                    className={`workspace ${theme} ${workspaceLook.className}`}
+                    style={workspaceLook.style}
+                  >
                     <div className="preview-header">
                       <span className="preview-brand">
                         <span className="preview-logo">
@@ -691,12 +792,18 @@ export default function App() {
                       selected={selected}
                       onSelect={setSelected}
                       onReorder={updateWidgets}
+                      columns={theme === "default"}
                       label={(widget) => catalog.find((item) => item.type === widget.type)!.title}
                       renderWidget={(widget) => <WidgetContent type={widget.type} theme={theme} />}
                     >
-                      <button className="add-placeholder" onClick={() => addWidget("quick")}>
-                        <Plus size={22} />
-                        <span>Добавить виджет</span>
+                      <button
+                        className="add-placeholder"
+                        onClick={() => (catalogOpen ? setCatalogOpen(false) : openCatalog())}
+                        aria-expanded={catalogOpen}
+                        aria-controls="widget-library"
+                      >
+                        {catalogOpen ? <X size={22} /> : <Plus size={22} />}
+                        <span>{catalogOpen ? "Скрыть список виджетов" : "Добавить виджет"}</span>
                       </button>
                     </WidgetArrangement>
                     <div className="preview-bottom">
@@ -713,7 +820,9 @@ export default function App() {
                         disabled={!editing || !widgets.some((w) => w.id === selected)}
                         onClick={() =>
                           updateWidgets(
-                            widgets.map((w) => (w.id === selected ? { ...w, wide: !w.wide } : w)),
+                            widgets.map((w) =>
+                              w.id === selected ? { ...w, wide: !w.wide, column: undefined } : w,
+                            ),
                           )
                         }
                       >
@@ -738,6 +847,28 @@ export default function App() {
                       >
                         <Move size={17} />
                         Переставить
+                      </button>
+                      <button
+                        className="column-button"
+                        disabled={
+                          !editing || theme !== "default" || !selectedWidget || selectedWidget.wide
+                        }
+                        aria-pressed={selectedWidget?.column === 1}
+                        onClick={() => placeWidget(1)}
+                      >
+                        <ArrowLeft size={17} />
+                        Влево
+                      </button>
+                      <button
+                        className="column-button"
+                        disabled={
+                          !editing || theme !== "default" || !selectedWidget || selectedWidget.wide
+                        }
+                        aria-pressed={selectedWidget?.column === 2}
+                        onClick={() => placeWidget(2)}
+                      >
+                        Вправо
+                        <ArrowRight size={17} />
                       </button>
                       <button
                         className="danger"
@@ -817,6 +948,7 @@ export default function App() {
                     setWidgets([]);
                     setActiveId(null);
                     setTheme("default");
+                    setAppearance(DEFAULT_APPEARANCE);
                     setDirty(true);
                     setPage("create");
                   }}
@@ -830,7 +962,19 @@ export default function App() {
               </div>
               <div className="templates-heading">
                 <div>
-                  <h2>Шаблоны</h2>
+                  <h2>
+                    <button
+                      type="button"
+                      className="templates-toggle"
+                      aria-expanded={templatesOpen}
+                      aria-controls="template-list"
+                      onClick={() => setTemplatesOpen(!templatesOpen)}
+                    >
+                      Шаблоны
+                      <span className="count-badge">{templates.length}</span>
+                      <ChevronDown size={22} aria-hidden="true" />
+                    </button>
+                  </h2>
                   <p>Продуманные решения для разных потребностей. Выберите и настройте под себя.</p>
                 </div>
                 <span className="template-label">
@@ -838,10 +982,18 @@ export default function App() {
                   Забота в каждой детали
                 </span>
               </div>
-              <div className="template-grid">
+              {templatesOpen && (
+              <div className="template-grid" id="template-list">
                 {templates.map((t) => (
-                  <article className={`template-card template-${t.theme}`} key={t.theme}>
-                    <MiniPreview theme={t.theme} types={t.types} />
+                  <article
+                    className={`template-card template-${t.theme} ${templatePreview === t.theme ? "with-preview" : "no-preview"}`}
+                    key={t.theme}
+                  >
+                    {templatePreview === t.theme && (
+                      <div id={`template-preview-${t.theme}`}>
+                        <MiniPreview theme={t.theme} types={t.types} />
+                      </div>
+                    )}
                     <div className="template-body">
                       <span className={`template-tag ${t.theme}`}>
                         <t.icon size={15} />
@@ -860,6 +1012,18 @@ export default function App() {
                       {t.theme === "student" && (
                         <p className="template-proposal">Предлагаемый состав · для согласования</p>
                       )}
+                      <button
+                        type="button"
+                        className="template-preview-toggle"
+                        aria-expanded={templatePreview === t.theme}
+                        aria-controls={`template-preview-${t.theme}`}
+                        onClick={() =>
+                          setTemplatePreview(templatePreview === t.theme ? null : t.theme)
+                        }
+                      >
+                        <Eye size={17} aria-hidden="true" />
+                        {templatePreview === t.theme ? "Скрыть превью" : "Показать превью"}
+                      </button>
                       <button
                         className="button secondary"
                         aria-label={`Выбрать шаблон «${t.title}»`}
@@ -883,6 +1047,7 @@ export default function App() {
                   </article>
                 ))}
               </div>
+              )}
               <div className="inline-note">
                 <ShieldCheck size={21} />
                 <span>
@@ -1151,7 +1316,10 @@ export default function App() {
             Так будет выглядеть ваш интерфейс без элементов редактирования. Финансовые данные
             демонстрационные.
           </p>
-          <div className={`live-preview workspace ${theme}`}>
+          <div
+            className={`live-preview workspace ${theme} ${workspaceLook.className}`}
+            style={workspaceLook.style}
+          >
             <div className="preview-header">
               <span className="preview-brand">
                 <span className="preview-logo">
@@ -1163,7 +1331,10 @@ export default function App() {
             </div>
             <div className="widget-grid">
               {widgets.map((w) => (
-                <div className={`workspace-widget ${w.type} ${w.wide ? "wide" : ""}`} key={w.id}>
+                <div
+                  className={`workspace-widget ${w.type} ${w.wide ? "wide" : ""} ${!w.wide && w.column && theme === "default" ? `col-${w.column}` : ""}`}
+                  key={w.id}
+                >
                   <WidgetContent type={w.type} theme={theme} />
                 </div>
               ))}

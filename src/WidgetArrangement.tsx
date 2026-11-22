@@ -15,7 +15,7 @@ import { SortableContext, arrayMove, rectSortingStrategy, useSortable } from "@d
 import { CSS } from "@dnd-kit/utilities";
 import { Check, Grip } from "lucide-react";
 
-type Item = { id: string; type: string; wide: boolean };
+type Item = { id: string; type: string; wide: boolean; column?: 1 | 2 };
 type Props<T extends Item> = {
   widgets: T[];
   editing: boolean;
@@ -24,6 +24,8 @@ type Props<T extends Item> = {
   onReorder: (widgets: T[]) => void;
   label: (widget: T) => string;
   renderWidget: (widget: T) => ReactNode;
+  /** Можно ли ставить узкие виджеты в левую или правую колонку. */
+  columns?: boolean;
   children: ReactNode;
 };
 
@@ -34,10 +36,12 @@ function SortableWidget({
   selected,
   position,
   keyboardDragging,
+  columns,
   onSelect,
   children,
 }: {
   widget: Item;
+  columns: boolean;
   title: string;
   editing: boolean;
   selected: boolean;
@@ -79,7 +83,7 @@ function SortableWidget({
         }
       }}
       onClick={() => editing && onSelect(widget.id)}
-      className={`workspace-widget ${widget.type} ${widget.wide ? "wide" : ""} ${editing && selected ? "selected" : ""} ${isDragging ? "widget-drag-placeholder" : ""}`}
+      className={`workspace-widget ${widget.type} ${widget.wide ? "wide" : ""} ${columns && !widget.wide && widget.column ? `col-${widget.column}` : ""} ${editing && selected ? "selected" : ""} ${isDragging ? "widget-drag-placeholder" : ""}`}
       data-widget-id={widget.id}
     >
       {editing && selected && (
@@ -126,6 +130,7 @@ export function WidgetArrangement<T extends Item>({
   onReorder,
   label,
   renderWidget,
+  columns = false,
   children,
 }: Props<T>) {
   const [activeId, setActiveId] = useState<string | null>(null);
@@ -224,7 +229,7 @@ export function WidgetArrangement<T extends Item>({
         setDraft(next);
       }}
       onDragEnd={({ active, over }) => {
-        const next =
+        let next =
           keyboardDraggingRef.current && over
             ? arrayMove(
                 widgets,
@@ -232,8 +237,31 @@ export function WidgetArrangement<T extends Item>({
                 widgets.findIndex((widget) => widget.id === over.id),
               )
             : draftRef.current;
+        // Узкий виджет, отпущенный в левой или правой половине сетки, встаёт в эту колонку.
+        let columnChanged = false;
+        const grid = gridRef.current;
+        const dropped = active.rect.current.translated;
+        const moved = next.find((widget) => widget.id === active.id);
+        if (
+          columns &&
+          over &&
+          !keyboardDraggingRef.current &&
+          grid &&
+          dropped &&
+          moved &&
+          !moved.wide &&
+          getComputedStyle(grid).gridTemplateColumns.trim().split(/\s+/).length === 2
+        ) {
+          const area = grid.getBoundingClientRect();
+          const column: 1 | 2 = dropped.left + dropped.width / 2 < area.left + area.width / 2 ? 1 : 2;
+          if (moved.column !== column) {
+            columnChanged = true;
+            next = next.map((widget) => (widget.id === active.id ? { ...widget, column } : widget));
+          }
+        }
         draftRef.current = next;
-        if (over && next.some((widget, index) => widget.id !== widgets[index]?.id)) onReorder(next);
+        if (over && (columnChanged || next.some((widget, index) => widget.id !== widgets[index]?.id)))
+          onReorder(next);
         reset();
       }}
       onDragCancel={reset}
@@ -250,6 +278,7 @@ export function WidgetArrangement<T extends Item>({
               selected={selected === widget.id}
               position={index + 1}
               keyboardDragging={keyboardDragging}
+              columns={columns}
               onSelect={onSelect}
             >
               {renderWidget(widget)}
