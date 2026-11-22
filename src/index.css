@@ -631,11 +631,6 @@ h2 {
   align-items: center;
   gap: 4px;
 }
-.balance-bottom b {
-  font-size: 7px;
-  color: #60845c;
-  font-style: italic;
-}
 .card-chip {
   width: 11px;
   height: 8px;
@@ -2597,9 +2592,6 @@ h2 {
     font-size: 12px;
     gap: 3px;
     margin-top: 16px;
-  }
-  .balance-bottom b {
-    display: none;
   }
   .widget-topline {
     font-size: 12px;
