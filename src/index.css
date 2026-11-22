@@ -1526,6 +1526,21 @@ h2 {
   accent-color: #239744;
   cursor: pointer;
 }
+.help-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 15px;
+}
+.help-actions .button {
+  min-height: 48px;
+  font-size: 14px;
+}
+.help-actions .modal-done {
+  margin: 0 0 0 auto;
+}
 .modal-done {
   display: flex;
   margin: 15px 0 0 auto;
