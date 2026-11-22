@@ -1,0 +1,10 @@
+{
+  "description": "Создавайте и выбирайте доступные интерфейсы банковских сервисов, адаптированные для пожилых людей и людей с инвалидностью, и экспортируйте настройки.",
+  "robots": {
+    "index": false
+  },
+  "accessibility": {
+    "addBypassLinks": false,
+    "ignoreReducedMotion": false
+  }
+}
