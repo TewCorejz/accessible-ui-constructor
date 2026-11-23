@@ -130,7 +130,7 @@ pnpm dev
 - [x] Аудит доступности по WCAG 2.2 AA — [docs/accessibility-audit.md](docs/accessibility-audit.md)
 - [ ] Ручная проверка со скринридерами NVDA и VoiceOver
 - [ ] Настройки размера шрифта и контраста поверх любого шаблона
-- [ ] Юзабилити-тестирование с целевыми группами
+- [ ] Юзабилити-тестирование с целевыми группами — материалы готовы: [docs/research](docs/research)
 - [x] Спецификация формата конфигурации для интеграции с банковским приложением — [docs/config-format.md](docs/config-format.md)
 - [ ] Мобильное приложение — в отдельном репозитории [accessible-ui-constructor-mobile](https://github.com/TewCorejz/accessible-ui-constructor-mobile)
 
