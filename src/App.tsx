@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState, type ReactNode } from "react";
+import { useEffect, useId, useRef, useState, type ReactNode } from "react";
 import { WidgetArrangement } from "./WidgetArrangement";
 import { StudentWidget, QuickActions, QrPayment, type StudentWidgetType } from "./StudentWidgets";
 import { TemplatePreview } from "./TemplatePreview";
@@ -214,20 +214,27 @@ function Modal({
   close: () => void;
 }) {
   const ref = useRef<HTMLDialogElement>(null);
+  const titleId = useId();
+  // Запоминаем, откуда открыли окно (до showModal), и возвращаем туда фокус после закрытия (WCAG 2.4.3).
+  const [opener] = useState(() => document.activeElement as HTMLElement | null);
   useEffect(() => {
-    ref.current?.showModal();
+    if (!ref.current?.open) ref.current?.showModal();
+    return () => {
+      if (opener?.isConnected) opener.focus();
+    };
   }, []);
   return (
     <dialog
       ref={ref}
       className="modal"
+      aria-labelledby={titleId}
       onCancel={close}
       onClick={(e) => {
         if (e.target === e.currentTarget) close();
       }}
     >
       <div className="modal-heading">
-        <h2>{title}</h2>
+        <h2 id={titleId}>{title}</h2>
         <button className="icon-button" aria-label="Закрыть" onClick={close}>
           <X size={24} />
         </button>
@@ -1132,7 +1139,8 @@ export default function App() {
                   type="file"
                   accept=".xml,.json,.yaml,.yml"
                   className="sr-only"
-                  aria-label="Выбрать файл интерфейса"
+                  tabIndex={-1}
+                  aria-hidden="true"
                   onChange={(e) => {
                     void readFile(e.target.files?.[0]);
                     e.target.value = "";
@@ -1178,8 +1186,11 @@ export default function App() {
           </footer>
         </main>
       </div>
+      <p className="sr-only" role="status" aria-live="polite">
+        {notice}
+      </p>
       {notice && (
-        <div className="toast" role="status">
+        <div className="toast">
           <CircleCheck size={22} />
           <span>{notice}</span>
           <button
