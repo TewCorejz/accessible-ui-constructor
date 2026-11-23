@@ -4,6 +4,7 @@ import { StudentWidget, QuickActions, QrPayment, type StudentWidgetType } from "
 import { TemplatePreview } from "./TemplatePreview";
 import { LogoMark } from "./Logo";
 import { MobileGate } from "./MobileGate";
+import { parseFile, serialize, validateConfig } from "./configFormat";
 import { clearSnapshot, loadSnapshot, saveSnapshot } from "./storage";
 import { AppearancePanel } from "./AppearancePanel";
 import {
@@ -472,17 +473,7 @@ export default function App() {
       exportId === "current"
         ? { name, widgets, theme, appearance }
         : saved.find((c) => c.id === exportId)!;
-    const escapeXml = (text: string) =>
-      text.replace(
-        /[<>&"']/g,
-        (c) => ({ "<": "&lt;", ">": "&gt;", "&": "&amp;", '"': "&quot;", "'": "&apos;" })[c]!,
-      );
-    const content =
-      format === "JSON"
-        ? JSON.stringify(config, null, 2)
-        : format === "YAML"
-          ? (await import("yaml")).stringify(config)
-          : `<?xml version="1.0" encoding="UTF-8"?>\n<interface><name>${escapeXml(config.name)}</name><theme>${config.theme}</theme>${config.appearance ? `<appearance fontSize="${config.appearance.fontSize}"${config.appearance.primary ? ` primary="${config.appearance.primary}"` : ""}${config.appearance.secondary ? ` secondary="${config.appearance.secondary}"` : ""} />` : ""}<widgets>${config.widgets.map((w) => `<widget id="${escapeXml(w.id)}" type="${w.type}" wide="${w.wide}"${w.column ? ` column="${w.column}"` : ""} />`).join("")}</widgets></interface>`;
+    const content = await serialize(config, format as "JSON" | "YAML" | "XML");
     const url = URL.createObjectURL(
       new Blob([content], {
         type:
@@ -507,55 +498,21 @@ export default function App() {
     try {
       if (file.size > 2_000_000) throw new Error("Размер файла не должен превышать 2 МБ.");
       const text = await file.text();
-      let data: unknown;
-      if (file.name.toLowerCase().endsWith(".xml")) {
-        const doc = new DOMParser().parseFromString(text, "application/xml");
-        if (doc.querySelector("parsererror")) throw new Error("Некорректный XML-файл.");
-        data = {
-          name: doc.querySelector("interface > name")?.textContent,
-          theme: doc.querySelector("theme")?.textContent || "default",
-          appearance: (() => {
-            const a = doc.querySelector("appearance");
-            return a
-              ? {
-                  fontSize: a.getAttribute("fontSize"),
-                  primary: a.getAttribute("primary"),
-                  secondary: a.getAttribute("secondary"),
-                }
-              : undefined;
-          })(),
-          widgets: [...doc.querySelectorAll("widget")].map((w) => ({
-            id: w.getAttribute("id"),
-            type: w.getAttribute("type"),
-            wide: w.getAttribute("wide") === "true",
-            column: Number(w.getAttribute("column")) || undefined,
-          })),
-        };
-      } else
-        data = file.name.toLowerCase().endsWith(".json")
-          ? JSON.parse(text)
-          : (await import("yaml")).parse(text);
-      const c = data as Config;
-      if (
-        !c ||
-        typeof c.name !== "string" ||
-        !c.name.trim() ||
-        !Array.isArray(c.widgets) ||
-        c.widgets.length > 30 ||
-        c.widgets.some((w) => !w || !catalog.some((t) => t.type === w.type))
-      )
-        throw new Error("В файле нет корректной конфигурации интерфейса.");
+      const result = validateConfig(await parseFile(file.name, text));
+      if (!result.ok)
+        throw new Error(
+          `В файле нет корректной конфигурации интерфейса. ${result.errors.slice(0, 3).join(" ")}`,
+        );
+      const c = result.config;
       setImported({
         id: `import-${Date.now()}`,
-        name: c.name.slice(0, 80),
-        theme: ["default", "senior", "focus", "contrast", "student"].includes(c.theme)
-          ? c.theme
-          : "default",
+        name: c.name,
+        theme: c.theme,
         appearance: normalizeAppearance(c.appearance),
         widgets: c.widgets.map((w, i) => ({
           id: `import-widget-${i}`,
           type: w.type,
-          wide: Boolean(w.wide),
+          wide: w.wide,
           column: normalizeColumn(w.column),
         })),
       });
