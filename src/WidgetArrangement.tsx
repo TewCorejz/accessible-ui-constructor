@@ -108,7 +108,7 @@ function SortableWidget({
           className="widget-grip"
           aria-label={`Переместить виджет «${title}»`}
           aria-roledescription="Кнопка перетаскивания виджета"
-          title="Перетащите за точки. С клавиатуры: Пробел, стрелки, Пробел."
+          title="Перетащите за точки. С клавиатуры: Пробел, стрелки (влево/вправо — колонка), Пробел."
           onFocus={() => onSelect(widget.id)}
           onClick={(event) => {
             event.stopPropagation();
@@ -138,6 +138,10 @@ export function WidgetArrangement<T extends Item>({
   const [keyboardDragging, setKeyboardDragging] = useState(false);
   const keyboardDraggingRef = useRef(false);
   const keyboardTargetRef = useRef<string | null>(null);
+  const activeIdRef = useRef<string | null>(null);
+  /** Колонка, выбранная стрелками влево/вправо во время перетаскивания с клавиатуры. */
+  const pendingColumnRef = useRef<1 | 2 | null>(null);
+  const [columnNotice, setColumnNotice] = useState("");
   const draftRef = useRef<T[]>(widgets);
   const gridRef = useRef<HTMLDivElement>(null);
   const sensors = useSensors(
@@ -148,6 +152,28 @@ export function WidgetArrangement<T extends Item>({
         const direction = { ArrowLeft: -1, ArrowUp: -1, ArrowRight: 1, ArrowDown: 1 }[event.code];
         if (!direction) return undefined;
         event.preventDefault();
+        // В двухколоночной сетке стрелки влево/вправо переносят узкий виджет в другую колонку,
+        // а вверх/вниз — меняют позицию.
+        const dragged = widgets.find((widget) => widget.id === activeIdRef.current);
+        if (
+          (event.code === "ArrowLeft" || event.code === "ArrowRight") &&
+          columns &&
+          dragged &&
+          !dragged.wide &&
+          isTwoColumns()
+        ) {
+          const column: 1 | 2 = event.code === "ArrowLeft" ? 1 : 2;
+          pendingColumnRef.current = column;
+          setDraft((current) =>
+            (current ?? widgets).map((widget) =>
+              widget.id === dragged.id ? { ...widget, column } : widget,
+            ),
+          );
+          setColumnNotice(
+            `Виджет «${label(dragged)}»: ${column === 1 ? "левая" : "правая"} колонка.`,
+          );
+          return currentCoordinates;
+        }
         const index = widgets.findIndex((widget) => widget.id === keyboardTargetRef.current);
         const next = widgets[index + direction];
         if (!next) return currentCoordinates;
@@ -157,6 +183,9 @@ export function WidgetArrangement<T extends Item>({
       },
     }),
   );
+  const isTwoColumns = () =>
+    !!gridRef.current &&
+    getComputedStyle(gridRef.current).gridTemplateColumns.trim().split(/\s+/).length === 2;
   const items = draft ?? widgets;
   const activeWidget = items.find((widget) => widget.id === activeId);
   const title = (id: string | number) => {
@@ -189,6 +218,8 @@ export function WidgetArrangement<T extends Item>({
     return collisions.length ? collisions : closestCenter(args);
   };
   const reset = () => {
+    activeIdRef.current = null;
+    pendingColumnRef.current = null;
     setActiveId(null);
     setDraft(null);
     setKeyboardDragging(false);
@@ -203,7 +234,9 @@ export function WidgetArrangement<T extends Item>({
         screenReaderInstructions: {
           draggable:
             "Чтобы переместить виджет, нажмите Пробел или Enter на кнопке перетаскивания. " +
-            "Стрелки влево и вверх — предыдущая позиция, вправо и вниз — следующая. " +
+            "Стрелки вверх и вниз — предыдущая и следующая позиция. " +
+            "Стрелки влево и вправо — левая и правая колонка (для узких виджетов), " +
+            "для широких — предыдущая и следующая позиция. " +
             "Нажмите Пробел или Enter для подтверждения, Escape для отмены. " +
             "Также можно выбрать виджет и воспользоваться кнопкой «Переставить».",
         },
@@ -211,6 +244,9 @@ export function WidgetArrangement<T extends Item>({
       onDragStart={({ active, activatorEvent }) => {
         keyboardDraggingRef.current = activatorEvent instanceof KeyboardEvent;
         keyboardTargetRef.current = String(active.id);
+        activeIdRef.current = String(active.id);
+        pendingColumnRef.current = null;
+        setColumnNotice("");
         setKeyboardDragging(keyboardDraggingRef.current);
         draftRef.current = [...widgets];
         setDraft(draftRef.current);
@@ -239,6 +275,14 @@ export function WidgetArrangement<T extends Item>({
             : draftRef.current;
         // Узкий виджет, отпущенный в левой или правой половине сетки, встаёт в эту колонку.
         let columnChanged = false;
+        const chosen = pendingColumnRef.current;
+        const target = next.find((widget) => widget.id === active.id);
+        if (keyboardDraggingRef.current && over && chosen && target && target.column !== chosen) {
+          columnChanged = true;
+          next = next.map((widget) =>
+            widget.id === active.id ? { ...widget, column: chosen } : widget,
+          );
+        }
         const grid = gridRef.current;
         const dropped = active.rect.current.translated;
         const moved = next.find((widget) => widget.id === active.id);
@@ -264,7 +308,10 @@ export function WidgetArrangement<T extends Item>({
           onReorder(next);
         reset();
       }}
-      onDragCancel={reset}
+      onDragCancel={() => {
+        pendingColumnRef.current = null;
+        reset();
+      }}
     >
       {/* Pointer sorting reflows mixed-width tiles; keyboard sorting keeps stable spatial targets. */}
       <SortableContext items={items} strategy={keyboardDragging ? rectSortingStrategy : () => null}>
@@ -287,6 +334,9 @@ export function WidgetArrangement<T extends Item>({
           {children}
         </div>
       </SortableContext>
+      <p className="visually-hidden" aria-live="assertive" aria-atomic="true">
+        {columnNotice}
+      </p>
       <DragOverlay dropAnimation={null}>
         {activeWidget ? (
           <div
