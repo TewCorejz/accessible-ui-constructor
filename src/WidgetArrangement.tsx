@@ -35,6 +35,7 @@ function SortableWidget({
   editing,
   selected,
   position,
+  total,
   keyboardDragging,
   columns,
   onSelect,
@@ -46,6 +47,7 @@ function SortableWidget({
   editing: boolean;
   selected: boolean;
   position: number;
+  total: number;
   keyboardDragging: boolean;
   onSelect: (id: string) => void;
   children: ReactNode;
@@ -74,7 +76,7 @@ function SortableWidget({
       }
       role={editing ? "group" : undefined}
       tabIndex={editing ? 0 : undefined}
-      aria-label={editing ? `Виджет «${title}», позиция ${position}` : undefined}
+      aria-label={editing ? `Виджет «${title}», позиция ${position} из ${total}` : undefined}
       onKeyDown={(event) => {
         if (event.target !== event.currentTarget) return;
         if (editing && (event.key === "Enter" || event.key === " ")) {
@@ -233,12 +235,9 @@ export function WidgetArrangement<T extends Item>({
         announcements,
         screenReaderInstructions: {
           draggable:
-            "Чтобы переместить виджет, нажмите Пробел или Enter на кнопке перетаскивания. " +
-            "Стрелки вверх и вниз — предыдущая и следующая позиция. " +
-            "Стрелки влево и вправо — левая и правая колонка (для узких виджетов), " +
-            "для широких — предыдущая и следующая позиция. " +
-            "Нажмите Пробел или Enter для подтверждения, Escape для отмены. " +
-            "Также можно выбрать виджет и воспользоваться кнопкой «Переставить».",
+            // Короткая подсказка: её слышат на каждом виджете. Подробнее — в «Помощи».
+            "Пробел — взять. Стрелки вверх и вниз — позиция, влево и вправо — колонка. " +
+            "Пробел — положить, Escape — отмена.",
         },
       }}
       onDragStart={({ active, activatorEvent }) => {
@@ -324,6 +323,7 @@ export function WidgetArrangement<T extends Item>({
               editing={editing}
               selected={selected === widget.id}
               position={index + 1}
+              total={items.length}
               keyboardDragging={keyboardDragging}
               columns={columns}
               onSelect={onSelect}

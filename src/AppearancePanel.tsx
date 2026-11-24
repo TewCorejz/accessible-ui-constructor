@@ -50,7 +50,6 @@ function ColorRow({
               className={`swatch ${active ? "active" : ""}`}
               style={{ background: p.value }}
               aria-pressed={active}
-              aria-label={p.name}
               title={p.name}
               onClick={() => onChange(p.value)}
             >
@@ -64,7 +63,9 @@ function ColorRow({
             value={current}
             onChange={(e) => onChange(e.target.value.toLowerCase())}
           />
-          <span>Свой цвет</span>
+          <span>
+            Свой цвет<span className="visually-hidden"> — {label.toLowerCase()}</span>
+          </span>
         </label>
       </div>
     </fieldset>
