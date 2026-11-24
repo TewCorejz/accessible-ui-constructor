@@ -1,12 +1,27 @@
 import { Monitor, Smartphone } from "lucide-react";
 import { LogoMark } from "./Logo";
 
-/** Ссылка на мобильное приложение (репозиторий с инструкцией по установке). */
-export const MOBILE_APP_URL = "https://github.com/TewCorejz/accessible-ui-constructor-mobile";
+/** Ссылка на инструкцию по установке мобильного приложения. */
+export const MOBILE_APP_URL =
+  "https://github.com/TewCorejz/accessible-ui-constructor-mobile/blob/main/docs/install.md";
+
+export const FORCE_WEB_KEY = "accessible-ui-constructor:force-web";
+
+/** Показать веб-версию вместо заглушки (запоминается в браузере). */
+export function openWebVersion() {
+  try {
+    localStorage.setItem(FORCE_WEB_KEY, "1");
+  } catch {
+    // Хранилище недоступно — веб-версия откроется только до перезагрузки.
+  }
+  document.documentElement.classList.add("force-web");
+  document.getElementById("main")?.focus();
+}
 
 /**
- * На телефонах веб-конструктор не показывается: для них есть отдельное
- * мобильное приложение. Экран виден только на ширине до 700 px (см. index.css).
+ * На сенсорных телефонах вместо веб-конструктора предлагается мобильное
+ * приложение (см. index.css: узкий экран и pointer: coarse). Узкое окно на
+ * компьютере — например, при увеличении страницы — получает обычную раскладку.
  */
 export function MobileGate() {
   return (
@@ -21,8 +36,11 @@ export function MobileGate() {
         </a>
         <div className="mobile-gate-note">
           <Monitor size={20} aria-hidden="true" />
-          <span>Веб-версия конструктора открывается на компьютере и планшете.</span>
+          <span>Веб-версия конструктора рассчитана на компьютер и планшет.</span>
         </div>
+        <button type="button" className="mobile-gate-secondary" onClick={openWebVersion}>
+          Открыть веб-версию всё равно
+        </button>
       </div>
     </main>
   );

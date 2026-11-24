@@ -606,7 +606,7 @@ export default function App() {
             <span>Доступность</span>
           </button>
         </header>
-        <main id="main">
+        <main id="main" tabIndex={-1}>
           <div className="breadcrumb">
             Конструктор <ChevronRight size={15} />
             <span>{currentPage.title}</span>

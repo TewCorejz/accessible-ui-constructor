@@ -71,7 +71,7 @@
 
 **Без установки:** откройте [демо на GitHub Pages](https://tewcorejz.github.io/accessible-ui-constructor/) — оно обновляется автоматически после каждого слияния в `main`. Работает на компьютере и планшете.
 
-**На телефоне** — отдельное мобильное приложение: [accessible-ui-constructor-mobile](https://github.com/TewCorejz/accessible-ui-constructor-mobile). Если открыть веб-версию на экране уже 700 px, она предложит установить приложение.
+**На телефоне** — отдельное мобильное приложение: [accessible-ui-constructor-mobile](https://github.com/TewCorejz/accessible-ui-constructor-mobile). Если открыть веб-версию на телефоне, она предложит установить приложение (веб-версию всё равно можно открыть). При увеличении страницы на компьютере конструктор перестраивается в одну колонку.
 
 **Локально** — нужны **Node.js 22** и **pnpm 10+**.
 
