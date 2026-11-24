@@ -1,8 +1,9 @@
 import { Monitor, Smartphone } from "lucide-react";
 import { LogoMark } from "./Logo";
 
-/** Ссылка на мобильное приложение (репозиторий с инструкцией по установке). */
-export const MOBILE_APP_URL = "https://github.com/TewCorejz/accessible-ui-constructor-mobile";
+/** Ссылка на инструкцию по установке мобильного приложения. */
+export const MOBILE_APP_URL =
+  "https://github.com/TewCorejz/accessible-ui-constructor-mobile/blob/main/docs/install.md";
 
 export const FORCE_WEB_KEY = "accessible-ui-constructor:force-web";
 
