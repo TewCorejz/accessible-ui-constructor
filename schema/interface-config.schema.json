@@ -1,0 +1,92 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/TewCorejz/accessible-ui-constructor/main/schema/interface-config.schema.json",
+  "title": "Конфигурация доступного интерфейса",
+  "description": "Настройки интерфейса, собранного в «Конструкторе доступных интерфейсов»: виджеты, их порядок и расположение, шаблон и оформление. Один формат для веб-версии, мобильного приложения и интеграции с банковским приложением.",
+  "type": "object",
+  "required": ["formatVersion", "name", "theme", "widgets"],
+  "additionalProperties": false,
+  "properties": {
+    "$schema": {
+      "type": "string",
+      "description": "Ссылка на эту схему (необязательно)."
+    },
+    "formatVersion": {
+      "const": 1,
+      "description": "Версия формата. Увеличивается при несовместимых изменениях."
+    },
+    "name": {
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 80,
+      "description": "Название интерфейса, которое видит пользователь."
+    },
+    "theme": {
+      "enum": ["default", "senior", "focus", "contrast", "student"],
+      "description": "Шаблон: default — обычный, senior — «Крупный текст», focus — «Фокус», contrast — «Высокий контраст», student — «Студент»."
+    },
+    "appearance": {
+      "$ref": "#/$defs/appearance"
+    },
+    "widgets": {
+      "type": "array",
+      "maxItems": 30,
+      "description": "Виджеты в порядке отображения: сверху вниз, слева направо.",
+      "items": { "$ref": "#/$defs/widget" }
+    }
+  },
+  "$defs": {
+    "color": {
+      "type": "string",
+      "pattern": "^#[0-9a-fA-F]{6}$",
+      "description": "Цвет в формате #RRGGBB."
+    },
+    "appearance": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["fontSize"],
+      "description": "Оформление. Если блока нет — используются настройки шаблона.",
+      "properties": {
+        "fontSize": {
+          "type": "integer",
+          "minimum": 12,
+          "maximum": 28,
+          "description": "Размер основного текста в пикселях. 14 — обычный."
+        },
+        "primary": {
+          "oneOf": [{ "$ref": "#/$defs/color" }, { "type": "null" }],
+          "description": "Основной цвет: кнопки, иконки, акценты. null — цвет шаблона."
+        },
+        "secondary": {
+          "oneOf": [{ "$ref": "#/$defs/color" }, { "type": "null" }],
+          "description": "Дополнительный цвет: фон виджетов. null — цвет шаблона. Цвет текста подбирается автоматически."
+        }
+      }
+    },
+    "widget": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["id", "type", "wide"],
+      "properties": {
+        "id": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 100,
+          "description": "Идентификатор виджета внутри интерфейса."
+        },
+        "type": {
+          "enum": ["balance", "qr", "history", "quick", "studentQr", "subscriptions", "mobile"],
+          "description": "Тип виджета: balance — баланс, qr — оплата по QR-коду, history — история переводов, quick — быстрая оплата, studentQr — QR-коды студента, subscriptions — подписки, mobile — мобильная связь."
+        },
+        "wide": {
+          "type": "boolean",
+          "description": "true — виджет во всю ширину, false — в половину (на компьютере и планшете)."
+        },
+        "column": {
+          "enum": [1, 2],
+          "description": "Колонка для узкого виджета: 1 — левая, 2 — правая. Если не указана, виджет встаёт на следующее свободное место. Для широких виджетов не используется."
+        }
+      }
+    }
+  }
+}

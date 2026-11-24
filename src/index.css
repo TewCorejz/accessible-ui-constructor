@@ -3800,3 +3800,33 @@ h2 {
   flex: none;
   margin-top: 2px;
 }
+
+/* Текст только для скринридеров */
+.visually-hidden {
+  position: absolute !important;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0 0 0 0);
+  white-space: nowrap;
+  border: 0;
+}
+
+/* Аудит доступности (#13) */
+/* Заметная рамка фокуса у поля названия (было — бледная тень) */
+.name-input-wrap:focus-within {
+  outline: 3px solid #1b6e35;
+  outline-offset: 2px;
+}
+/* Образцы цветов должны показывать настоящий цвет и в режиме высокой контрастности Windows */
+.swatch,
+.swatch-custom input[type="color"] {
+  forced-color-adjust: none;
+}
+@media (forced-colors: active) {
+  .swatch.active {
+    outline-color: Highlight;
+  }
+}

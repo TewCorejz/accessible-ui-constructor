@@ -1,0 +1,19 @@
+$schema: https://raw.githubusercontent.com/TewCorejz/accessible-ui-constructor/main/schema/interface-config.schema.json
+formatVersion: 1
+name: Мой удобный банк
+theme: default
+appearance:
+  fontSize: 14
+  primary: "#1f5fbf"
+  secondary: null
+widgets:
+  - id: balance-1
+    type: balance
+    wide: false
+  - id: qr-1
+    type: qr
+    wide: false
+    column: 1
+  - id: history-1
+    type: history
+    wide: true
