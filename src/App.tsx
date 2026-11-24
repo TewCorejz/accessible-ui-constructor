@@ -569,7 +569,7 @@ export default function App() {
             <span className="access-icon">
               <Accessibility size={25} />
             </span>
-            <h3>Удобно каждому</h3>
+            <p className="access-card-title">Удобно каждому</p>
             <p>
               Настройте размер текста
               <br />и контраст под себя.
@@ -634,7 +634,7 @@ export default function App() {
               <section className="name-panel" aria-labelledby="name-label">
                 <div className="name-input-area">
                   <label id="name-label" htmlFor="interface-name">
-                    Строка выбора названия интерфейса
+                    Название интерфейса
                   </label>
                   <div className="name-input-wrap">
                     <LayoutGrid size={21} />
@@ -706,6 +706,7 @@ export default function App() {
                         </span>
                         <span className="catalog-text">
                           <strong>{w.title}</strong>
+                          <span className="visually-hidden">. </span>
                           <span>{w.description}</span>
                         </span>
                         <Plus size={20} className="catalog-plus" />
@@ -937,6 +938,7 @@ export default function App() {
                       onClick={() => setTemplatesOpen(!templatesOpen)}
                     >
                       Шаблоны
+                      <span className="visually-hidden">, </span>
                       <span className="count-badge">{templates.length}</span>
                       <ChevronDown size={22} aria-hidden="true" />
                     </button>

@@ -155,7 +155,7 @@
   border-radius: 10px;
   margin-bottom: 12px;
 }
-.access-card h3 {
+.access-card .access-card-title {
   font-size: 15px;
   margin-bottom: 7px;
 }
@@ -1877,7 +1877,7 @@ h2 {
 .local-tag {
   font-size: 12px;
 }
-.access-card h3 {
+.access-card .access-card-title {
   font-size: 17px;
 }
 .access-card p {
