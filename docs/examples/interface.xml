@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<interface formatVersion="1">
+  <name>Мой удобный банк</name>
+  <theme>default</theme>
+  <appearance fontSize="14" primary="#1f5fbf" />
+  <widgets>
+    <widget id="balance-1" type="balance" wide="false" />
+    <widget id="qr-1" type="qr" wide="false" column="1" />
+    <widget id="history-1" type="history" wide="true" />
+  </widgets>
+</interface>
