@@ -4650,18 +4650,24 @@ h2 {
 }
 
 /* ===================================================================
-   Анимации: пак «Плавный» (выбор команды). Демо: docs/design/animations/2-smooth.mp4
+   Анимации: пак «Живой» (выбор команды). Демо: docs/design/animations/4-lively.mp4
+   Основа — сдвиг и проявление; сверху скелет при открытии экрана, счётчик баланса
+   (src/motion.tsx), блик по карте баланса и подсветка нового виджета.
    Только когда пользователь не просил уменьшить движение (WCAG 2.3.3).
    =================================================================== */
 @media (prefers-reduced-motion: no-preference) {
   :root {
     --ease-smooth: cubic-bezier(0.2, 0.8, 0.2, 1);
+    --skel-bg: #ffffff;
+    --skel-bar: #e8eeea;
+    --skel-shine: rgba(255, 255, 255, 0.85);
+    --ring-new: #178544;
   }
   /* Вход экрана: блоки поднимаются по очереди */
   main > *,
   .template-grid > *,
   .saved-grid > * {
-    animation: rise-in 0.45s var(--ease-smooth) both;
+    animation: rise-in 0.42s var(--ease-smooth) both;
   }
   main > :nth-child(2),
   .template-grid > :nth-child(2),
@@ -4682,9 +4688,52 @@ h2 {
     transform: scale(0.97);
   }
 
-  /* Новый виджет проявляется и поднимается на место */
+  /* Экран открылся: на виджетах мерцает скелет и растворяется (900 мс) */
+  .widget-grid.is-loading .workspace-widget:not(:is(.contrast, .preset-contrast) *)::after {
+    content: "";
+    position: absolute;
+    inset: -1px;
+    z-index: 3;
+    border-radius: inherit;
+    pointer-events: none;
+    background:
+      linear-gradient(100deg, transparent 20%, var(--skel-shine) 50%, transparent 80%) -150% 0 / 60% 100% no-repeat,
+      linear-gradient(var(--skel-bar) 0 0) 18px 22px / 38% 12px no-repeat,
+      linear-gradient(var(--skel-bar) 0 0) 18px 52px / 62% 26px no-repeat,
+      linear-gradient(var(--skel-bar) 0 0) 18px 96px / 30% 12px no-repeat,
+      var(--skel-bg);
+    animation:
+      skeleton-shine 0.9s ease-in-out both,
+      skeleton-out 0.9s ease-out both;
+  }
+  .widget-grid.is-loading .workspace-widget :is(.balance-sheen) {
+    display: none;
+  }
+
+  /* Блик по карте баланса после открытия экрана */
+  .balance-sheen {
+    position: absolute;
+    inset: 0;
+    border-radius: inherit;
+    overflow: hidden;
+    pointer-events: none;
+  }
+  .balance-sheen::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    width: 40%;
+    left: -40%;
+    background: linear-gradient(100deg, transparent, rgba(255, 255, 255, 0.35), transparent);
+    animation: sheen 0.9s 0.35s ease-in-out both;
+  }
+
+  /* Новый виджет выезжает справа и подсвечивается рамкой */
   .workspace-widget.widget-enter {
-    animation: rise-in 0.42s var(--ease-smooth) both;
+    animation:
+      slide-in-right 0.48s var(--ease-smooth) both,
+      new-ring 1.5s 0.4s ease-out both;
   }
 
   /* Окна выезжают снизу, фон затемняется */
@@ -4692,7 +4741,8 @@ h2 {
     animation: sheet-in 0.36s var(--ease-smooth) both;
   }
   dialog.modal[open]::backdrop {
-    animation: fade-in 0.3s ease-out both;
+    backdrop-filter: blur(4px);
+    animation: backdrop-in 0.32s ease-out both;
   }
 
   /* Уведомление выезжает снизу */
@@ -4706,10 +4756,69 @@ h2 {
     transition: background-color 0.3s ease, color 0.3s ease, border-color 0.3s ease !important;
   }
 }
+/* Шаблон «Фокус» обещает интерфейс без анимаций */
+.workspace.focus :is(*, *::before, *::after) {
+  animation: none !important;
+}
 @keyframes rise-in {
   from {
     opacity: 0;
-    transform: translateY(18px);
+    transform: translateY(12px);
+  }
+}
+@keyframes skeleton-shine {
+  to {
+    background-position: 250% 0, 18px 22px, 18px 52px, 18px 96px;
+  }
+}
+@keyframes skeleton-out {
+  0%,
+  70% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0;
+  }
+}
+@keyframes sheen {
+  from {
+    left: -40%;
+    opacity: 0;
+  }
+  20%,
+  80% {
+    opacity: 1;
+  }
+  to {
+    left: 120%;
+    opacity: 0;
+  }
+}
+@keyframes slide-in-right {
+  from {
+    opacity: 0;
+    transform: translateX(60px);
+  }
+}
+@keyframes new-ring {
+  0% {
+    outline: 3px solid transparent;
+    outline-offset: 4px;
+  }
+  20%,
+  60% {
+    outline: 3px solid var(--ring-new);
+    outline-offset: 3px;
+  }
+  100% {
+    outline: 3px solid transparent;
+    outline-offset: 3px;
+  }
+}
+@keyframes backdrop-in {
+  from {
+    opacity: 0;
+    backdrop-filter: blur(0);
   }
 }
 @keyframes sheet-in {
