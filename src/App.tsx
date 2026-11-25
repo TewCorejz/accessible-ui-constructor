@@ -6,6 +6,7 @@ import { LogoMark } from "./Logo";
 import { MobileGate } from "./MobileGate";
 import { parseFile, serialize, validateConfig } from "./configFormat";
 import { useColorTheme, type ColorTheme } from "./colorTheme";
+import { CountUp } from "./motion";
 import { clearSnapshot, loadSnapshot, saveSnapshot } from "./storage";
 import { AppearancePanel } from "./AppearancePanel";
 import {
@@ -303,8 +304,10 @@ function WidgetContent({ type, theme = "default" }: { type: WidgetType; theme?: 
           <Eye size={19} className="muted" />
         </div>
         <div className="balance-value">
-          128 450<span>,00 ₽</span>
+          <CountUp value={128450} instant={theme === "focus"} />
+          <span>,00 ₽</span>
         </div>
+        <span className="balance-sheen" aria-hidden="true" />
         <div className="balance-bottom">
           <span>
             <i className="card-chip" /> Дебетовая карта

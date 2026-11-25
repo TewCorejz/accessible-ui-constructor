@@ -41,3 +41,11 @@ html[data-theme="dark"] .theme-switch button.on {
 html[data-theme="dark"] .modal::backdrop {
   background: rgb(0 0 0 / 60%);
 }
+
+/* Скелет и подсветка нового виджета (пак анимаций «Живой») */
+html[data-theme="dark"] {
+  --skel-bg: #1b211e;
+  --skel-bar: #29312d;
+  --skel-shine: rgba(255, 255, 255, 0.08);
+  --ring-new: #3ccf7d;
+}

@@ -14,6 +14,7 @@ import {
 import { SortableContext, arrayMove, rectSortingStrategy, useSortable } from "@dnd-kit/sortable";
 import { CSS } from "@dnd-kit/utilities";
 import { Check, Grip } from "lucide-react";
+import { useLoadingSkeleton } from "./motion";
 
 type Item = { id: string; type: string; wide: boolean; column?: 1 | 2 };
 type Props<T extends Item> = {
@@ -138,6 +139,7 @@ export function WidgetArrangement<T extends Item>({
   children,
 }: Props<T>) {
   const [activeId, setActiveId] = useState<string | null>(null);
+  const loading = useLoadingSkeleton();
   // Виджеты, которые только что добавили, — для анимации появления.
   const knownIds = useRef<Set<string> | null>(null);
   const [freshIds, setFreshIds] = useState<Set<string>>(new Set());
@@ -147,7 +149,7 @@ export function WidgetArrangement<T extends Item>({
       const added = [...ids].filter((id) => !knownIds.current!.has(id));
       if (added.length) {
         setFreshIds(new Set(added));
-        const timer = window.setTimeout(() => setFreshIds(new Set()), 700);
+        const timer = window.setTimeout(() => setFreshIds(new Set()), 1900);
         knownIds.current = ids;
         return () => window.clearTimeout(timer);
       }
@@ -332,7 +334,7 @@ export function WidgetArrangement<T extends Item>({
     >
       {/* Pointer sorting reflows mixed-width tiles; keyboard sorting keeps stable spatial targets. */}
       <SortableContext items={items} strategy={keyboardDragging ? rectSortingStrategy : () => null}>
-        <div ref={gridRef} className={`widget-grid ${activeId ? "widget-grid-dragging" : ""}`}>
+        <div ref={gridRef} className={`widget-grid ${activeId ? "widget-grid-dragging" : ""} ${loading ? "is-loading" : ""}`}>
           {items.map((widget, index) => (
             <SortableWidget
               key={widget.id}
