@@ -1,13 +1,14 @@
-/* Шрифт Inter (OFL 1.1) лежит в проекте — без запросов к Google Fonts */
-@import "@fontsource-variable/inter/wght.css";
+/* Шрифт Onest (OFL 1.1) лежит в проекте — без запросов к Google Fonts.
+   Создан для кириллицы, хорошо читается в крупных размерах. */
+@import "@fontsource-variable/onest/wght.css";
 @import "tailwindcss";
 
 @theme {
-  --font-sans: "Inter Variable", "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+  --font-sans: "Onest Variable", "Onest", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
 }
 @layer base {
   body {
-    font-family: "Inter Variable", "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+    font-family: "Onest Variable", "Onest", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
     color: #28332f;
     background: #f6f8f7;
     font-size: 16px;
@@ -3641,7 +3642,7 @@ h2 {
   border-radius: 8px;
 }
 .creator-grid.catalog-open .widget-library {
-  animation: library-in 0.22s ease-out;
+  animation: library-in 0.42s cubic-bezier(0.2, 0.8, 0.2, 1);
 }
 @keyframes library-in {
   from {
@@ -4483,4 +4484,248 @@ h2 {
   font-weight: 600;
   text-decoration: underline;
   cursor: pointer;
+}
+
+/* ===================================================================
+   Дизайн «Классика» (выбор команды, 25.11.2026): белые карточки на светлом
+   фоне, мягкие тени, скругления 20–24 px, зелёная карта баланса.
+   Макет: docs/design/mockups/1-classic.png
+   =================================================================== */
+.app {
+  --surface: #ffffff;
+  --page: #f2f4f3;
+  --card-shadow: 0 4px 18px rgb(20 60 40 / 6%);
+  --radius-card: 20px;
+}
+@layer base {
+  body {
+    background: #f2f4f3;
+    color: #18211c;
+  }
+}
+.app-body,
+.topbar {
+  background: #f2f4f3;
+}
+:is(.name-panel, .appearance-panel, .template-card, .saved-card, .format-card, .export-config, .import-zone, .catalog-card) {
+  border-radius: var(--radius-card);
+  border-color: transparent;
+  box-shadow: var(--card-shadow);
+}
+.import-zone {
+  border: 1.5px dashed #b9d3c1;
+}
+/* Рабочая область — спокойный фон без точечной сетки */
+.workspace {
+  border: none;
+  border-radius: 24px;
+  background-color: #e9eeeb;
+  background-image: none;
+}
+.workspace-widget {
+  border-color: transparent;
+  border-radius: var(--radius-card);
+  box-shadow: var(--card-shadow);
+}
+/* Карта баланса — зелёный градиент, белый текст */
+.app .workspace:not(.custom-surface, .contrast) .workspace-widget.balance {
+  background: linear-gradient(135deg, #178544 0%, #127a45 55%, #0d6a4f 100%);
+  color: #ffffff;
+}
+.app .workspace:not(.custom-surface, .contrast) .workspace-widget.balance :is(.widget-topline, .balance-value, .balance-bottom, .balance-bottom span, .small-icon, svg) {
+  color: #ffffff;
+}
+.app .workspace:not(.custom-surface, .contrast) .workspace-widget.balance .card-chip {
+  background: rgb(255 255 255 / 55%);
+}
+.app .workspace:not(.custom-surface, .contrast) .workspace-widget.balance .widget-grip {
+  color: rgb(255 255 255 / 85%);
+}
+.add-placeholder {
+  border-radius: 16px;
+  border-color: #a9cdb3;
+  color: #167a41;
+  background: rgb(255 255 255 / 45%);
+}
+.button {
+  border-radius: 14px;
+}
+.primary {
+  background: #178544;
+  border-color: #178544;
+  box-shadow: 0 6px 16px rgb(23 133 68 / 22%);
+}
+.primary:hover {
+  background: #127a3d;
+}
+.bank-action {
+  border-radius: 14px;
+}
+.nav-item {
+  border-radius: 14px;
+}
+.nav-item.active {
+  background: #e5f4ea;
+  color: #167a41;
+}
+.modal {
+  border-radius: 24px;
+  border-color: transparent;
+}
+.toast {
+  border-radius: 16px;
+  border-color: transparent;
+}
+
+/* Переключатель темы в верхней панели */
+.theme-switch {
+  display: flex;
+  gap: 2px;
+  margin-left: auto;
+  margin-right: 12px;
+  padding: 3px;
+  border-radius: 14px;
+  background: #e6ebe8;
+}
+.theme-switch button {
+  width: 44px;
+  height: 38px;
+  border: 0;
+  border-radius: 11px;
+  background: transparent;
+  color: #4f5b54;
+  display: grid;
+  place-items: center;
+}
+.theme-switch button.on {
+  background: #ffffff;
+  color: #127a3d;
+  box-shadow: 0 1px 4px rgb(20 60 40 / 12%);
+}
+.theme-setting {
+  border: 0;
+  border-top: 1px solid #e4eade;
+  display: block;
+  cursor: default;
+}
+.theme-setting legend {
+  float: left;
+  width: 100%;
+  margin-bottom: 14px;
+}
+.theme-options {
+  clear: both;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+.theme-options label {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  min-height: 44px;
+  padding: 0 14px;
+  border-radius: 12px;
+  border: 1px solid #dfe6e2;
+  font-size: 15px;
+  font-weight: 550;
+  cursor: pointer;
+}
+.theme-options label:has(input:checked) {
+  border-color: #178544;
+  background: #e5f4ea;
+  color: #127a3d;
+}
+.theme-options input {
+  accent-color: #178544;
+  width: 18px;
+  height: 18px;
+}
+
+/* Контраст подписей на новом фоне рабочей области (WCAG 1.4.3) */
+.preview-header > span:nth-child(2),
+.preview-bottom,
+.templates-heading p {
+  color: #55625a;
+}
+
+/* ===================================================================
+   Анимации: пак «Плавный» (выбор команды). Демо: docs/design/animations/2-smooth.mp4
+   Только когда пользователь не просил уменьшить движение (WCAG 2.3.3).
+   =================================================================== */
+@media (prefers-reduced-motion: no-preference) {
+  :root {
+    --ease-smooth: cubic-bezier(0.2, 0.8, 0.2, 1);
+  }
+  /* Вход экрана: блоки поднимаются по очереди */
+  main > *,
+  .template-grid > *,
+  .saved-grid > * {
+    animation: rise-in 0.45s var(--ease-smooth) both;
+  }
+  main > :nth-child(2),
+  .template-grid > :nth-child(2),
+  .saved-grid > :nth-child(2) { animation-delay: 60ms; }
+  main > :nth-child(3),
+  .template-grid > :nth-child(3),
+  .saved-grid > :nth-child(3) { animation-delay: 120ms; }
+  main > :nth-child(4),
+  .template-grid > :nth-child(4) { animation-delay: 180ms; }
+  main > :nth-child(5) { animation-delay: 240ms; }
+  main > :nth-child(n + 6) { animation-delay: 300ms; }
+
+  /* Нажатие: кнопка чуть уменьшается */
+  :is(.button, .bank-action, .catalog-card, .nav-item, .add-placeholder, .theme-switch button, .access-top, .help-button, .template-preview-toggle, .templates-toggle) {
+    transition: transform 0.16s var(--ease-smooth), background-color 0.2s, box-shadow 0.2s;
+  }
+  :is(.button, .bank-action, .catalog-card, .nav-item, .add-placeholder, .theme-switch button):active:not(:disabled) {
+    transform: scale(0.97);
+  }
+
+  /* Новый виджет проявляется и поднимается на место */
+  .workspace-widget.widget-enter {
+    animation: rise-in 0.42s var(--ease-smooth) both;
+  }
+
+  /* Окна выезжают снизу, фон затемняется */
+  dialog.modal[open] {
+    animation: sheet-in 0.36s var(--ease-smooth) both;
+  }
+  dialog.modal[open]::backdrop {
+    animation: fade-in 0.3s ease-out both;
+  }
+
+  /* Уведомление выезжает снизу */
+  .toast {
+    animation: toast-in 0.38s var(--ease-smooth) both;
+  }
+
+  /* Плавная смена темы */
+  html.theme-changing,
+  html.theme-changing * {
+    transition: background-color 0.3s ease, color 0.3s ease, border-color 0.3s ease !important;
+  }
+}
+@keyframes rise-in {
+  from {
+    opacity: 0;
+    transform: translateY(18px);
+  }
+}
+@keyframes sheet-in {
+  from {
+    opacity: 0;
+    transform: translateY(28px);
+  }
+}
+@keyframes fade-in {
+  from {
+    opacity: 0;
+  }
+}
+@keyframes toast-in {
+  from {
+    opacity: 0;
+    transform: translate(-50%, 24px);
+  }
 }

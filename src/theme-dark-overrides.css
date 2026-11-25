@@ -1,0 +1,43 @@
+/* Ручные правки тёмной темы поверх сгенерированной (src/theme-dark.css).
+   Макет: docs/design/mockups/3-dark.png */
+html[data-theme="dark"] {
+  color-scheme: dark;
+}
+html[data-theme="dark"] body,
+html[data-theme="dark"] .app-body,
+html[data-theme="dark"] .topbar {
+  background: #111513;
+  color: #eef3f0;
+}
+html[data-theme="dark"] .app {
+  --surface: #1b211e;
+  --page: #111513;
+  --border: #29312d;
+  --text-muted: #a3b0a8;
+  --card-shadow: 0 0 0 1px #252d29;
+}
+html[data-theme="dark"] .sidebar {
+  background: #151a17;
+  border-color: #252d29;
+}
+/* Карта баланса — тёмно-зелёный градиент, как в макете */
+html[data-theme="dark"] .app .workspace:not(.custom-surface, .contrast) .workspace-widget.balance {
+  background: linear-gradient(135deg, #1e6b45 0%, #145136 60%, #0f3a2c 100%);
+}
+html[data-theme="dark"] .workspace {
+  border: none;
+  background-color: #161b18;
+}
+html[data-theme="dark"] :is(.primary, .bank-action) {
+  box-shadow: none;
+}
+html[data-theme="dark"] .theme-switch {
+  background: #1b211e;
+}
+html[data-theme="dark"] .theme-switch button.on {
+  background: #2a332e;
+  color: #6fe39f;
+}
+html[data-theme="dark"] .modal::backdrop {
+  background: rgb(0 0 0 / 60%);
+}

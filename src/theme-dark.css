@@ -1,0 +1,1015 @@
+/*  Сгенерировано scripts/build-dark-theme.mjs из src/index.css — не править вручную.  */
+html[data-theme="dark"] body:not(:is(.contrast, .preset-contrast) *):not(:is(.contrast, .preset-contrast)) {
+    color: #cbd6d2;
+    background: #1d2521
+}
+html[data-theme="dark"] button:focus-visible:not(:is(.contrast, .preset-contrast) *):not(:is(.contrast, .preset-contrast)),
+html[data-theme="dark"] a:focus-visible:not(:is(.contrast, .preset-contrast) *):not(:is(.contrast, .preset-contrast)),
+html[data-theme="dark"] input:focus-visible:not(:is(.contrast, .preset-contrast) *):not(:is(.contrast, .preset-contrast)),
+html[data-theme="dark"] select:focus-visible:not(:is(.contrast, .preset-contrast) *):not(:is(.contrast, .preset-contrast)),
+html[data-theme="dark"] [tabindex]:focus-visible:not(:is(.contrast, .preset-contrast) *):not(:is(.contrast, .preset-contrast)) {
+    outline: 3px solid #36f2a7
+}
+html[data-theme="dark"] .app:not(:is(.contrast, .preset-contrast) *):not(:is(.contrast, .preset-contrast)) {
+    --green: #43e585;
+    --text-muted: #a1a9a5;
+    --border: #313b33
+}
+html[data-theme="dark"] .sidebar:not(:is(.contrast, .preset-contrast) *):not(:is(.contrast, .preset-contrast)) {
+    background: #262626
+}
+html[data-theme="dark"] .brand:not(:is(.contrast, .preset-contrast) *):not(:is(.contrast, .preset-contrast)) {
+    color: #cad9d3
+}
+html[data-theme="dark"] .brand-name > span:not(:is(.contrast, .preset-contrast) *):not(:is(.contrast, .preset-contrast)) {
+    color: #a7b0ab
+}
+html[data-theme="dark"] .sidebar-label:not(:is(.contrast, .preset-contrast) *):not(:is(.contrast, .preset-contrast)) {
+    color: #979e99
+}
+html[data-theme="dark"] .nav-item:not(:is(.contrast, .preset-contrast) *):not(:is(.contrast, .preset-contrast)) {
+    color: #a3aba7
+}
+html[data-theme="dark"] .nav-item.active:not(:is(.contrast, .preset-contrast) *):not(:is(.contrast, .preset-contrast)) {
+    color: #4bdd84;
+    background: #172016
+}
+html[data-theme="dark"] .nav-item.active:not(:is(.contrast, .preset-contrast) *):not(:is(.contrast, .preset-contrast))::before {
+    background: #52d570
+}
+html[data-theme="dark"] .nav-item:hover:not(.active):not(:is(.contrast, .preset-contrast) *):not(:is(.contrast, .preset-contrast)) {
+    background: #1c231c;
+    color: #bfd5c7
+}
+html[data-theme="dark"] .access-card:not(:is(.contrast, .preset-contrast) *):not(:is(.contrast, .preset-contrast)) {
+    background: linear-gradient(120deg, #1b2318, #202419);
+    border: 1px solid #141811
+}
+html[data-theme="dark"] .access-icon:not(:is(.contrast, .preset-contrast) *):not(:is(.contrast, .preset-contrast)) {
+    color: #63c575;
+    background: #314b1f
+}
+html[data-theme="dark"] .access-card p:not(:is(.contrast, .preset-contrast) *):not(:is(.contrast, .preset-contrast)) {
+    color: #a7b1a2
+}
+html[data-theme="dark"] .access-card button:not(:is(.contrast, .preset-contrast) *):not(:is(.contrast, .preset-contrast)) {
+    color: #9bd9a6;
+    border-top: 1px solid #3c4f32
+}
+html[data-theme="dark"] .help-button:not(:is(.contrast, .preset-contrast) *):not(:is(.contrast, .preset-contrast)) {
+    color: #a2ada7
+}
+html[data-theme="dark"] .sidebar-version:not(:is(.contrast, .preset-contrast) *):not(:is(.contrast, .preset-contrast)) {
+    color: #9ea7a1
+}
+html[data-theme="dark"] .sidebar-version > span:last-child:not(:is(.contrast, .preset-contrast) *):not(:is(.contrast, .preset-contrast)) {
+    color: #8a948e
+}
+html[data-theme="dark"] .local-dot:not(:is(.contrast, .preset-contrast) *):not(:is(.contrast, .preset-contrast)) {
+    background: #78c989
+}
+html[data-theme="dark"] .topbar:not(:is(.contrast, .preset-contrast) *):not(:is(.contrast, .preset-contrast)) {
+    background: #262626
+}
+html[data-theme="dark"] .topbar-product:not(:is(.contrast, .preset-contrast) *):not(:is(.contrast, .preset-contrast)) {
+    color: #aab5ae
+}
+html[data-theme="dark"] .topbar-product > svg:not(:is(.contrast, .preset-contrast) *):not(:is(.contrast, .preset-contrast)) {
+    color: #959e99
+}
+html[data-theme="dark"] .topbar-divider:not(:is(.contrast, .preset-contrast) *):not(:is(.contrast, .preset-contrast)) {
+    border-left: 1px solid #353f37
+}
+html[data-theme="dark"] .local-tag:not(:is(.contrast, .preset-contrast) *):not(:is(.contrast, .preset-contrast)) {
+    color: #98a29c
+}
+html[data-theme="dark"] .access-top:not(:is(.contrast, .preset-contrast) *):not(:is(.contrast, .preset-contrast)) {
+    color: #a9b3ad
+}
+html[data-theme="dark"] .breadcrumb:not(:is(.contrast, .preset-contrast) *):not(:is(.contrast, .preset-contrast)) {
+    color: #8f9892
+}
+html[data-theme="dark"] .breadcrumb span:not(:is(.contrast, .preset-contrast) *):not(:is(.contrast, .preset-contrast)) {
+    color: #afb9b2
+}
+html[data-theme="dark"] .page-heading p:not(:is(.contrast, .preset-contrast) *):not(:is(.contrast, .preset-contrast)) {
+    color: #9ea7a1
+}
+html[data-theme="dark"] .page-step:not(:is(.contrast, .preset-contrast) *):not(:is(.contrast, .preset-contrast)) {
+    color: #5fc977
+}
+html[data-theme="dark"] .page-step span:not(:is(.contrast, .preset-contrast) *):not(:is(.contrast, .preset-contrast)) {
+    color: #858f88
+}
+html[data-theme="dark"] .name-panel:not(:is(.contrast, .preset-contrast) *):not(:is(.contrast, .preset-contrast)) {
+    background: #262626
+}
+html[data-theme="dark"] .name-input-area label > span:not(:is(.contrast, .preset-contrast) *):not(:is(.contrast, .preset-contrast)) {
+    color: #949c96
+}
+html[data-theme="dark"] .name-input-wrap:not(:is(.contrast, .preset-contrast) *):not(:is(.contrast, .preset-contrast)) {
+    border: 1px solid #3d4a3f;
+    background: #262626
+}
+html[data-theme="dark"] .name-input-wrap > svg:not(:is(.contrast, .preset-contrast) *):not(:is(.contrast, .preset-contrast)) {
+    color: #929c96
+}
+html[data-theme="dark"] .name-input-wrap:focus-within:not(:is(.contrast, .preset-contrast) *):not(:is(.contrast, .preset-contrast)) {
+    border-color: #50d87b
+}
+html[data-theme="dark"] .name-input-wrap input:not(:is(.contrast, .preset-contrast) *):not(:is(.contrast, .preset-contrast)) {
+    color: #c0cbc4
+}
+html[data-theme="dark"] .save-status:not(:is(.contrast, .preset-contrast) *):not(:is(.contrast, .preset-contrast)) {
+    color: #989d96
+}
+html[data-theme="dark"] .save-status > span:not(:is(.contrast, .preset-contrast) *):not(:is(.contrast, .preset-contrast)) {
+    background: #bca56a
+}
+html[data-theme="dark"] .save-status.is-saved:not(:is(.contrast, .preset-contrast) *):not(:is(.contrast, .preset-contrast)) {
+    color: #55d27d
+}
+html[data-theme="dark"] .count-badge:not(:is(.contrast, .preset-contrast) *):not(:is(.contrast, .preset-contrast)) {
+    background: #161b16;
+    color: #a2aca3
+}
+html[data-theme="dark"] .section-description:not(:is(.contrast, .preset-contrast) *):not(:is(.contrast, .preset-contrast)) {
+    color: #98a19a
+}
+html[data-theme="dark"] .catalog-card:not(:is(.contrast, .preset-contrast) *):not(:is(.contrast, .preset-contrast)) {
+    background: #262626
+}
+html[data-theme="dark"] .catalog-card:hover:not(:is(.contrast, .preset-contrast) *):not(:is(.contrast, .preset-contrast)) {
+    border-color: #78ba85;
+    background: #222b1e
+}
+html[data-theme="dark"] .green:not(:is(.contrast, .preset-contrast) *):not(:is(.contrast, .preset-contrast)) {
+    background: #172118;
+    color: #56d27b
+}
+html[data-theme="dark"] .blue:not(:is(.contrast, .preset-contrast) *):not(:is(.contrast, .preset-contrast)) {
+    background: #1a1e25;
+    color: #4f7bcb
+}
+html[data-theme="dark"] .purple:not(:is(.contrast, .preset-contrast) *):not(:is(.contrast, .preset-contrast)) {
+    background: #1c1924;
+    color: #7f4ec0
+}
+html[data-theme="dark"] .orange:not(:is(.contrast, .preset-contrast) *):not(:is(.contrast, .preset-contrast)) {
+    background: #221e18;
+    color: #cf9b59
+}
+html[data-theme="dark"] .catalog-text > span:not(:is(.contrast, .preset-contrast) *):not(:is(.contrast, .preset-contrast)) {
+    color: #949c96
+}
+html[data-theme="dark"] .catalog-plus:not(:is(.contrast, .preset-contrast) *):not(:is(.contrast, .preset-contrast)) {
+    color: #859087
+}
+html[data-theme="dark"] .library-tip:not(:is(.contrast, .preset-contrast) *):not(:is(.contrast, .preset-contrast)) {
+    color: #929b94
+}
+html[data-theme="dark"] .library-tip svg:not(:is(.contrast, .preset-contrast) *):not(:is(.contrast, .preset-contrast)) {
+    color: #869287
+}
+html[data-theme="dark"] .edit-mode:not(:is(.contrast, .preset-contrast) *):not(:is(.contrast, .preset-contrast)) {
+    color: #a3b2a5;
+    border: 1px solid #364c30;
+    background: #1b2218
+}
+html[data-theme="dark"] .mode-dot:not(:is(.contrast, .preset-contrast) *):not(:is(.contrast, .preset-contrast)) {
+    background: #8eba78
+}
+html[data-theme="dark"] .workspace:not(:is(.contrast, .preset-contrast) *):not(:is(.contrast, .preset-contrast)) {
+    border: 1px dashed #455946;
+    background-color: #1b2217;
+    background-image: radial-gradient(#4a5c48 0.7px, transparent 0.7px)
+}
+html[data-theme="dark"] .preview-header:not(:is(.contrast, .preset-contrast) *):not(:is(.contrast, .preset-contrast)) {
+    color: #8f9b8c
+}
+html[data-theme="dark"] .preview-brand:not(:is(.contrast, .preset-contrast) *):not(:is(.contrast, .preset-contrast)) {
+    color: #bad0bb
+}
+html[data-theme="dark"] .preview-logo:not(:is(.contrast, .preset-contrast) *):not(:is(.contrast, .preset-contrast)) {
+    background: #bad3ca;
+    color: #262626
+}
+html[data-theme="dark"] .preview-header > svg:not(:is(.contrast, .preset-contrast) *):not(:is(.contrast, .preset-contrast)) {
+    color: #879980
+}
+html[data-theme="dark"] .workspace-widget:not(:is(.contrast, .preset-contrast) *):not(:is(.contrast, .preset-contrast)) {
+    border: 1px solid #374131;
+    background: #262626
+}
+html[data-theme="dark"] .workspace-widget.selected:not(:is(.contrast, .preset-contrast) *):not(:is(.contrast, .preset-contrast)) {
+    border: 1.5px solid #61c771
+}
+html[data-theme="dark"] .selected-label:not(:is(.contrast, .preset-contrast) *):not(:is(.contrast, .preset-contrast)) {
+    background: #62c671;
+    color: #262626
+}
+html[data-theme="dark"] .widget-topline:not(:is(.contrast, .preset-contrast) *):not(:is(.contrast, .preset-contrast)) {
+    color: #acbda8
+}
+html[data-theme="dark"] .small-icon:not(:is(.contrast, .preset-contrast) *):not(:is(.contrast, .preset-contrast)) {
+    color: #82c485
+}
+html[data-theme="dark"] .widget-topline > svg:last-child:not(:is(.contrast, .preset-contrast) *):not(:is(.contrast, .preset-contrast)) {
+    color: #889980
+}
+html[data-theme="dark"] .balance:not(:is(.contrast, .preset-contrast) *):not(:is(.contrast, .preset-contrast)) {
+    background: linear-gradient(120deg, #192016, #1f2318)
+}
+html[data-theme="dark"] .balance-value:not(:is(.contrast, .preset-contrast) *):not(:is(.contrast, .preset-contrast)) {
+    color: #bed5be
+}
+html[data-theme="dark"] .balance-bottom:not(:is(.contrast, .preset-contrast) *):not(:is(.contrast, .preset-contrast)) {
+    color: #a0b098
+}
+html[data-theme="dark"] .card-chip:not(:is(.contrast, .preset-contrast) *):not(:is(.contrast, .preset-contrast)) {
+    background: #b7a148;
+    border: 1px solid #b3a464
+}
+html[data-theme="dark"] .qr-symbol:not(:is(.contrast, .preset-contrast) *):not(:is(.contrast, .preset-contrast)) {
+    background: #1d2318;
+    color: #b9d0bb
+}
+html[data-theme="dark"] .qr-content p:not(:is(.contrast, .preset-contrast) *):not(:is(.contrast, .preset-contrast)) {
+    color: #919b8b
+}
+html[data-theme="dark"] .widget-grip:not(:is(.contrast, .preset-contrast) *):not(:is(.contrast, .preset-contrast)) {
+    color: #a4b1a1
+}
+html[data-theme="dark"] .widget-grip:hover:not(:is(.contrast, .preset-contrast) *):not(:is(.contrast, .preset-contrast)),
+html[data-theme="dark"] .widget-grip:focus-visible:not(:is(.contrast, .preset-contrast) *):not(:is(.contrast, .preset-contrast)) {
+    background: #151912;
+    color: #addbb1
+}
+html[data-theme="dark"] .workspace-widget.widget-drag-placeholder:not(:is(.contrast, .preset-contrast) *):not(:is(.contrast, .preset-contrast)) {
+    background: #161d14;
+    border: 2px dashed #58d074
+}
+html[data-theme="dark"] .widget-drop-label:not(:is(.contrast, .preset-contrast) *):not(:is(.contrast, .preset-contrast)) {
+    color: #61c672
+}
+html[data-theme="dark"] .workspace-widget.widget-drag-overlay:not(:is(.contrast, .preset-contrast) *):not(:is(.contrast, .preset-contrast)) {
+    border: 2px solid #58d074
+}
+html[data-theme="dark"] .history-heading:not(:is(.contrast, .preset-contrast) *):not(:is(.contrast, .preset-contrast)) {
+    color: #9fb39a
+}
+html[data-theme="dark"] .history-heading h3:not(:is(.contrast, .preset-contrast) *):not(:is(.contrast, .preset-contrast)) {
+    color: #bdcabb
+}
+html[data-theme="dark"] .history-heading > svg:last-child:not(:first-child):not(:is(.contrast, .preset-contrast) *):not(:is(.contrast, .preset-contrast)) {
+    color: #808e77
+}
+html[data-theme="dark"] .transaction + .transaction:not(:is(.contrast, .preset-contrast) *):not(:is(.contrast, .preset-contrast)) {
+    border-top: 1px solid #1c1f18
+}
+html[data-theme="dark"] .transaction-avatar:not(:is(.contrast, .preset-contrast) *):not(:is(.contrast, .preset-contrast)) {
+    color: #61c77a;
+    background: #192218
+}
+html[data-theme="dark"] .transaction-avatar.neutral:not(:is(.contrast, .preset-contrast) *):not(:is(.contrast, .preset-contrast)) {
+    color: #8f9a88;
+    background: #1f2218
+}
+html[data-theme="dark"] .transaction div > span:not(:is(.contrast, .preset-contrast) *):not(:is(.contrast, .preset-contrast)) {
+    color: #8b9585
+}
+html[data-theme="dark"] .transaction > b:not(:is(.contrast, .preset-contrast) *):not(:is(.contrast, .preset-contrast)) {
+    color: #5ccc79
+}
+html[data-theme="dark"] .transaction > b.expense:not(:is(.contrast, .preset-contrast) *):not(:is(.contrast, .preset-contrast)) {
+    color: #b3bcad
+}
+html[data-theme="dark"] .add-placeholder:not(:is(.contrast, .preset-contrast) *):not(:is(.contrast, .preset-contrast)) {
+    border: 1px dashed #4d6243;
+    color: #93a38c
+}
+html[data-theme="dark"] .preview-bottom:not(:is(.contrast, .preset-contrast) *):not(:is(.contrast, .preset-contrast)) {
+    color: #8a9882
+}
+html[data-theme="dark"] .toolbar-label:not(:is(.contrast, .preset-contrast) *):not(:is(.contrast, .preset-contrast)) {
+    color: #879288
+}
+html[data-theme="dark"] .editing-toolbar button:not(:is(.contrast, .preset-contrast) *):not(:is(.contrast, .preset-contrast)) {
+    color: #9ea89f
+}
+html[data-theme="dark"] .editing-toolbar button:hover:not(:is(.contrast, .preset-contrast) *):not(:is(.contrast, .preset-contrast)) {
+    background: #171d14
+}
+html[data-theme="dark"] .editing-toolbar .danger:not(:is(.contrast, .preset-contrast) *):not(:is(.contrast, .preset-contrast)),
+html[data-theme="dark"] .danger:not(:is(.contrast, .preset-contrast) *):not(:is(.contrast, .preset-contrast)) {
+    color: #be7972
+}
+html[data-theme="dark"] .save-bar > span:not(:is(.contrast, .preset-contrast) *):not(:is(.contrast, .preset-contrast)) {
+    color: #8f9890
+}
+html[data-theme="dark"] .primary:not(:is(.contrast, .preset-contrast) *):not(:is(.contrast, .preset-contrast)) {
+    background: linear-gradient(105deg, #46e278, #5fc96c);
+    color: #262626;
+    border: 1px solid #54d378
+}
+html[data-theme="dark"] .primary:hover:not(:is(.contrast, .preset-contrast) *):not(:is(.contrast, .preset-contrast)) {
+    background: #43e577
+}
+html[data-theme="dark"] .secondary:not(:is(.contrast, .preset-contrast) *):not(:is(.contrast, .preset-contrast)) {
+    background: #262626;
+    border: 1px solid #3a483a;
+    color: #a8b3a8
+}
+html[data-theme="dark"] .secondary:hover:not(:is(.contrast, .preset-contrast) *):not(:is(.contrast, .preset-contrast)) {
+    border-color: #76a776;
+    background: #20281c
+}
+html[data-theme="dark"] .main-footer:not(:is(.contrast, .preset-contrast) *):not(:is(.contrast, .preset-contrast)) {
+    color: #87918a
+}
+html[data-theme="dark"] .section-note:not(:is(.contrast, .preset-contrast) *):not(:is(.contrast, .preset-contrast)) {
+    color: #8c988b
+}
+html[data-theme="dark"] .saved-card:not(:is(.contrast, .preset-contrast) *):not(:is(.contrast, .preset-contrast)),
+html[data-theme="dark"] .template-card:not(:is(.contrast, .preset-contrast) *):not(:is(.contrast, .preset-contrast)) {
+    background: #262626
+}
+html[data-theme="dark"] .mini-preview:not(:is(.contrast, .preset-contrast) *):not(:is(.contrast, .preset-contrast)) {
+    background: #1b2016;
+    border-bottom: 1px solid #39482b
+}
+html[data-theme="dark"] .mini-top:not(:is(.contrast, .preset-contrast) *):not(:is(.contrast, .preset-contrast)) {
+    color: #b6c9b0
+}
+html[data-theme="dark"] .mini-logo:not(:is(.contrast, .preset-contrast) *):not(:is(.contrast, .preset-contrast)) {
+    color: #262626;
+    background: #bad3ca
+}
+html[data-theme="dark"] .mini-balance:not(:is(.contrast, .preset-contrast) *):not(:is(.contrast, .preset-contrast)) {
+    background: #33501f
+}
+html[data-theme="dark"] .mini-balance > span:not(:is(.contrast, .preset-contrast) *):not(:is(.contrast, .preset-contrast)) {
+    color: #a2b499
+}
+html[data-theme="dark"] .mini-balance strong:not(:is(.contrast, .preset-contrast) *):not(:is(.contrast, .preset-contrast)) {
+    color: #c4d8b9
+}
+html[data-theme="dark"] .mini-balance small:not(:is(.contrast, .preset-contrast) *):not(:is(.contrast, .preset-contrast)) {
+    color: #9cac92
+}
+html[data-theme="dark"] .mini-qr:not(:is(.contrast, .preset-contrast) *):not(:is(.contrast, .preset-contrast)) {
+    background: #262626;
+    color: #b4c2ab
+}
+html[data-theme="dark"] .mini-bottom:not(:is(.contrast, .preset-contrast) *):not(:is(.contrast, .preset-contrast)) {
+    background: #262626;
+    color: #a8b5a2
+}
+html[data-theme="dark"] .mini-bottom i:not(:is(.contrast, .preset-contrast) *):not(:is(.contrast, .preset-contrast)) {
+    background: #151911
+}
+html[data-theme="dark"] .mini-bottom b:not(:is(.contrast, .preset-contrast) *):not(:is(.contrast, .preset-contrast)) {
+    color: #80cf8f
+}
+html[data-theme="dark"] .saved-card-body > p:not(:is(.contrast, .preset-contrast) *):not(:is(.contrast, .preset-contrast)) {
+    color: #909a8b
+}
+html[data-theme="dark"] .applied-tag:not(:is(.contrast, .preset-contrast) *):not(:is(.contrast, .preset-contrast)) {
+    color: #60c874;
+    background: #1a2016
+}
+html[data-theme="dark"] .card-actions .danger:not(:is(.contrast, .preset-contrast) *):not(:is(.contrast, .preset-contrast)) {
+    color: #bb807a
+}
+html[data-theme="dark"] .new-interface:not(:is(.contrast, .preset-contrast) *):not(:is(.contrast, .preset-contrast)) {
+    border: 1px dashed #4e6544;
+    color: #a4b99a
+}
+html[data-theme="dark"] .new-interface > span:first-child:not(:is(.contrast, .preset-contrast) *):not(:is(.contrast, .preset-contrast)) {
+    background: #181d14
+}
+html[data-theme="dark"] .templates-heading p:not(:is(.contrast, .preset-contrast) *):not(:is(.contrast, .preset-contrast)) {
+    color: #9da796
+}
+html[data-theme="dark"] .template-label:not(:is(.contrast, .preset-contrast) *):not(:is(.contrast, .preset-contrast)) {
+    color: #95a589
+}
+html[data-theme="dark"] .template-tag:not(:is(.contrast, .preset-contrast) *):not(:is(.contrast, .preset-contrast)) {
+    background: #1c2117;
+    color: #a9bf95
+}
+html[data-theme="dark"] .template-tag.focus:not(:is(.contrast, .preset-contrast) *):not(:is(.contrast, .preset-contrast)) {
+    background: #1b1924;
+    color: #8b7eab
+}
+html[data-theme="dark"] .template-body p:not(:is(.contrast, .preset-contrast) *):not(:is(.contrast, .preset-contrast)) {
+    color: #97a092
+}
+html[data-theme="dark"] .mini-preview.focus:not(:is(.contrast, .preset-contrast) *):not(:is(.contrast, .preset-contrast)) {
+    background: #1a1822
+}
+html[data-theme="dark"] .mini-preview.focus .mini-balance:not(:is(.contrast, .preset-contrast) *):not(:is(.contrast, .preset-contrast)) {
+    background: #262626
+}
+html[data-theme="dark"] .inline-note:not(:is(.contrast, .preset-contrast) *):not(:is(.contrast, .preset-contrast)) {
+    color: #96a291
+}
+html[data-theme="dark"] .export-config:not(:is(.contrast, .preset-contrast) *):not(:is(.contrast, .preset-contrast)) {
+    background: #262626
+}
+html[data-theme="dark"] .export-config-icon:not(:is(.contrast, .preset-contrast) *):not(:is(.contrast, .preset-contrast)) {
+    background: #1a2016;
+    color: #8ac886
+}
+html[data-theme="dark"] .select-wrap select:not(:is(.contrast, .preset-contrast) *):not(:is(.contrast, .preset-contrast)) {
+    border: 1px solid #3d4d35;
+    background: #262626;
+    color: #b5c5ae
+}
+html[data-theme="dark"] .select-wrap > svg:not(:is(.contrast, .preset-contrast) *):not(:is(.contrast, .preset-contrast)) {
+    color: #98a88f
+}
+html[data-theme="dark"] .export-config-badge:not(:is(.contrast, .preset-contrast) *):not(:is(.contrast, .preset-contrast)) {
+    color: #95c78d
+}
+html[data-theme="dark"] .format-heading p:not(:is(.contrast, .preset-contrast) *):not(:is(.contrast, .preset-contrast)) {
+    color: #99a492
+}
+html[data-theme="dark"] .format-card:not(:is(.contrast, .preset-contrast) *):not(:is(.contrast, .preset-contrast)) {
+    background: #262626
+}
+html[data-theme="dark"] .file-extension:not(:is(.contrast, .preset-contrast) *):not(:is(.contrast, .preset-contrast)) {
+    color: #849077;
+    background: #202419
+}
+html[data-theme="dark"] .format-card p:not(:is(.contrast, .preset-contrast) *):not(:is(.contrast, .preset-contrast)) {
+    color: #979f92
+}
+html[data-theme="dark"] .format-details:not(:is(.contrast, .preset-contrast) *):not(:is(.contrast, .preset-contrast)) {
+    color: #91a286
+}
+html[data-theme="dark"] .export-info:not(:is(.contrast, .preset-contrast) *):not(:is(.contrast, .preset-contrast)) {
+    border: 1px solid #3b5328;
+    background: #1c2117;
+    color: #9fbc91
+}
+html[data-theme="dark"] .export-info h3:not(:is(.contrast, .preset-contrast) *):not(:is(.contrast, .preset-contrast)) {
+    color: #b3d0a4
+}
+html[data-theme="dark"] .text-link:not(:is(.contrast, .preset-contrast) *):not(:is(.contrast, .preset-contrast)) {
+    color: #a1b995
+}
+html[data-theme="dark"] .import-zone:not(:is(.contrast, .preset-contrast) *):not(:is(.contrast, .preset-contrast)) {
+    background: #262626;
+    border: 1.5px dashed #547244
+}
+html[data-theme="dark"] .import-symbol:not(:is(.contrast, .preset-contrast) *):not(:is(.contrast, .preset-contrast)) {
+    background: #1a2016;
+    color: #94cb83
+}
+html[data-theme="dark"] .import-zone p:not(:is(.contrast, .preset-contrast) *):not(:is(.contrast, .preset-contrast)) {
+    color: #97a190
+}
+html[data-theme="dark"] .import-formats:not(:is(.contrast, .preset-contrast) *):not(:is(.contrast, .preset-contrast)) {
+    color: #879180
+}
+html[data-theme="dark"] .import-result:not(:is(.contrast, .preset-contrast) *):not(:is(.contrast, .preset-contrast)) {
+    border: 1px solid #3a542c;
+    background: #1c2217;
+    color: #9dc78f
+}
+html[data-theme="dark"] .import-result h3:not(:is(.contrast, .preset-contrast) *):not(:is(.contrast, .preset-contrast)) {
+    color: #bbd9b1
+}
+html[data-theme="dark"] .error-message:not(:is(.contrast, .preset-contrast) *):not(:is(.contrast, .preset-contrast)) {
+    color: #ca635e;
+    border: 1px solid #6f3124;
+    background: #271e1b
+}
+html[data-theme="dark"] .modal:not(:is(.contrast, .preset-contrast) *):not(:is(.contrast, .preset-contrast)) {
+    border: 1px solid #3d4f33;
+    color: #c5d3bf
+}
+html[data-theme="dark"] .icon-button:hover:not(:is(.contrast, .preset-contrast) *):not(:is(.contrast, .preset-contrast)) {
+    background: #1a1e15
+}
+html[data-theme="dark"] .modal-description:not(:is(.contrast, .preset-contrast) *):not(:is(.contrast, .preset-contrast)) {
+    color: #a1ab97
+}
+html[data-theme="dark"] .setting-row:not(:is(.contrast, .preset-contrast) *):not(:is(.contrast, .preset-contrast)) {
+    border-top: 1px solid #37442b
+}
+html[data-theme="dark"] .setting-row small:not(:is(.contrast, .preset-contrast) *):not(:is(.contrast, .preset-contrast)) {
+    color: #98a091
+}
+html[data-theme="dark"] .setting-row input:not(:is(.contrast, .preset-contrast) *):not(:is(.contrast, .preset-contrast)) {
+    accent-color: #51d777
+}
+html[data-theme="dark"] .help-steps li > span:not(:is(.contrast, .preset-contrast) *):not(:is(.contrast, .preset-contrast)) {
+    background: #181d14;
+    color: #9dc88f
+}
+html[data-theme="dark"] .help-steps p:not(:is(.contrast, .preset-contrast) *):not(:is(.contrast, .preset-contrast)) {
+    color: #99a291
+}
+html[data-theme="dark"] .delete-button:not(:is(.contrast, .preset-contrast) *):not(:is(.contrast, .preset-contrast)) {
+    color: #262626;
+    background: #c87773
+}
+html[data-theme="dark"] .toast:not(:is(.contrast, .preset-contrast) *):not(:is(.contrast, .preset-contrast)) {
+    background: #262626;
+    border: 1px solid #5c7b4c;
+    color: #b9cdae
+}
+html[data-theme="dark"] .toast > svg:not(:is(.contrast, .preset-contrast) *):not(:is(.contrast, .preset-contrast)) {
+    color: #80cb8b
+}
+html[data-theme="dark"] .skip-link:not(:is(.contrast, .preset-contrast) *):not(:is(.contrast, .preset-contrast)) {
+    background: #262626;
+    color: #51d77d
+}
+html[data-theme="dark"] .workspace.focus:not(:is(.contrast, .preset-contrast) *):not(:is(.contrast, .preset-contrast)) {
+    background: #191924
+}
+html[data-theme="dark"] .workspace.focus .balance:not(:is(.contrast, .preset-contrast) *):not(:is(.contrast, .preset-contrast)) {
+    background: #262626
+}
+html[data-theme="dark"] .page-heading p:not(:is(.contrast, .preset-contrast) *):not(:is(.contrast, .preset-contrast)) {
+    color: #aab4ad
+}
+html[data-theme="dark"] .save-status:not(:is(.contrast, .preset-contrast) *):not(:is(.contrast, .preset-contrast)) {
+    color: #adb2a6
+}
+html[data-theme="dark"] .section-description:not(:is(.contrast, .preset-contrast) *):not(:is(.contrast, .preset-contrast)) {
+    color: #a4ada3
+}
+html[data-theme="dark"] .catalog-text > span:not(:is(.contrast, .preset-contrast) *):not(:is(.contrast, .preset-contrast)) {
+    color: #a7b0a2
+}
+html[data-theme="dark"] .library-tip:not(:is(.contrast, .preset-contrast) *):not(:is(.contrast, .preset-contrast)) {
+    color: #a5b2a0
+}
+html[data-theme="dark"] .qr-content p:not(:is(.contrast, .preset-contrast) *):not(:is(.contrast, .preset-contrast)) {
+    color: #a5b29d
+}
+html[data-theme="dark"] .transaction div > span:not(:is(.contrast, .preset-contrast) *):not(:is(.contrast, .preset-contrast)) {
+    color: #a6b19d
+}
+html[data-theme="dark"] .add-placeholder:not(:is(.contrast, .preset-contrast) *):not(:is(.contrast, .preset-contrast)) {
+    color: #a9bc9c
+}
+html[data-theme="dark"] .preview-bottom:not(:is(.contrast, .preset-contrast) *):not(:is(.contrast, .preset-contrast)) {
+    color: #a4b59c
+}
+html[data-theme="dark"] .editing-toolbar button:not(:is(.contrast, .preset-contrast) *):not(:is(.contrast, .preset-contrast)) {
+    color: #b0bdab
+}
+html[data-theme="dark"] .primary:not(:is(.contrast, .preset-contrast) *):not(:is(.contrast, .preset-contrast)) {
+    background: linear-gradient(105deg, #46e27b, #54d372);
+    border-color: #4cdc77
+}
+html[data-theme="dark"] .save-bar > span:not(:is(.contrast, .preset-contrast) *):not(:is(.contrast, .preset-contrast)) {
+    color: #a7b1a0
+}
+html[data-theme="dark"] .access-card p:not(:is(.contrast, .preset-contrast) *):not(:is(.contrast, .preset-contrast)) {
+    color: #acbaa6
+}
+html[data-theme="dark"] .saved-card-body > p:not(:is(.contrast, .preset-contrast) *):not(:is(.contrast, .preset-contrast)) {
+    color: #a7b49f
+}
+html[data-theme="dark"] .templates-heading p:not(:is(.contrast, .preset-contrast) *):not(:is(.contrast, .preset-contrast)) {
+    color: #a6b49e
+}
+html[data-theme="dark"] .template-body p:not(:is(.contrast, .preset-contrast) *):not(:is(.contrast, .preset-contrast)) {
+    color: #a6b49f
+}
+html[data-theme="dark"] .inline-note:not(:is(.contrast, .preset-contrast) *):not(:is(.contrast, .preset-contrast)) {
+    color: #a5b39e
+}
+html[data-theme="dark"] .format-heading p:not(:is(.contrast, .preset-contrast) *):not(:is(.contrast, .preset-contrast)) {
+    color: #a8b4a2
+}
+html[data-theme="dark"] .format-card p:not(:is(.contrast, .preset-contrast) *):not(:is(.contrast, .preset-contrast)) {
+    color: #a8b4a2
+}
+html[data-theme="dark"] .format-details:not(:is(.contrast, .preset-contrast) *):not(:is(.contrast, .preset-contrast)) {
+    color: #acc09e
+}
+html[data-theme="dark"] .import-zone p:not(:is(.contrast, .preset-contrast) *):not(:is(.contrast, .preset-contrast)) {
+    color: #a8b4a2
+}
+html[data-theme="dark"] .import-formats:not(:is(.contrast, .preset-contrast) *):not(:is(.contrast, .preset-contrast)) {
+    color: #a7b2a0
+}
+html[data-theme="dark"] .quick-options > span:not(:is(.contrast, .preset-contrast) *):not(:is(.contrast, .preset-contrast)) {
+    color: #a2b19a
+}
+html[data-theme="dark"] .quick-options svg:not(:is(.contrast, .preset-contrast) *):not(:is(.contrast, .preset-contrast)) {
+    background: #1a2016;
+    color: #94bf84
+}
+html[data-theme="dark"] .sidebar-label:not(:is(.contrast, .preset-contrast) *):not(:is(.contrast, .preset-contrast)),
+html[data-theme="dark"] .sidebar-version > span:last-child:not(:is(.contrast, .preset-contrast) *):not(:is(.contrast, .preset-contrast)),
+html[data-theme="dark"] .local-tag:not(:is(.contrast, .preset-contrast) *):not(:is(.contrast, .preset-contrast)),
+html[data-theme="dark"] .breadcrumb:not(:is(.contrast, .preset-contrast) *):not(:is(.contrast, .preset-contrast)),
+html[data-theme="dark"] .page-step > span:not(:is(.contrast, .preset-contrast) *):not(:is(.contrast, .preset-contrast)),
+html[data-theme="dark"] .main-footer:not(:is(.contrast, .preset-contrast) *):not(:is(.contrast, .preset-contrast)),
+html[data-theme="dark"] .section-note:not(:is(.contrast, .preset-contrast) *):not(:is(.contrast, .preset-contrast)) {
+    color: #a4afa6
+}
+html[data-theme="dark"] .page-step:not(:is(.contrast, .preset-contrast) *):not(:is(.contrast, .preset-contrast)) {
+    color: #58d074
+}
+html[data-theme="dark"] .selected-label:not(:is(.contrast, .preset-contrast) *):not(:is(.contrast, .preset-contrast)) {
+    background: #54d472
+}
+html[data-theme="dark"] .transaction > b:not(:is(.contrast, .preset-contrast) *):not(:is(.contrast, .preset-contrast)) {
+    color: #58cf77
+}
+html[data-theme="dark"] .editing-toolbar .danger:not(:is(.contrast, .preset-contrast) *):not(:is(.contrast, .preset-contrast)),
+html[data-theme="dark"] .danger:not(:is(.contrast, .preset-contrast) *):not(:is(.contrast, .preset-contrast)) {
+    color: #cb807a
+}
+html[data-theme="dark"] .mini-balance > span:not(:is(.contrast, .preset-contrast) *):not(:is(.contrast, .preset-contrast)),
+html[data-theme="dark"] .mini-balance small:not(:is(.contrast, .preset-contrast) *):not(:is(.contrast, .preset-contrast)) {
+    color: #afc3a8
+}
+html[data-theme="dark"] .mini-bottom b:not(:is(.contrast, .preset-contrast) *):not(:is(.contrast, .preset-contrast)) {
+    color: #5ace72
+}
+html[data-theme="dark"] .new-interface:not(:is(.contrast, .preset-contrast) *):not(:is(.contrast, .preset-contrast)),
+html[data-theme="dark"] .template-label:not(:is(.contrast, .preset-contrast) *):not(:is(.contrast, .preset-contrast)) {
+    color: #afc4a4
+}
+html[data-theme="dark"] .template-tag:not(:is(.contrast, .preset-contrast) *):not(:is(.contrast, .preset-contrast)) {
+    color: #b6cfa3
+}
+html[data-theme="dark"] .template-tag.focus:not(:is(.contrast, .preset-contrast) *):not(:is(.contrast, .preset-contrast)) {
+    color: #9b8cb6
+}
+html[data-theme="dark"] .export-config-badge:not(:is(.contrast, .preset-contrast) *):not(:is(.contrast, .preset-contrast)) {
+    color: #a2d49a
+}
+html[data-theme="dark"] .file-extension:not(:is(.contrast, .preset-contrast) *):not(:is(.contrast, .preset-contrast)) {
+    color: #aebaa3
+}
+html[data-theme="dark"] .export-info p:not(:is(.contrast, .preset-contrast) *):not(:is(.contrast, .preset-contrast)),
+html[data-theme="dark"] .text-link:not(:is(.contrast, .preset-contrast) *):not(:is(.contrast, .preset-contrast)) {
+    color: #b2c9a2
+}
+html[data-theme="dark"] .modal-description:not(:is(.contrast, .preset-contrast) *):not(:is(.contrast, .preset-contrast)),
+html[data-theme="dark"] .setting-row small:not(:is(.contrast, .preset-contrast) *):not(:is(.contrast, .preset-contrast)),
+html[data-theme="dark"] .help-steps p:not(:is(.contrast, .preset-contrast) *):not(:is(.contrast, .preset-contrast)) {
+    color: #adb9a5
+}
+html[data-theme="dark"] .save-status.is-saved:not(:is(.contrast, .preset-contrast) *):not(:is(.contrast, .preset-contrast)) {
+    color: #59cf78
+}
+html[data-theme="dark"] .save-status:not(:is(.contrast, .preset-contrast) *):not(:is(.contrast, .preset-contrast)),
+html[data-theme="dark"] .section-description:not(:is(.contrast, .preset-contrast) *):not(:is(.contrast, .preset-contrast)),
+html[data-theme="dark"] .catalog-text > span:not(:is(.contrast, .preset-contrast) *):not(:is(.contrast, .preset-contrast)),
+html[data-theme="dark"] .library-tip:not(:is(.contrast, .preset-contrast) *):not(:is(.contrast, .preset-contrast)),
+html[data-theme="dark"] .save-bar > span:not(:is(.contrast, .preset-contrast) *):not(:is(.contrast, .preset-contrast)),
+html[data-theme="dark"] .saved-card-body > p:not(:is(.contrast, .preset-contrast) *):not(:is(.contrast, .preset-contrast)),
+html[data-theme="dark"] .template-body p:not(:is(.contrast, .preset-contrast) *):not(:is(.contrast, .preset-contrast)),
+html[data-theme="dark"] .inline-note:not(:is(.contrast, .preset-contrast) *):not(:is(.contrast, .preset-contrast)),
+html[data-theme="dark"] .format-heading p:not(:is(.contrast, .preset-contrast) *):not(:is(.contrast, .preset-contrast)),
+html[data-theme="dark"] .format-card p:not(:is(.contrast, .preset-contrast) *):not(:is(.contrast, .preset-contrast)),
+html[data-theme="dark"] .import-zone p:not(:is(.contrast, .preset-contrast) *):not(:is(.contrast, .preset-contrast)),
+html[data-theme="dark"] .import-formats:not(:is(.contrast, .preset-contrast) *):not(:is(.contrast, .preset-contrast)) {
+    color: #acb8a6
+}
+html[data-theme="dark"] .sidebar-version:not(:is(.contrast, .preset-contrast) *):not(:is(.contrast, .preset-contrast)),
+html[data-theme="dark"] .help-button:not(:is(.contrast, .preset-contrast) *):not(:is(.contrast, .preset-contrast)) {
+    color: #a9b5ac
+}
+html[data-theme="dark"] .quick-options > span:not(:is(.contrast, .preset-contrast) *):not(:is(.contrast, .preset-contrast)) {
+    color: #b0c1a6
+}
+html[data-theme="dark"] .template-body > p:not(:is(.contrast, .preset-contrast) *):not(:is(.contrast, .preset-contrast)) {
+    color: #b1bead
+}
+html[data-theme="dark"] .template-features li:not(:is(.contrast, .preset-contrast) *):not(:is(.contrast, .preset-contrast)) {
+    color: #b4c1af
+}
+html[data-theme="dark"] .template-features svg:not(:is(.contrast, .preset-contrast) *):not(:is(.contrast, .preset-contrast)) {
+    color: #5dca7a
+}
+html[data-theme="dark"] .template-tag.student:not(:is(.contrast, .preset-contrast) *):not(:is(.contrast, .preset-contrast)) {
+    color: #5b8dcd;
+    background: #191d24
+}
+html[data-theme="dark"] .template-body .template-proposal:not(:is(.contrast, .preset-contrast) *):not(:is(.contrast, .preset-contrast)) {
+    background: #1a1e25;
+    color: #9bafc6
+}
+html[data-theme="dark"] .preset-preview:not(:is(.contrast, .preset-contrast) *):not(:is(.contrast, .preset-contrast)) {
+    border-bottom: 1px solid #47583c;
+    color: #c4dbc8;
+    background: #1c2016
+}
+html[data-theme="dark"] .preset-preview-header > span + span:not(:is(.contrast, .preset-contrast) *):not(:is(.contrast, .preset-contrast)) {
+    background: #262626;
+    border: 1px solid #526b46;
+    color: #b6d6b7
+}
+html[data-theme="dark"] .preset-balance:not(:is(.contrast, .preset-contrast) *):not(:is(.contrast, .preset-contrast)) {
+    background: #262626;
+    border: 1px solid #6d845f
+}
+html[data-theme="dark"] .preset-action:not(:is(.contrast, .preset-contrast) *):not(:is(.contrast, .preset-contrast)) {
+    border: 1.5px solid #97a893;
+    background: #262626
+}
+html[data-theme="dark"] .preset-preview-footer:not(:is(.contrast, .preset-contrast) *):not(:is(.contrast, .preset-contrast)) {
+    color: #b3c5ac
+}
+html[data-theme="dark"] .preset-focus:not(:is(.contrast, .preset-contrast) *):not(:is(.contrast, .preset-contrast)) {
+    background: #1a1823;
+    color: #bab7ca
+}
+html[data-theme="dark"] .preset-focus .preset-action:not(:is(.contrast, .preset-contrast) *):not(:is(.contrast, .preset-contrast)) {
+    color: #262626;
+    background: #a3a7bb
+}
+html[data-theme="dark"] .preset-qr-action:not(:is(.contrast, .preset-contrast) *):not(:is(.contrast, .preset-contrast)) {
+    background: #c39d00;
+    color: #e0e6db
+}
+html[data-theme="dark"] .preset-student:not(:is(.contrast, .preset-contrast) *):not(:is(.contrast, .preset-contrast)) {
+    background: #191d24;
+    color: #a9bfdd
+}
+html[data-theme="dark"] .preset-student .preset-preview-header > span:last-child:not(:is(.contrast, .preset-contrast) *):not(:is(.contrast, .preset-contrast)) {
+    color: #8babd3;
+    border-color: #31537e
+}
+html[data-theme="dark"] .preset-campus:not(:is(.contrast, .preset-contrast) *):not(:is(.contrast, .preset-contrast)) {
+    background: #262626;
+    border: 1px solid #2d4463
+}
+html[data-theme="dark"] .preset-campus > div > div:not(:is(.contrast, .preset-contrast) *):not(:is(.contrast, .preset-contrast)) {
+    background: #191e24
+}
+html[data-theme="dark"] .preset-student-grid > div:not(:is(.contrast, .preset-contrast) *):not(:is(.contrast, .preset-contrast)) {
+    background: #262626;
+    border: 1px solid #2d4463
+}
+html[data-theme="dark"] .preset-student-grid > div > span:last-child:not(:is(.contrast, .preset-contrast) *):not(:is(.contrast, .preset-contrast)) {
+    color: #262626;
+    background: #5797d1
+}
+html[data-theme="dark"] .preset-student .preset-preview-footer:not(:is(.contrast, .preset-contrast) *):not(:is(.contrast, .preset-contrast)) {
+    color: #94acc8
+}
+html[data-theme="dark"] .bank-action:not(:is(.contrast, .preset-contrast) *):not(:is(.contrast, .preset-contrast)) {
+    border: 1px solid #4fd97b;
+    color: #262626;
+    background: #49df7e
+}
+html[data-theme="dark"] .bank-action:hover:not(:is(.contrast, .preset-contrast) *):not(:is(.contrast, .preset-contrast)) {
+    background: #45e37b
+}
+html[data-theme="dark"] .bank-qr-expanded:not(:is(.contrast, .preset-contrast) *):not(:is(.contrast, .preset-contrast)) {
+    background: #262626;
+    border: 1px solid #5e7453
+}
+html[data-theme="dark"] .bank-qr-expanded > p:not(:is(.contrast, .preset-contrast) *):not(:is(.contrast, .preset-contrast)) {
+    color: #c4d6bd
+}
+html[data-theme="dark"] .quick-options > .quick-service-button:not(:is(.contrast, .preset-contrast) *):not(:is(.contrast, .preset-contrast)) {
+    border: 1px solid #8a9e7f;
+    color: #c5debc;
+    background: #202419
+}
+html[data-theme="dark"] .bank-confirm-panel:not(:is(.contrast, .preset-contrast) *):not(:is(.contrast, .preset-contrast)) {
+    background: #1f2419;
+    border: 1px solid #607452
+}
+html[data-theme="dark"] .bank-confirm-panel > p:not(:is(.contrast, .preset-contrast) *):not(:is(.contrast, .preset-contrast)) {
+    color: #c2d8b9
+}
+html[data-theme="dark"] .bank-text-button:not(:is(.contrast, .preset-contrast) *):not(:is(.contrast, .preset-contrast)) {
+    color: #c1d9b7
+}
+html[data-theme="dark"] .bank-inline-status:not(:is(.contrast, .preset-contrast) *):not(:is(.contrast, .preset-contrast)) {
+    color: #afdebf
+}
+html[data-theme="dark"] .bank-demo-label:not(:is(.contrast, .preset-contrast) *):not(:is(.contrast, .preset-contrast)) {
+    color: #9aa7b7
+}
+html[data-theme="dark"] .workspace.senior:not(:is(.contrast, .preset-contrast) *):not(:is(.contrast, .preset-contrast)) {
+    background-color: #1a1e15
+}
+html[data-theme="dark"] .workspace.focus:not(:is(.contrast, .preset-contrast) *):not(:is(.contrast, .preset-contrast)) {
+    background: #1c1924;
+    border: 1px solid #453c58
+}
+html[data-theme="dark"] .workspace.focus .workspace-widget:not(:is(.contrast, .preset-contrast) *):not(:is(.contrast, .preset-contrast)) {
+    background: #262626;
+    border-color: #464155
+}
+html[data-theme="dark"] .workspace.focus .history-heading h3:not(:is(.contrast, .preset-contrast) *):not(:is(.contrast, .preset-contrast)) {
+    color: #bdbcce
+}
+html[data-theme="dark"] .workspace.focus .quick-service-button:not(:is(.contrast, .preset-contrast) *):not(:is(.contrast, .preset-contrast)) {
+    background: #a3a7bb;
+    color: #262626
+}
+html[data-theme="dark"] .workspace.focus .balance-value:not(:is(.contrast, .preset-contrast) *):not(:is(.contrast, .preset-contrast)) {
+    color: #b1b2bf
+}
+html[data-theme="dark"] .workspace.focus .widget-topline:not(:is(.contrast, .preset-contrast) *):not(:is(.contrast, .preset-contrast)) {
+    color: #a8a9b9
+}
+html[data-theme="dark"] .workspace.student:not(:is(.contrast, .preset-contrast) *):not(:is(.contrast, .preset-contrast)) {
+    background: #1a1e25;
+    border: 1px solid #365073
+}
+html[data-theme="dark"] .workspace.student .workspace-widget:not(:is(.contrast, .preset-contrast) *):not(:is(.contrast, .preset-contrast)) {
+    background: #262626;
+    border-color: #324967
+}
+html[data-theme="dark"] .student-widget-heading:not(:is(.contrast, .preset-contrast) *):not(:is(.contrast, .preset-contrast)) {
+    color: #6290c6
+}
+html[data-theme="dark"] .student-widget-heading h3:not(:is(.contrast, .preset-contrast) *):not(:is(.contrast, .preset-contrast)) {
+    color: #aec3de
+}
+html[data-theme="dark"] .student-widget-description:not(:is(.contrast, .preset-contrast) *):not(:is(.contrast, .preset-contrast)) {
+    color: #9aa9bb
+}
+html[data-theme="dark"] .student-qr-tabs:not(:is(.contrast, .preset-contrast) *):not(:is(.contrast, .preset-contrast)) {
+    background: #181d23
+}
+html[data-theme="dark"] .student-qr-tabs > button:not(:is(.contrast, .preset-contrast) *):not(:is(.contrast, .preset-contrast)) {
+    color: #9fb2cb
+}
+html[data-theme="dark"] .student-qr-tabs > button[aria-selected="true"]:not(:is(.contrast, .preset-contrast) *):not(:is(.contrast, .preset-contrast)) {
+    color: #508cd8;
+    background: #262626;
+    border-color: #4870a3
+}
+html[data-theme="dark"] .student-demo-code:not(:is(.contrast, .preset-contrast) *):not(:is(.contrast, .preset-contrast)) {
+    border: 1px solid #314763;
+    color: #5992cf;
+    background: #262626
+}
+html[data-theme="dark"] .student-qr-panel h4:not(:is(.contrast, .preset-contrast) *):not(:is(.contrast, .preset-contrast)) {
+    color: #5e90ca
+}
+html[data-theme="dark"] .student-qr-panel > p:not(:is(.contrast, .preset-contrast) *):not(:is(.contrast, .preset-contrast)) {
+    color: #98a9bf
+}
+html[data-theme="dark"] .subscription-list > li:not(:is(.contrast, .preset-contrast) *):not(:is(.contrast, .preset-contrast)) {
+    border-bottom: 1px solid #12161a
+}
+html[data-theme="dark"] .subscription-avatar:not(:is(.contrast, .preset-contrast) *):not(:is(.contrast, .preset-contrast)) {
+    background: #1a1822;
+    color: #a696bd
+}
+html[data-theme="dark"] .subscription-avatar.cloud:not(:is(.contrast, .preset-contrast) *):not(:is(.contrast, .preset-contrast)) {
+    background: #181d22;
+    color: #88a6cc
+}
+html[data-theme="dark"] .subscription-list strong:not(:is(.contrast, .preset-contrast) *):not(:is(.contrast, .preset-contrast)) {
+    color: #adc2db
+}
+html[data-theme="dark"] .subscription-list div > span:not(:is(.contrast, .preset-contrast) *):not(:is(.contrast, .preset-contrast)) {
+    color: #97a8bc
+}
+html[data-theme="dark"] .subscription-list b:not(:is(.contrast, .preset-contrast) *):not(:is(.contrast, .preset-contrast)) {
+    color: #aabdd7
+}
+html[data-theme="dark"] .student-total:not(:is(.contrast, .preset-contrast) *):not(:is(.contrast, .preset-contrast)) {
+    color: #a2b7d2
+}
+html[data-theme="dark"] .sim-balance:not(:is(.contrast, .preset-contrast) *):not(:is(.contrast, .preset-contrast)) {
+    color: #abc1dd;
+    background: #191e24
+}
+html[data-theme="dark"] .sim-plan > div:not(:is(.contrast, .preset-contrast) *):not(:is(.contrast, .preset-contrast)) {
+    color: #a5bad1
+}
+html[data-theme="dark"] .bank-confirm-panel > label:not(:is(.contrast, .preset-contrast) *):not(:is(.contrast, .preset-contrast)) {
+    color: #c5dbbe
+}
+html[data-theme="dark"] .bank-confirm-panel > input:not(:is(.contrast, .preset-contrast) *):not(:is(.contrast, .preset-contrast)) {
+    border: 1px solid #92a486;
+    background: #262626;
+    color: #c8dfc2
+}
+html[data-theme="dark"] .workspace:is(.senior, .focus, .student)
+  :is(.preview-bottom, .add-placeholder, .preview-header > span:nth-child(2)):not(:is(.contrast, .preset-contrast) *):not(:is(.contrast, .preset-contrast)) {
+    color: #b6c7b1
+}
+html[data-theme="dark"] .appearance-panel:not(:is(.contrast, .preset-contrast) *):not(:is(.contrast, .preset-contrast)) {
+    background: #262626
+}
+html[data-theme="dark"] .appearance-reset:not(:is(.contrast, .preset-contrast) *):not(:is(.contrast, .preset-contrast)) {
+    background: #262626;
+    color: #bcc7c0
+}
+html[data-theme="dark"] .appearance-size label:not(:is(.contrast, .preset-contrast) *):not(:is(.contrast, .preset-contrast)),
+html[data-theme="dark"] .appearance-colors legend:not(:is(.contrast, .preset-contrast) *):not(:is(.contrast, .preset-contrast)) {
+    color: #cbd6d2
+}
+html[data-theme="dark"] .appearance-hint:not(:is(.contrast, .preset-contrast) *):not(:is(.contrast, .preset-contrast)) {
+    color: #a7b0ab
+}
+html[data-theme="dark"] .size-a:not(:is(.contrast, .preset-contrast) *):not(:is(.contrast, .preset-contrast)) {
+    color: #b2bdb6
+}
+html[data-theme="dark"] .size-value:not(:is(.contrast, .preset-contrast) *):not(:is(.contrast, .preset-contrast)) {
+    color: #4bdd84;
+    background: #172016
+}
+html[data-theme="dark"] .swatch-custom:not(:is(.contrast, .preset-contrast) *):not(:is(.contrast, .preset-contrast)) {
+    border: 1px dashed #607458;
+    color: #bcc7c0
+}
+html[data-theme="dark"] .swatch-custom:focus-within:not(:is(.contrast, .preset-contrast) *):not(:is(.contrast, .preset-contrast)) {
+    outline: 3px solid #d9dedb
+}
+html[data-theme="dark"] .widget-library:focus-visible:not(:is(.contrast, .preset-contrast) *):not(:is(.contrast, .preset-contrast)) {
+    outline: 3px solid #d9dedb
+}
+html[data-theme="dark"] .library-close:not(:is(.contrast, .preset-contrast) *):not(:is(.contrast, .preset-contrast)) {
+    background: #262626;
+    color: #bcc7c0
+}
+html[data-theme="dark"] .template-preview-toggle:not(:is(.contrast, .preset-contrast) *):not(:is(.contrast, .preset-contrast)) {
+    color: #4bdd84
+}
+@media (max-width: 700px) {
+    html[data-theme="dark"] .sidebar nav:not(:is(.contrast, .preset-contrast) *):not(:is(.contrast, .preset-contrast)) {
+        background: rgb(38 38 38 / 96%)
+    }
+}
+html[data-theme="dark"] .name-input-wrap:focus-within:not(:is(.contrast, .preset-contrast) *):not(:is(.contrast, .preset-contrast)) {
+    outline: 3px solid #53d57c
+}
+html[data-theme="dark"] .app:not(:is(.contrast, .preset-contrast) *):not(:is(.contrast, .preset-contrast)) {
+    --surface: #262626;
+    --page: #1b201e;
+    --card-shadow: 0 4px 18px rgb(94 201 148 / 6%)
+}
+html[data-theme="dark"] body:not(:is(.contrast, .preset-contrast) *):not(:is(.contrast, .preset-contrast)) {
+    background: #1b201e;
+    color: #d6e1db
+}
+html[data-theme="dark"] .app-body:not(:is(.contrast, .preset-contrast) *):not(:is(.contrast, .preset-contrast)),
+html[data-theme="dark"] .topbar:not(:is(.contrast, .preset-contrast) *):not(:is(.contrast, .preset-contrast)) {
+    background: #1b201e
+}
+html[data-theme="dark"] .import-zone:not(:is(.contrast, .preset-contrast) *):not(:is(.contrast, .preset-contrast)) {
+    border: 1.5px dashed #487255
+}
+html[data-theme="dark"] .workspace:not(:is(.contrast, .preset-contrast) *):not(:is(.contrast, .preset-contrast)) {
+    background-color: #151c18
+}
+html[data-theme="dark"] .add-placeholder:not(:is(.contrast, .preset-contrast) *):not(:is(.contrast, .preset-contrast)) {
+    border-color: #4c835b;
+    color: #4ade89;
+    background: rgb(38 38 38 / 45%)
+}
+html[data-theme="dark"] .primary:not(:is(.contrast, .preset-contrast) *):not(:is(.contrast, .preset-contrast)) {
+    background: #48df86;
+    border-color: #48df86
+}
+html[data-theme="dark"] .primary:hover:not(:is(.contrast, .preset-contrast) *):not(:is(.contrast, .preset-contrast)) {
+    background: #44e386
+}
+html[data-theme="dark"] .nav-item.active:not(:is(.contrast, .preset-contrast) *):not(:is(.contrast, .preset-contrast)) {
+    background: #151e18;
+    color: #4ade89
+}
+html[data-theme="dark"] .theme-switch:not(:is(.contrast, .preset-contrast) *):not(:is(.contrast, .preset-contrast)) {
+    background: #141916
+}
+html[data-theme="dark"] .theme-switch button:not(:is(.contrast, .preset-contrast) *):not(:is(.contrast, .preset-contrast)) {
+    color: #b1bcb6
+}
+html[data-theme="dark"] .theme-switch button.on:not(:is(.contrast, .preset-contrast) *):not(:is(.contrast, .preset-contrast)) {
+    background: #262626;
+    color: #44e386
+}
+html[data-theme="dark"] .theme-setting:not(:is(.contrast, .preset-contrast) *):not(:is(.contrast, .preset-contrast)) {
+    border-top: 1px solid #37442b
+}
+html[data-theme="dark"] .theme-options label:not(:is(.contrast, .preset-contrast) *):not(:is(.contrast, .preset-contrast)) {
+    border: 1px solid #334139
+}
+html[data-theme="dark"] .theme-options label:has(input:checked):not(:is(.contrast, .preset-contrast) *):not(:is(.contrast, .preset-contrast)) {
+    border-color: #48df86;
+    background: #151e18;
+    color: #44e386
+}
+html[data-theme="dark"] .theme-options input:not(:is(.contrast, .preset-contrast) *):not(:is(.contrast, .preset-contrast)) {
+    accent-color: #48df86
+}
+html[data-theme="dark"] .preview-header > span:nth-child(2):not(:is(.contrast, .preset-contrast) *):not(:is(.contrast, .preset-contrast)),
+html[data-theme="dark"] .preview-bottom:not(:is(.contrast, .preset-contrast) *):not(:is(.contrast, .preset-contrast)),
+html[data-theme="dark"] .templates-heading p:not(:is(.contrast, .preset-contrast) *):not(:is(.contrast, .preset-contrast)) {
+    color: #adb8b1
+}

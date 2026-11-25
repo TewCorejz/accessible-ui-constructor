@@ -1,0 +1,233 @@
+<!doctype html>
+<html lang="ru">
+<head>
+<meta charset="utf-8" />
+<title>Макеты дизайна</title>
+<!-- Только для отрисовки макетов в скриншоты: шрифт и иконки с CDN -->
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Onest:wght@400;500;600;700;800&display=swap" />
+<link rel="stylesheet" href="https://unpkg.com/@phosphor-icons/web@2.1.1/src/regular/style.css" />
+<link rel="stylesheet" href="https://unpkg.com/@phosphor-icons/web@2.1.1/src/fill/style.css" />
+<style>
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { font-family: "Onest", system-ui, sans-serif; background: #e9ecea; -webkit-font-smoothing: antialiased; }
+  .board { width: 1720px; height: 1000px; padding: 56px 56px; display: grid; grid-template-columns: 400px 1fr; gap: 56px; position: relative; overflow: hidden; }
+  .right { display: flex; flex-direction: column; gap: 22px; min-width: 0; }
+  .board-head { display: flex; align-items: baseline; gap: 20px; }
+  .board-head h1 { font-size: 30px; font-weight: 750; letter-spacing: -.02em; color: var(--board-ink); }
+  .board-head p { font-size: 16px; line-height: 1.5; color: var(--board-muted); max-width: 820px; }
+
+  /* ---------- телефон ---------- */
+  .phone { width: 390px; height: 860px; border-radius: 52px; padding: 10px; background: #111; box-shadow: 0 30px 80px rgb(20 40 30 / .22); }
+  .screen { width: 100%; height: 100%; border-radius: 44px; overflow: hidden; background: var(--bg); color: var(--ink); position: relative; display: flex; flex-direction: column; }
+  .status { height: 48px; display: flex; align-items: center; justify-content: space-between; padding: 0 28px; font-size: 15px; font-weight: 600; flex: none; }
+  .status i { font-size: 16px; }
+  .p-body { flex: 1; overflow: hidden; padding: 4px 18px 0; display: flex; flex-direction: column; gap: 14px; }
+  .p-top { display: flex; align-items: center; gap: 12px; }
+  .avatar { width: 44px; height: 44px; border-radius: 50%; display: grid; place-items: center; font-weight: 700; background: var(--chip); color: var(--accent-ink); flex: none; }
+  .p-top .hello { font-size: var(--t-sm); color: var(--muted); }
+  .p-top .name { font-size: var(--t-md); font-weight: 700; }
+  .p-top .icons { margin-left: auto; display: flex; gap: 8px; }
+  .icon-btn { width: 44px; height: 44px; border-radius: 14px; display: grid; place-items: center; background: var(--surface); color: var(--ink); font-size: 22px; }
+
+  .balance { border-radius: var(--r-lg); padding: 20px; background: var(--hero); color: var(--hero-ink); position: relative; overflow: hidden; }
+  .balance .lbl { font-size: var(--t-sm); opacity: .85; display: flex; align-items: center; gap: 6px; }
+  .balance .sum { font-size: var(--t-xxl); font-weight: 800; letter-spacing: -.02em; margin-top: 8px; }
+  .balance .sum small { font-size: .6em; font-weight: 700; }
+  .balance .card { margin-top: 14px; display: flex; justify-content: space-between; font-size: var(--t-sm); opacity: .9; }
+
+  .actions { display: grid; grid-template-columns: repeat(4, 1fr); gap: 8px; }
+  .act { display: flex; flex-direction: column; align-items: center; gap: 6px; font-size: 13px; text-align: center; line-height: 1.2; color: var(--ink); }
+  .act .ic { width: 56px; height: 56px; border-radius: var(--r-act); display: grid; place-items: center; font-size: 26px; background: var(--act-bg); color: var(--act-ink); }
+
+  .w { border-radius: var(--r-lg); background: var(--surface); padding: 16px; box-shadow: var(--shadow); border: var(--border); }
+  .w-head { display: flex; align-items: center; justify-content: space-between; font-size: var(--t-md); font-weight: 700; }
+  .w-head i { color: var(--muted); font-size: 20px; }
+  .op { display: flex; align-items: center; gap: 12px; padding-top: 12px; }
+  .op .av { width: 42px; height: 42px; border-radius: 50%; display: grid; place-items: center; background: var(--chip); color: var(--accent-ink); font-size: 20px; flex: none; }
+  .op .av.out { background: var(--chip-neutral); color: var(--muted); }
+  .op .t { font-size: var(--t-base); font-weight: 600; }
+  .op .d { font-size: var(--t-sm); color: var(--muted); }
+  .op .s { margin-left: auto; font-size: var(--t-base); font-weight: 700; white-space: nowrap; }
+  .op .s.in { color: var(--accent); }
+
+  .btn { display: flex; align-items: center; justify-content: center; gap: 8px; height: 54px; border-radius: var(--r-btn); background: var(--accent); color: var(--on-accent); font-size: var(--t-base); font-weight: 700; }
+  .btn.ghost { background: var(--chip); color: var(--accent-ink); }
+
+  .tabbar { flex: none; height: 84px; display: grid; grid-template-columns: repeat(3, 1fr); padding: 10px 12px 22px; background: var(--tab-bg); border-top: var(--tab-border); }
+  .tab { display: flex; flex-direction: column; align-items: center; gap: 4px; font-size: 12px; font-weight: 600; color: var(--muted); }
+  .tab i { font-size: 26px; }
+  .tab.on { color: var(--accent); }
+
+  /* ---------- веб ---------- */
+  .web { border-radius: 18px; overflow: hidden; background: var(--bg); color: var(--ink); box-shadow: 0 30px 80px rgb(20 40 30 / .18); display: flex; flex-direction: column; height: 820px; }
+  .chrome { height: 40px; background: var(--chrome); display: flex; align-items: center; gap: 8px; padding: 0 16px; flex: none; }
+  .chrome span { width: 12px; height: 12px; border-radius: 50%; background: var(--chrome-dot); }
+  .chrome .url { margin-left: 18px; height: 24px; flex: 0 0 380px; border-radius: 8px; background: var(--chrome-url); font-size: 12px; color: var(--muted); display: flex; align-items: center; padding: 0 12px; }
+  .app { flex: 1; display: grid; grid-template-columns: 232px 1fr; min-height: 0; }
+  .side { background: var(--side-bg); border-right: var(--side-border); padding: 24px 16px; display: flex; flex-direction: column; gap: 6px; color: var(--side-ink); }
+  .brand { display: flex; align-items: center; gap: 10px; margin-bottom: 22px; padding: 0 6px; }
+  .brand b { font-size: 17px; font-weight: 750; line-height: 1.1; }
+  .brand small { display: block; font-size: 11px; font-weight: 500; opacity: .7; }
+  .nav { display: flex; align-items: center; gap: 12px; height: 48px; padding: 0 12px; border-radius: 14px; font-size: 15px; font-weight: 600; opacity: .82; }
+  .nav i { font-size: 22px; }
+  .nav.on { background: var(--nav-on); color: var(--nav-on-ink); opacity: 1; }
+  .main { padding: 26px 32px; display: grid; grid-template-columns: 1fr 330px; grid-template-rows: auto 1fr; gap: 22px; min-height: 0; align-items: start; }
+  .main h2 { font-size: 30px; font-weight: 800; letter-spacing: -.02em; grid-column: 1 / -1; display: flex; align-items: baseline; gap: 14px; }
+  .main h2 small { font-size: 15px; font-weight: 500; color: var(--muted); letter-spacing: 0; }
+  .ws { border-radius: var(--r-lg); background: var(--ws-bg); padding: 18px; display: grid; grid-template-columns: 1fr 1fr; gap: 14px; align-content: start; border: var(--border); }
+  .ws .full { grid-column: 1 / -1; }
+  .ws .w { box-shadow: none; }
+  .ws .balance .sum { font-size: 34px; }
+  .qr { display: flex; flex-direction: column; align-items: center; gap: 10px; text-align: center; }
+  .qr .ic { width: 58px; height: 58px; border-radius: 16px; display: grid; place-items: center; background: var(--chip); color: var(--accent-ink); font-size: 32px; }
+  .qr b { font-size: 16px; }
+  .qr .btn { width: 100%; height: 46px; font-size: 15px; }
+  .panel { display: flex; flex-direction: column; gap: 14px; }
+  .panel .w h3 { font-size: 16px; font-weight: 700; margin-bottom: 12px; }
+  .slider { height: 8px; border-radius: 8px; background: var(--chip-neutral); position: relative; margin: 14px 4px 8px; }
+  .slider::before { content: ""; position: absolute; inset: 0 auto 0 0; width: 38%; border-radius: 8px; background: var(--accent); }
+  .slider::after { content: ""; position: absolute; left: 38%; top: 50%; width: 24px; height: 24px; border-radius: 50%; transform: translate(-50%, -50%); background: var(--surface); border: 3px solid var(--accent); }
+  .row { display: flex; justify-content: space-between; font-size: 13px; color: var(--muted); }
+  .sw { display: flex; gap: 8px; flex-wrap: wrap; }
+  .sw span { width: 38px; height: 38px; border-radius: 12px; border: 1px solid rgb(0 0 0 / .12); }
+  .sw span.on { outline: 3px solid var(--ink); outline-offset: 2px; }
+  .cat { display: flex; align-items: center; gap: 12px; padding: 10px 0; }
+  .cat + .cat { border-top: var(--hair); }
+  .cat .ic { width: 40px; height: 40px; border-radius: 12px; display: grid; place-items: center; font-size: 22px; background: var(--chip); color: var(--accent-ink); flex: none; }
+  .cat b { font-size: 14px; display: block; }
+  .cat small { font-size: 12px; color: var(--muted); }
+  .cat i.plus { margin-left: auto; font-size: 20px; color: var(--accent); }
+</style>
+</head>
+<body>
+<div id="out"></div>
+<script>
+const V = {
+  classic: {
+    title: "1. Классика", note: "Ближе всего к привычным банковским приложениям: светлый фон, белые карточки, зелёная карта-баланс с градиентом, круглые быстрые действия.",
+    vars: { "--bg":"#f2f4f3","--surface":"#ffffff","--ink":"#18211c","--muted":"#647069","--accent":"#1f9d55","--accent-ink":"#167a41","--on-accent":"#fff","--chip":"#e5f4ea","--chip-neutral":"#eceeed",
+      "--hero":"linear-gradient(135deg,#21b35f 0%,#13894a 55%,#0d6f52 100%)","--hero-ink":"#fff","--act-bg":"#ffffff","--act-ink":"#1f9d55","--r-lg":"24px","--r-act":"50%","--r-btn":"16px",
+      "--shadow":"0 4px 18px rgb(20 60 40 / .06)","--border":"none","--tab-bg":"#ffffff","--tab-border":"1px solid #e3e7e5","--hair":"1px solid #edf0ee",
+      "--side-bg":"#ffffff","--side-border":"1px solid #e3e7e5","--side-ink":"#18211c","--nav-on":"#e5f4ea","--nav-on-ink":"#167a41","--ws-bg":"#e9eeeb",
+      "--chrome":"#dfe3e1","--chrome-dot":"#c4cac7","--chrome-url":"#f4f6f5","--t-sm":"13px","--t-base":"15px","--t-md":"17px","--t-xxl":"32px","--board-ink":"#18211c","--board-muted":"#55615a" },
+    boardBg: "#e6ebe8",
+  },
+  senior: {
+    title: "2. Крупно и спокойно", note: "Для пожилых пользователей: крупный текст, большие плитки по две в ряд, минимум элементов, кнопки на всю ширину.",
+    vars: { "--bg":"#fbfcfb","--surface":"#ffffff","--ink":"#111a15","--muted":"#4d5952","--accent":"#157a3f","--accent-ink":"#0f6332","--on-accent":"#fff","--chip":"#e3f2e8","--chip-neutral":"#e7ebe9",
+      "--hero":"#e3f2e8","--hero-ink":"#0f3d22","--act-bg":"#157a3f","--act-ink":"#fff","--r-lg":"20px","--r-act":"18px","--r-btn":"18px",
+      "--shadow":"none","--border":"2px solid #dfe6e2","--tab-bg":"#ffffff","--tab-border":"2px solid #dfe6e2","--hair":"2px solid #edf1ef",
+      "--side-bg":"#ffffff","--side-border":"2px solid #dfe6e2","--side-ink":"#111a15","--nav-on":"#157a3f","--nav-on-ink":"#ffffff","--ws-bg":"#f1f5f2",
+      "--chrome":"#dfe3e1","--chrome-dot":"#c4cac7","--chrome-url":"#f4f6f5","--t-sm":"16px","--t-base":"19px","--t-md":"21px","--t-xxl":"38px","--board-ink":"#111a15","--board-muted":"#4d5952" },
+    boardBg: "#eef2ef", big: true,
+  },
+  dark: {
+    title: "3. Тёмная", note: "Тёмная графитовая тема, как ночной режим банковских приложений: светлый текст, мятный акцент, карточки чуть светлее фона.",
+    vars: { "--bg":"#111513","--surface":"#1b211e","--ink":"#eef3f0","--muted":"#9aa8a0","--accent":"#3ccf7d","--accent-ink":"#5fe096","--on-accent":"#08210f","--chip":"#1f3a2a","--chip-neutral":"#252d29",
+      "--hero":"linear-gradient(135deg,#1e6b45 0%,#145136 60%,#0f3a2c 100%)","--hero-ink":"#ffffff","--act-bg":"#1b211e","--act-ink":"#5fe096","--r-lg":"24px","--r-act":"50%","--r-btn":"16px",
+      "--shadow":"none","--border":"1px solid #252d29","--tab-bg":"#161b18","--tab-border":"1px solid #252d29","--hair":"1px solid #252d29",
+      "--side-bg":"#151a17","--side-border":"1px solid #252d29","--side-ink":"#eef3f0","--nav-on":"#1f3a2a","--nav-on-ink":"#5fe096","--ws-bg":"#161b18",
+      "--chrome":"#232a26","--chrome-dot":"#3a443f","--chrome-url":"#151a17","--t-sm":"13px","--t-base":"15px","--t-md":"17px","--t-xxl":"32px","--board-ink":"#eef3f0","--board-muted":"#9aa8a0" },
+    boardBg: "#0b0e0c",
+  },
+  glass: {
+    title: "4. Мягкий градиент", note: "Свежее и дружелюбное: мятно-бирюзовый фон, полупрозрачные карточки, мягкие тени. Ближе к промо-экранам и новым сервисам.",
+    vars: { "--bg":"linear-gradient(170deg,#d9f5e6 0%,#c9efe9 45%,#e4f1f8 100%)","--surface":"rgb(255 255 255 / .72)","--ink":"#12241c","--muted":"#4f6a5f","--accent":"#0f9b6e","--accent-ink":"#0b7d58","--on-accent":"#fff","--chip":"rgb(15 155 110 / .12)","--chip-neutral":"rgb(18 36 28 / .07)",
+      "--hero":"linear-gradient(135deg,#12b37f 0%,#0e9a8f 60%,#2a86c9 100%)","--hero-ink":"#fff","--act-bg":"rgb(255 255 255 / .75)","--act-ink":"#0b7d58","--r-lg":"28px","--r-act":"20px","--r-btn":"20px",
+      "--shadow":"0 10px 30px rgb(20 80 70 / .10)","--border":"1px solid rgb(255 255 255 / .8)","--tab-bg":"rgb(255 255 255 / .8)","--tab-border":"1px solid rgb(255 255 255 / .9)","--hair":"1px solid rgb(18 36 28 / .07)",
+      "--side-bg":"rgb(255 255 255 / .55)","--side-border":"1px solid rgb(255 255 255 / .8)","--side-ink":"#12241c","--nav-on":"#ffffff","--nav-on-ink":"#0b7d58","--ws-bg":"rgb(255 255 255 / .4)",
+      "--chrome":"#d4e8e2","--chrome-dot":"#b5ccc5","--chrome-url":"rgb(255 255 255 / .7)","--t-sm":"13px","--t-base":"15px","--t-md":"17px","--t-xxl":"32px","--board-ink":"#12241c","--board-muted":"#4f6a5f" },
+    boardBg: "linear-gradient(120deg,#e3f6ec,#e0f0f5)",
+  },
+  mono: {
+    title: "5. Строгий контраст", note: "Минимализм: почти белый фон, чёрная типографика, крупные цифры, один зелёный акцент. Максимальная читаемость и контраст.",
+    vars: { "--bg":"#fafaf9","--surface":"#fafaf9","--ink":"#0e0f0e","--muted":"#4e524f","--accent":"#0b7a3b","--accent-ink":"#0b7a3b","--on-accent":"#fff","--chip":"#eef0ee","--chip-neutral":"#e8eae8",
+      "--hero":"#0e0f0e","--hero-ink":"#fafaf9","--act-bg":"#eef0ee","--act-ink":"#0e0f0e","--r-lg":"14px","--r-act":"14px","--r-btn":"12px",
+      "--shadow":"none","--border":"1.5px solid #d9dcd9","--tab-bg":"#fafaf9","--tab-border":"1.5px solid #0e0f0e","--hair":"1.5px solid #e3e5e3",
+      "--side-bg":"#0e0f0e","--side-border":"none","--side-ink":"#fafaf9","--nav-on":"#fafaf9","--nav-on-ink":"#0e0f0e","--ws-bg":"#f1f2f1",
+      "--chrome":"#e2e3e2","--chrome-dot":"#c8cac8","--chrome-url":"#f6f6f5","--t-sm":"14px","--t-base":"16px","--t-md":"18px","--t-xxl":"36px","--board-ink":"#0e0f0e","--board-muted":"#4e524f" },
+    boardBg: "#f0f1f0",
+  },
+};
+
+const mark = (bg, fg) => `<svg width="40" height="40" viewBox="0 0 1024 1024" aria-hidden="true"><rect width="1024" height="1024" rx="228" fill="${bg}"/><rect x="232" y="232" width="252" height="252" rx="72" fill="${fg}"/><rect x="540" y="232" width="252" height="252" rx="72" fill="${fg}" opacity=".9"/><rect x="232" y="540" width="252" height="252" rx="72" fill="${fg}" opacity=".9"/><path d="M666 600V732M600 666H732" stroke="${fg}" stroke-width="44" stroke-linecap="round"/></svg>`;
+
+function phone(v) {
+  const big = v.big;
+  const actions = big
+    ? [["qr-code","Оплата по QR"],["phone","Мобильная связь"]]
+    : [["qr-code","QR-оплата"],["arrows-left-right","Перевод"],["device-mobile","Связь"],["house-line","ЖКХ"]];
+  const actsHtml = big
+    ? `<div style="display:grid;grid-template-columns:1fr 1fr;gap:12px">${actions.map(([i,t])=>`<div class="w" style="display:flex;flex-direction:column;gap:12px;padding:18px"><span class="ic" style="width:60px;height:60px;border-radius:18px;display:grid;place-items:center;font-size:32px;background:var(--accent);color:#fff"><i class="ph ph-${i}"></i></span><b style="font-size:20px;line-height:1.2">${t}</b></div>`).join("")}</div>`
+    : `<div class="actions">${actions.map(([i,t])=>`<div class="act"><span class="ic"><i class="ph ph-${i}"></i></span>${t}</div>`).join("")}</div>`;
+  const history = big
+    ? `<div class="w"><div class="w-head">Последние операции</div><div class="op"><span class="av"><i class="ph ph-arrow-down"></i></span><div><div class="t">Перевод от Анны</div><div class="d">Сегодня</div><div class="s in" style="margin:2px 0 0">+ 5 000 ₽</div></div></div></div>`
+    : `<div class="w"><div class="w-head">История<i class="ph ph-caret-right"></i></div>
+        <div class="op"><span class="av"><i class="ph ph-arrow-down"></i></span><div><div class="t">Перевод от Анны</div><div class="d">Сегодня, 10:42</div></div><div class="s in">+ 5 000 ₽</div></div>
+        <div class="op"><span class="av out"><i class="ph ph-shopping-bag"></i></span><div><div class="t">Продукты у дома</div><div class="d">Сегодня, 09:15</div></div><div class="s">− 1 250 ₽</div></div></div>`;
+  return `<div class="phone"><div class="screen">
+    <div class="status"><span>9:41</span><span><i class="ph-fill ph-cell-signal-full"></i> <i class="ph-fill ph-wifi-high"></i> <i class="ph-fill ph-battery-full"></i></span></div>
+    <div class="p-body">
+      <div class="p-top"><span class="avatar">ГП</span><div><div class="hello">Добрый день,</div><div class="name">Галина Петровна</div></div>
+        <div class="icons">${big ? "" : `<span class="icon-btn"><i class="ph ph-magnifying-glass"></i></span>`}<span class="icon-btn"><i class="ph ph-bell"></i></span></div></div>
+      <div class="balance"><div class="lbl"><i class="ph ph-wallet"></i> Мой баланс</div><div class="sum">128 450<small>,00 ₽</small></div><div class="card"><span>Дебетовая карта</span><span>•• 4821</span></div></div>
+      ${actsHtml}
+      ${history}
+      ${big ? "" : `<div class="w"><div class="w-head">Быстрая оплата<i class="ph ph-caret-right"></i></div>
+        <div class="op"><span class="av"><i class="ph ph-device-mobile"></i></span><div><div class="t">Мобильная связь</div><div class="d">+7 999 ••• 45 67</div></div><div class="s">300 ₽</div></div>
+        <div class="op"><span class="av"><i class="ph ph-house-line"></i></span><div><div class="t">ЖКХ</div><div class="d">Счёт за ноябрь</div></div><div class="s">4 870 ₽</div></div></div>`}
+      ${big ? `<div class="btn"><i class="ph ph-qr-code"></i> Показать QR-код</div>
+      <div class="w" style="display:flex;align-items:center;gap:14px"><span class="ic" style="width:52px;height:52px;border-radius:50%;display:grid;place-items:center;font-size:26px;background:var(--chip);color:var(--accent-ink);flex:none"><i class="ph ph-headset"></i></span><div><b style="font-size:19px">Нужна помощь?</b><div style="font-size:16px;color:var(--muted)">Позвонить в банк</div></div><i class="ph ph-caret-right" style="margin-left:auto;font-size:22px;color:var(--muted)"></i></div>` : ""}
+    </div>
+    <div class="tabbar"><div class="tab on"><i class="ph-fill ph-squares-four"></i>Мой банк</div><div class="tab"><i class="ph ph-cards"></i>Выбрать</div><div class="tab"><i class="ph ph-palette"></i>Оформление</div></div>
+  </div></div>`;
+}
+
+function web(v, key) {
+  const markBg = key === "mono" ? "#fafaf9" : key === "dark" ? "#3ccf7d" : "#1f9d55";
+  const markFg = key === "mono" ? "#0e0f0e" : key === "dark" ? "#08210f" : "#ffffff";
+  return `<div class="web">
+    <div class="chrome"><span></span><span></span><span></span><div class="url">tewcorejz.github.io/accessible-ui-constructor</div></div>
+    <div class="app">
+      <div class="side">
+        <div class="brand">${mark(markBg, markFg)}<b>Конструктор<small>доступных интерфейсов</small></b></div>
+        <div class="nav on"><i class="ph ph-plus-circle"></i>Создать</div>
+        <div class="nav"><i class="ph ph-squares-four"></i>Выбрать</div>
+        <div class="nav"><i class="ph ph-download-simple"></i>Экспорт</div>
+        <div class="nav"><i class="ph ph-upload-simple"></i>Импорт</div>
+      </div>
+      <div class="main">
+        <h2>Создать интерфейс <small>Мой удобный банк</small></h2>
+        <div class="ws">
+          <div class="balance full"><div class="lbl"><i class="ph ph-wallet"></i> Мой баланс</div><div class="sum">128 450<small>,00 ₽</small></div><div class="card"><span>Дебетовая карта</span><span>•• 4821</span></div></div>
+          <div class="w qr"><span class="ic"><i class="ph ph-qr-code"></i></span><b>Оплата по QR-коду</b><div class="btn">Показать QR-код</div></div>
+          <div class="w"><div class="w-head" style="font-size:16px">История<i class="ph ph-caret-right"></i></div>
+            <div class="op"><span class="av"><i class="ph ph-arrow-down"></i></span><div><div class="t" style="font-size:14px">Перевод от Анны</div><div class="d">Сегодня</div></div><div class="s in" style="font-size:14px">+ 5 000 ₽</div></div>
+            <div class="op"><span class="av out"><i class="ph ph-shopping-bag"></i></span><div><div class="t" style="font-size:14px">Продукты</div><div class="d">Сегодня</div></div><div class="s" style="font-size:14px">− 1 250 ₽</div></div></div>
+          <div class="w full"><div class="w-head" style="font-size:16px">Быстрая оплата<i class="ph ph-caret-right"></i></div>
+            <div style="display:grid;grid-template-columns:1fr 1fr;gap:16px">
+            <div class="op"><span class="av"><i class="ph ph-device-mobile"></i></span><div><div class="t" style="font-size:14px">Мобильная связь</div><div class="d">••• 45 67</div></div><div class="s" style="font-size:14px">300 ₽</div></div>
+            <div class="op"><span class="av"><i class="ph ph-house-line"></i></span><div><div class="t" style="font-size:14px">ЖКХ</div><div class="d">Ноябрь</div></div><div class="s" style="font-size:14px">4 870 ₽</div></div></div></div>
+        </div>
+        <div class="panel">
+          <div class="w"><h3>Оформление</h3><div class="row"><span>Размер текста</span><b style="color:var(--ink)">18 px</b></div><div class="slider"></div>
+            <div class="row" style="margin:14px 0 8px"><span>Основной цвет</span></div>
+            <div class="sw"><span class="on" style="background:var(--accent)"></span><span style="background:#1f5fbf"></span><span style="background:#6b3fb5"></span><span style="background:#a3243b"></span><span style="background:#1d1d1f"></span></div></div>
+          <div class="w"><h3>Добавить виджет</h3>
+            <div class="cat"><span class="ic"><i class="ph ph-lightning"></i></span><div><b>Быстрая оплата</b><small>Важные платежи в один шаг</small></div><i class="ph ph-plus-circle plus"></i></div>
+            <div class="cat"><span class="ic"><i class="ph ph-graduation-cap"></i></span><div><b>Мои QR-коды</b><small>Пропуск и студенческий</small></div><i class="ph ph-plus-circle plus"></i></div></div>
+          <div class="btn"><i class="ph ph-check"></i> Сохранить</div>
+        </div>
+      </div>
+    </div>
+  </div>`;
+}
+
+const key = new URLSearchParams(location.search).get("v") || "classic";
+const v = V[key];
+const style = Object.entries(v.vars).map(([k, val]) => `${k}:${val}`).join(";");
+document.getElementById("out").innerHTML = `<div class="board" style="${style};background:${v.boardBg}">
+  ${phone(v)}<div class="right"><div class="board-head"><h1>${v.title}</h1><p>${v.note}</p></div>${web(v, key)}</div></div>`;
+</script>
+</body>
+</html>

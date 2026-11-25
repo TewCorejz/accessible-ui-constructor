@@ -5,6 +5,7 @@ import { TemplatePreview } from "./TemplatePreview";
 import { LogoMark } from "./Logo";
 import { MobileGate } from "./MobileGate";
 import { parseFile, serialize, validateConfig } from "./configFormat";
+import { useColorTheme, type ColorTheme } from "./colorTheme";
 import { clearSnapshot, loadSnapshot, saveSnapshot } from "./storage";
 import { AppearancePanel } from "./AppearancePanel";
 import {
@@ -39,6 +40,7 @@ import {
   LayoutGrid,
   Maximize2,
   Monitor,
+  Moon,
   Move,
   Plus,
   QrCode,
@@ -46,6 +48,7 @@ import {
   ShieldCheck,
   Smartphone,
   Sparkles,
+  Sun,
   Trash2,
   Wallet,
   X,
@@ -369,6 +372,7 @@ export default function App() {
   const [notice, setNotice] = useState("");
   const [largeText, setLargeText] = useState(stored?.largeText ?? false);
   const [highContrast, setHighContrast] = useState(stored?.highContrast ?? false);
+  const [colorTheme, setColorTheme] = useColorTheme(highContrast);
   const [exportId, setExportId] = useState("current");
   const [imported, setImported] = useState<Config | null>(null);
   const [importError, setImportError] = useState("");
@@ -601,12 +605,34 @@ export default function App() {
               Локальная версия
             </span>
           </div>
+          <div className="theme-switch" role="radiogroup" aria-label="Тема оформления">
+            {(
+              [
+                ["light", Sun, "Светлая"],
+                ["dark", Moon, "Тёмная"],
+                ["system", Monitor, "Как в системе"],
+              ] as [ColorTheme, typeof Sun, string][]
+            ).map(([value, Icon, label]) => (
+              <button
+                key={value}
+                role="radio"
+                aria-checked={colorTheme === value}
+                aria-label={label}
+                title={label}
+                className={colorTheme === value ? "on" : ""}
+                disabled={highContrast}
+                onClick={() => setColorTheme(value)}
+              >
+                <Icon size={18} aria-hidden="true" />
+              </button>
+            ))}
+          </div>
           <button className="access-top" onClick={() => setModal("access")}>
             <Accessibility size={21} />
             <span>Доступность</span>
           </button>
         </header>
-        <main id="main" tabIndex={-1}>
+        <main id="main" tabIndex={-1} key={page}>
           <div className="breadcrumb">
             Конструктор <ChevronRight size={15} />
             <span>{currentPage.title}</span>
@@ -895,7 +921,7 @@ export default function App() {
                       <div className="card-actions">
                         <button className="button primary" onClick={() => apply(c)}>
                           <Check size={19} />
-                          ОК · Применить
+                          Применить
                         </button>
                         <button
                           className="button secondary danger"
@@ -1229,6 +1255,35 @@ export default function App() {
               onChange={(e) => setHighContrast(e.target.checked)}
             />
           </label>
+          <fieldset className="setting-row theme-setting">
+            <legend>
+              <strong>Тема оформления</strong>
+              <small>
+                {highContrast ? "В режиме высокого контраста тема всегда светлая" : "Светлая, тёмная или как в системе"}
+              </small>
+            </legend>
+            <div className="theme-options">
+              {(
+                [
+                  ["light", "Светлая"],
+                  ["dark", "Тёмная"],
+                  ["system", "Как в системе"],
+                ] as [ColorTheme, string][]
+              ).map(([value, label]) => (
+                <label key={value}>
+                  <input
+                    type="radio"
+                    name="color-theme"
+                    value={value}
+                    checked={colorTheme === value}
+                    disabled={highContrast}
+                    onChange={() => setColorTheme(value)}
+                  />
+                  {label}
+                </label>
+              ))}
+            </div>
+          </fieldset>
           <div className="inline-note">
             <Info size={20} />
             <span>Все действия доступны с клавиатуры: используйте Tab и Enter.</span>
