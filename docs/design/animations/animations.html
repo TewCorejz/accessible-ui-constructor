@@ -1,0 +1,242 @@
+<!doctype html>
+<html lang="ru">
+<head>
+<meta charset="utf-8" />
+<title>Паки анимаций</title>
+<!-- Только для записи демонстраций анимаций: шрифт и иконки с CDN -->
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Onest:wght@400;500;600;700;800&display=swap" />
+<link rel="stylesheet" href="https://unpkg.com/@phosphor-icons/web@2.1.1/src/regular/style.css" />
+<link rel="stylesheet" href="https://unpkg.com/@phosphor-icons/web@2.1.1/src/fill/style.css" />
+<style>
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { font-family: "Onest", system-ui, sans-serif; -webkit-font-smoothing: antialiased; }
+  .board { width: 1080px; height: 920px; background: #e6ebe8; display: grid; grid-template-columns: 420px 1fr; gap: 56px; padding: 30px 56px 30px 60px; align-items: center; }
+  .phone { width: 390px; height: 840px; border-radius: 52px; padding: 10px; background: #111; box-shadow: 0 30px 80px rgb(20 40 30 / .22); }
+  .screen { width: 100%; height: 100%; border-radius: 44px; overflow: hidden; background: #f2f4f3; color: #18211c; position: relative; display: flex; flex-direction: column; }
+  .status { height: 48px; display: flex; align-items: center; justify-content: space-between; padding: 0 28px; font-size: 15px; font-weight: 600; flex: none; }
+  .body { flex: 1; padding: 4px 18px 0; display: flex; flex-direction: column; gap: 14px; overflow: hidden; position: relative; }
+  .top { display: flex; align-items: center; gap: 12px; }
+  .avatar { width: 44px; height: 44px; border-radius: 50%; display: grid; place-items: center; font-weight: 700; background: #e5f4ea; color: #167a41; }
+  .hello { font-size: 13px; color: #647069; } .name { font-size: 17px; font-weight: 700; }
+  .bell { margin-left: auto; width: 44px; height: 44px; border-radius: 14px; display: grid; place-items: center; background: #fff; font-size: 22px; }
+  .balance { border-radius: 24px; padding: 20px; color: #fff; position: relative; overflow: hidden; background: linear-gradient(135deg,#21b35f 0%,#13894a 55%,#0d6f52 100%); }
+  .balance .lbl { font-size: 13px; opacity: .85; } .balance .sum { font-size: 32px; font-weight: 800; margin-top: 8px; font-variant-numeric: tabular-nums; }
+  .balance .sum small { font-size: 19px; } .balance .card { margin-top: 14px; display: flex; justify-content: space-between; font-size: 13px; opacity: .9; }
+  .sheen { position: absolute; inset: -20% auto -20% -40%; width: 40%; background: linear-gradient(100deg, transparent, rgb(255 255 255 / .35), transparent); transform: skewX(-18deg); opacity: 0; }
+  .actions { display: grid; grid-template-columns: repeat(4, 1fr); gap: 8px; }
+  .act { display: flex; flex-direction: column; align-items: center; gap: 6px; font-size: 13px; }
+  .act .ic { width: 56px; height: 56px; border-radius: 50%; display: grid; place-items: center; font-size: 26px; background: #fff; color: #1f9d55; }
+  .w { border-radius: 24px; background: #fff; padding: 16px; box-shadow: 0 4px 18px rgb(20 60 40 / .06); position: relative; }
+  .w-head { display: flex; justify-content: space-between; font-size: 17px; font-weight: 700; } .w-head i { color: #647069; font-size: 20px; }
+  .op { display: flex; align-items: center; gap: 12px; padding-top: 12px; }
+  .op .av { width: 42px; height: 42px; border-radius: 50%; display: grid; place-items: center; background: #e5f4ea; color: #167a41; font-size: 20px; flex: none; }
+  .op .av.out { background: #eceeed; color: #647069; }
+  .op .t { font-size: 15px; font-weight: 600; } .op .d { font-size: 13px; color: #647069; } .op .s { margin-left: auto; font-size: 15px; font-weight: 700; } .op .s.in { color: #1f9d55; }
+  .add { height: 56px; border-radius: 16px; border: 1.5px dashed #9cc3a2; display: flex; align-items: center; justify-content: center; gap: 8px; color: #167a41; font-size: 16px; font-weight: 650; position: relative; overflow: hidden; background: #f2f4f3; }
+  .newwrap { overflow: hidden; max-height: 0; }
+  .ring { position: absolute; inset: -3px; border-radius: 27px; border: 3px solid #21b35f; opacity: 0; pointer-events: none; }
+  .tabbar { flex: none; height: 84px; display: grid; grid-template-columns: repeat(3, 1fr); padding: 10px 12px 22px; background: #fff; border-top: 1px solid #e3e7e5; }
+  .tab { display: flex; flex-direction: column; align-items: center; gap: 4px; font-size: 12px; font-weight: 600; color: #647069; } .tab i { font-size: 26px; } .tab.on { color: #1f9d55; }
+  .backdrop { position: absolute; inset: 0; background: rgb(10 20 15 / .38); opacity: 0; }
+  .sheet { position: absolute; left: 0; right: 0; bottom: 0; background: #f2f4f3; border-radius: 26px 26px 0 0; padding: 18px 16px 30px; transform: translateY(100%); }
+  .grab { width: 40px; height: 5px; border-radius: 3px; background: #c9d2cd; margin: 0 auto 14px; }
+  .sheet h3 { font-size: 21px; font-weight: 750; margin-bottom: 12px; }
+  .item { display: flex; align-items: center; gap: 14px; background: #fff; border-radius: 16px; padding: 14px; margin-top: 10px; position: relative; overflow: hidden; }
+  .item .ic { width: 46px; height: 46px; border-radius: 12px; background: #e5f4ea; color: #1f9d55; display: grid; place-items: center; font-size: 24px; }
+  .item b { font-size: 16px; display: block; } .item small { font-size: 13px; color: #647069; } .item .plus { margin-left: auto; font-size: 26px; color: #1f9d55; }
+  .toast { position: absolute; left: 16px; right: 16px; top: 54px; background: #18211c; color: #fff; border-radius: 16px; padding: 14px 16px; display: flex; align-items: center; gap: 10px; font-size: 15px; font-weight: 600; opacity: 0; }
+  .toast .ok { width: 28px; height: 28px; border-radius: 50%; background: #21b35f; display: grid; place-items: center; font-size: 17px; }
+  .finger { position: absolute; width: 46px; height: 46px; margin: -23px 0 0 -23px; border-radius: 50%; background: rgb(30 40 35 / .28); border: 2px solid rgb(255 255 255 / .8); opacity: 0; pointer-events: none; z-index: 20; }
+  .ripple { position: absolute; width: 20px; height: 20px; margin: -10px 0 0 -10px; border-radius: 50%; background: rgb(33 179 95 / .28); opacity: 0; pointer-events: none; }
+  .skel { position: absolute; inset: 0; border-radius: inherit; background: linear-gradient(90deg,#e4e9e6 0%,#f3f6f4 50%,#e4e9e6 100%); background-size: 200% 100%; opacity: 0; }
+  /* правая колонка */
+  .info h1 { font-size: 40px; font-weight: 800; letter-spacing: -.02em; color: #18211c; }
+  .info .tag { display: inline-block; margin-top: 12px; padding: 6px 12px; border-radius: 10px; background: #fff; font-size: 15px; font-weight: 600; color: #167a41; }
+  .info p { margin-top: 18px; font-size: 19px; line-height: 1.5; color: #3f4b44; max-width: 520px; }
+  .info ul { margin-top: 22px; list-style: none; display: grid; gap: 12px; }
+  .info li { font-size: 17px; line-height: 1.45; color: #28332f; display: flex; gap: 10px; }
+  .info li i { color: #1f9d55; font-size: 22px; flex: none; margin-top: 1px; }
+  .info .meta { margin-top: 26px; font-size: 15px; color: #647069; }
+</style>
+</head>
+<body>
+<div class="board">
+  <div class="phone"><div class="screen" id="screen">
+    <div class="status"><span>9:41</span><span><i class="ph-fill ph-cell-signal-full"></i> <i class="ph-fill ph-wifi-high"></i> <i class="ph-fill ph-battery-full"></i></span></div>
+    <div class="body" id="body">
+      <div class="top a-in" id="top"><span class="avatar">ГП</span><div><div class="hello">Добрый день,</div><div class="name">Галина Петровна</div></div><span class="bell"><i class="ph ph-bell"></i></span></div>
+      <div class="balance a-in" id="balance"><div class="skel"></div><div class="sheen" id="sheen"></div><div class="lbl">Мой баланс</div><div class="sum"><span id="sum">128 450</span><small>,00 ₽</small></div><div class="card"><span>Дебетовая карта</span><span>•• 4821</span></div></div>
+      <div class="actions a-in" id="actions">
+        <div class="act"><span class="ic"><i class="ph ph-qr-code"></i></span>QR-оплата</div><div class="act"><span class="ic"><i class="ph ph-arrows-left-right"></i></span>Перевод</div>
+        <div class="act"><span class="ic"><i class="ph ph-device-mobile"></i></span>Связь</div><div class="act"><span class="ic"><i class="ph ph-house-line"></i></span>ЖКХ</div></div>
+      <div class="w a-in" id="history"><div class="skel"></div><div class="w-head">История<i class="ph ph-caret-right"></i></div>
+        <div class="op"><span class="av"><i class="ph ph-arrow-down"></i></span><div><div class="t">Перевод от Анны</div><div class="d">Сегодня, 10:42</div></div><div class="s in">+ 5 000 ₽</div></div>
+        <div class="op"><span class="av out"><i class="ph ph-shopping-bag"></i></span><div><div class="t">Продукты у дома</div><div class="d">Сегодня, 09:15</div></div><div class="s">− 1 250 ₽</div></div></div>
+      <div class="newwrap" id="newwrap"><div class="w" id="neww"><div class="ring" id="ring"></div><div class="w-head">Быстрая оплата<i class="ph ph-caret-right"></i></div>
+        <div class="op"><span class="av"><i class="ph ph-device-mobile"></i></span><div><div class="t">Мобильная связь</div><div class="d">••• 45 67</div></div><div class="s">300 ₽</div></div></div></div>
+      <div class="add a-in" id="add"><div class="ripple" id="ripple1"></div><i class="ph ph-plus"></i>Добавить виджет</div>
+    </div>
+    <div class="tabbar"><div class="tab on"><i class="ph-fill ph-squares-four"></i>Мой банк</div><div class="tab"><i class="ph ph-cards"></i>Выбрать</div><div class="tab"><i class="ph ph-palette"></i>Оформление</div></div>
+    <div class="backdrop" id="backdrop"></div>
+    <div class="sheet" id="sheet"><div class="grab"></div><h3>Добавить виджет</h3>
+      <div class="item" id="item1"><div class="ripple" id="ripple2"></div><span class="ic"><i class="ph ph-lightning"></i></span><div><b>Быстрая оплата</b><small>Важные платежи в один шаг</small></div><i class="ph ph-plus-circle plus"></i></div>
+      <div class="item"><span class="ic"><i class="ph ph-graduation-cap"></i></span><div><b>Мои QR-коды</b><small>Пропуск и студенческий</small></div><i class="ph ph-plus-circle plus"></i></div>
+      <div class="item"><span class="ic"><i class="ph ph-repeat"></i></span><div><b>Подписки</b><small>Музыка, облако и учёба</small></div><i class="ph ph-plus-circle plus"></i></div></div>
+    <div class="toast" id="toast"><span class="ok"><i class="ph ph-check"></i></span>Виджет «Быстрая оплата» добавлен</div>
+    <div class="finger" id="finger"></div>
+  </div></div>
+  <div class="info" id="info"></div>
+</div>
+<script>
+// Сценарий одинаковый для всех паков (мс): вход экрана, нажатие «Добавить виджет»,
+// шторка, выбор виджета, появление виджета, уведомление.
+const T = { press1: 1700, sheetOpen: 1950, press2: 3000, sheetClose: 3300, widget: 3650, toast: 4300, toastOut: 6000, end: 7200 };
+const $ = (id) => document.getElementById(id);
+const ins = [...document.querySelectorAll(".a-in")];
+const anims = [];
+// У элемента может быть несколько анимаций (появление и исчезновение): вторая и следующие
+// не должны действовать до своего начала, поэтому заполняются только вперёд.
+const seen = new WeakSet();
+const A = (el, kf, o) => {
+  const fill = seen.has(el) ? "forwards" : "both"; seen.add(el);
+  const a = el.animate(kf, { fill, ...o }); a.pause(); anims.push(a); return a;
+};
+let ticks = [];
+
+// палец: показывает, куда «нажимает» пользователь (одинаков во всех паках)
+function finger(x, y, at) {
+  A($("finger"), [{ opacity: 0, transform: "scale(1.3)", left: x + "px", top: y + "px" }, { opacity: 1, transform: "scale(1)", offset: .35 }, { opacity: 1, transform: "scale(.85)", offset: .6 }, { opacity: 0, transform: "scale(1)" }], { duration: 650, delay: at - 250 });
+}
+const ADD = [195, 0], ITEM = [195, 0];
+
+const PACKS = {
+  calm: {
+    title: "1. Спокойный", tag: "Мягкие появления, без движения", ms: "150–250 мс",
+    text: "Элементы просто проявляются. Ничего не прыгает и не летает: подходит пожилым людям и тем, кого отвлекает движение.",
+    list: ["Экран проявляется целиком", "Нажатие: кнопка чуть темнеет", "Шторка появляется с коротким сдвигом", "Уведомление плавно проявляется"],
+    build() {
+      ins.forEach((el) => A(el, [{ opacity: 0 }, { opacity: 1 }], { duration: 250, delay: 150, easing: "ease-out" }));
+      A($("add"), [{ background: "#f2f4f3" }, { background: "#dcebe0" }, { background: "#f2f4f3" }], { duration: 300, delay: T.press1 - 80 });
+      A($("backdrop"), [{ opacity: 0 }, { opacity: 1 }], { duration: 200, delay: T.sheetOpen });
+      A($("sheet"), [{ transform: "translateY(24px)", opacity: 0 }, { transform: "translateY(0)", opacity: 1 }], { duration: 220, delay: T.sheetOpen, easing: "ease-out" });
+      A($("item1"), [{ background: "#fff" }, { background: "#dcebe0" }, { background: "#fff" }], { duration: 300, delay: T.press2 - 80 });
+      A($("backdrop"), [{ opacity: 1 }, { opacity: 0 }], { duration: 200, delay: T.sheetClose, composite: "replace" });
+      A($("sheet"), [{ opacity: 1 }, { opacity: 0, transform: "translateY(24px)" }], { duration: 200, delay: T.sheetClose });
+      A($("newwrap"), [{ maxHeight: "0px" }, { maxHeight: "140px" }], { duration: 1, delay: T.widget });
+      A($("neww"), [{ opacity: 0 }, { opacity: 1 }], { duration: 250, delay: T.widget });
+      A($("toast"), [{ opacity: 0 }, { opacity: 1 }], { duration: 200, delay: T.toast });
+      A($("toast"), [{ opacity: 1 }, { opacity: 0 }], { duration: 200, delay: T.toastOut });
+    },
+  },
+  smooth: {
+    title: "2. Плавный", tag: "Как в iOS: сдвиг и проявление", ms: "300–450 мс",
+    text: "Элементы выезжают снизу друг за другом, шторка поднимается от края экрана, новый виджет раздвигает соседей. Привычно и аккуратно.",
+    list: ["Вход: карточки поднимаются по очереди", "Нажатие: лёгкое уменьшение кнопки", "Шторка выезжает снизу", "Виджет раздвигает место и проявляется", "Уведомление съезжает сверху"],
+    build() {
+      const e = "cubic-bezier(.2,.8,.2,1)";
+      ins.forEach((el, i) => A(el, [{ opacity: 0, transform: "translateY(18px)" }, { opacity: 1, transform: "none" }], { duration: 450, delay: 120 + i * 80, easing: e }));
+      A($("add"), [{ transform: "scale(1)" }, { transform: "scale(.97)" }, { transform: "scale(1)" }], { duration: 260, delay: T.press1 - 60, easing: e });
+      A($("backdrop"), [{ opacity: 0 }, { opacity: 1 }], { duration: 300, delay: T.sheetOpen });
+      A($("sheet"), [{ transform: "translateY(100%)" }, { transform: "translateY(0)" }], { duration: 420, delay: T.sheetOpen, easing: e });
+      A($("item1"), [{ transform: "scale(1)" }, { transform: "scale(.97)" }, { transform: "scale(1)" }], { duration: 260, delay: T.press2 - 60, easing: e });
+      A($("backdrop"), [{ opacity: 1 }, { opacity: 0 }], { duration: 300, delay: T.sheetClose });
+      A($("sheet"), [{ transform: "translateY(0)" }, { transform: "translateY(100%)" }], { duration: 360, delay: T.sheetClose, easing: "cubic-bezier(.4,0,1,1)" });
+      A($("newwrap"), [{ maxHeight: "0px" }, { maxHeight: "140px" }], { duration: 380, delay: T.widget, easing: e });
+      A($("neww"), [{ opacity: 0, transform: "translateY(10px)" }, { opacity: 1, transform: "none" }], { duration: 380, delay: T.widget + 120, easing: e });
+      A($("toast"), [{ opacity: 0, transform: "translateY(-30px)" }, { opacity: 1, transform: "none" }], { duration: 380, delay: T.toast, easing: e });
+      A($("toast"), [{ opacity: 1, transform: "none" }, { opacity: 0, transform: "translateY(-30px)" }], { duration: 300, delay: T.toastOut, easing: e });
+    },
+  },
+  spring: {
+    title: "3. Пружинистый", tag: "Отскок и «живые» кнопки", ms: "400–600 мс",
+    text: "Кнопки пружинят при нажатии, новый виджет «выпрыгивает» с небольшим отскоком, галочка в уведомлении подпрыгивает. Дружелюбно и игриво.",
+    list: ["Вход: карточки слегка увеличиваются с отскоком", "Нажатие: кнопка сжимается и пружинит", "Шторка выезжает с небольшим перелётом", "Виджет «выпрыгивает» на место", "Галочка подпрыгивает"],
+    build() {
+      const sp = "cubic-bezier(.34,1.56,.64,1)";
+      ins.forEach((el, i) => A(el, [{ opacity: 0, transform: "scale(.92)" }, { opacity: 1, transform: "none" }], { duration: 520, delay: 120 + i * 70, easing: sp }));
+      A($("add"), [{ transform: "scale(1)" }, { transform: "scale(.9)", offset: .35 }, { transform: "scale(1.04)", offset: .7 }, { transform: "scale(1)" }], { duration: 500, delay: T.press1 - 80 });
+      A($("backdrop"), [{ opacity: 0 }, { opacity: 1 }], { duration: 300, delay: T.sheetOpen });
+      A($("sheet"), [{ transform: "translateY(100%)" }, { transform: "translateY(0)" }], { duration: 560, delay: T.sheetOpen, easing: sp });
+      A($("item1"), [{ transform: "scale(1)" }, { transform: "scale(.93)", offset: .35 }, { transform: "scale(1.03)", offset: .7 }, { transform: "scale(1)" }], { duration: 480, delay: T.press2 - 80 });
+      A($("backdrop"), [{ opacity: 1 }, { opacity: 0 }], { duration: 300, delay: T.sheetClose });
+      A($("sheet"), [{ transform: "translateY(0)" }, { transform: "translateY(100%)" }], { duration: 340, delay: T.sheetClose, easing: "cubic-bezier(.5,-0.4,.8,.6)" });
+      A($("newwrap"), [{ maxHeight: "0px" }, { maxHeight: "140px" }], { duration: 300, delay: T.widget, easing: "ease-out" });
+      A($("neww"), [{ opacity: 0, transform: "scale(.6)" }, { opacity: 1, transform: "scale(1.06)", offset: .6 }, { transform: "scale(1)" }], { duration: 600, delay: T.widget + 80, easing: "ease-out" });
+      A($("toast"), [{ opacity: 0, transform: "translateY(-40px)" }, { opacity: 1, transform: "none" }], { duration: 520, delay: T.toast, easing: sp });
+      A(document.querySelector("#toast .ok"), [{ transform: "scale(0)" }, { transform: "scale(1.35)", offset: .6 }, { transform: "scale(1)" }], { duration: 500, delay: T.toast + 180 });
+      A($("toast"), [{ opacity: 1, transform: "none" }, { opacity: 0, transform: "translateY(-40px)" }], { duration: 320, delay: T.toastOut, easing: "cubic-bezier(.5,-0.4,.8,.6)" });
+    },
+  },
+  lively: {
+    title: "4. Живой", tag: "Загрузка, блики, счётчик", ms: "400–900 мс",
+    text: "Экран загружается через «скелет», баланс досчитывается до суммы, по карте пробегает блик, новый виджет подсвечивается рамкой. Самый эффектный пак.",
+    list: ["Вход: мерцающий скелет, затем содержимое", "Баланс досчитывается до суммы", "Блик по карте баланса", "Новый виджет выезжает и подсвечивается рамкой", "Уведомление съезжает сверху"],
+    build() {
+      const e = "cubic-bezier(.2,.8,.2,1)";
+      document.querySelectorAll(".skel").forEach((s) => {
+        A(s, [{ opacity: 1 }, { opacity: 1, offset: .8 }, { opacity: 0 }], { duration: 1200, delay: 0 });
+        A(s, [{ backgroundPosition: "200% 0" }, { backgroundPosition: "-200% 0" }], { duration: 1000, delay: 0 });
+      });
+      ins.forEach((el, i) => A(el, [{ opacity: 0, transform: "translateY(12px)" }, { opacity: 1, transform: "none" }], { duration: 420, delay: 60 + i * 60, easing: e }));
+      A($("sheen"), [{ opacity: 0, left: "-40%" }, { opacity: 1, offset: .2 }, { opacity: 1, offset: .8 }, { opacity: 0, left: "120%" }], { duration: 900, delay: 1300, easing: "ease-in-out" });
+      ticks.push((t) => { const p = Math.min(1, Math.max(0, (t - 900) / 900)); const v = Math.round(128450 * (1 - Math.pow(1 - p, 3))); $("sum").textContent = v.toLocaleString("ru-RU"); });
+      A($("add"), [{ transform: "scale(1)" }, { transform: "scale(.97)" }, { transform: "scale(1)" }], { duration: 260, delay: T.press1 - 60 });
+      A($("backdrop"), [{ opacity: 0, backdropFilter: "blur(0px)" }, { opacity: 1, backdropFilter: "blur(4px)" }], { duration: 320, delay: T.sheetOpen });
+      A($("sheet"), [{ transform: "translateY(100%)" }, { transform: "translateY(0)" }], { duration: 420, delay: T.sheetOpen, easing: e });
+      A($("item1"), [{ transform: "scale(1)" }, { transform: "scale(.97)" }, { transform: "scale(1)" }], { duration: 260, delay: T.press2 - 60 });
+      A($("backdrop"), [{ opacity: 1 }, { opacity: 0 }], { duration: 300, delay: T.sheetClose });
+      A($("sheet"), [{ transform: "translateY(0)" }, { transform: "translateY(100%)" }], { duration: 360, delay: T.sheetClose, easing: "cubic-bezier(.4,0,1,1)" });
+      A($("newwrap"), [{ maxHeight: "0px" }, { maxHeight: "140px" }], { duration: 380, delay: T.widget, easing: e });
+      A($("neww"), [{ opacity: 0, transform: "translateX(60px)" }, { opacity: 1, transform: "none" }], { duration: 480, delay: T.widget + 80, easing: e });
+      A($("ring"), [{ opacity: 0 }, { opacity: 1, offset: .2 }, { opacity: 1, offset: .6 }, { opacity: 0 }], { duration: 1500, delay: T.widget + 400 });
+      A($("toast"), [{ opacity: 0, transform: "translateY(-30px)" }, { opacity: 1, transform: "none" }], { duration: 380, delay: T.toast, easing: e });
+      A($("toast"), [{ opacity: 1, transform: "none" }, { opacity: 0, transform: "translateY(-30px)" }], { duration: 300, delay: T.toastOut, easing: e });
+    },
+  },
+  tactile: {
+    title: "5. Тактильный", tag: "Отклик на каждое касание", ms: "200–400 мс",
+    text: "Акцент на обратной связи: от точки нажатия расходится волна, кнопка «вдавливается», новый виджет приподнимается тенью, как будто его положили на экран.",
+    list: ["Вход: быстрый сдвиг снизу", "Нажатие: волна от пальца и «вдавливание»", "Шторка выезжает снизу", "Виджет опускается на место с тенью", "Уведомление с полосой времени"],
+    build() {
+      const e = "cubic-bezier(.2,.8,.2,1)";
+      ins.forEach((el, i) => A(el, [{ opacity: 0, transform: "translateY(10px)" }, { opacity: 1, transform: "none" }], { duration: 300, delay: 100 + i * 50, easing: e }));
+      const ripple = (r, x, y, at) => A(r, [{ opacity: 1, transform: "scale(0)", left: x + "px", top: y + "px" }, { opacity: 0, transform: "scale(30)" }], { duration: 550, delay: at - 40, easing: "ease-out" });
+      ripple($("ripple1"), 160, 28, T.press1); ripple($("ripple2"), 150, 37, T.press2);
+      A($("add"), [{ transform: "translateY(0)" }, { transform: "translateY(2px) scale(.985)" }, { transform: "none" }], { duration: 240, delay: T.press1 - 60 });
+      A($("backdrop"), [{ opacity: 0 }, { opacity: 1 }], { duration: 260, delay: T.sheetOpen });
+      A($("sheet"), [{ transform: "translateY(100%)" }, { transform: "translateY(0)" }], { duration: 340, delay: T.sheetOpen, easing: e });
+      A($("item1"), [{ transform: "translateY(0)" }, { transform: "translateY(2px) scale(.985)" }, { transform: "none" }], { duration: 240, delay: T.press2 - 60 });
+      A($("backdrop"), [{ opacity: 1 }, { opacity: 0 }], { duration: 260, delay: T.sheetClose });
+      A($("sheet"), [{ transform: "translateY(0)" }, { transform: "translateY(100%)" }], { duration: 300, delay: T.sheetClose, easing: "cubic-bezier(.4,0,1,1)" });
+      A($("newwrap"), [{ maxHeight: "0px" }, { maxHeight: "150px" }], { duration: 320, delay: T.widget, easing: e });
+      A($("neww"), [{ opacity: 0, transform: "scale(1.06) translateY(-8px)", boxShadow: "0 24px 40px rgb(20 60 40 / .28)" }, { opacity: 1, transform: "scale(1.04) translateY(-6px)", boxShadow: "0 24px 40px rgb(20 60 40 / .28)", offset: .3 }, { opacity: 1, transform: "none", boxShadow: "0 4px 18px rgb(20 60 40 / .06)" }], { duration: 750, delay: T.widget + 60, easing: e });
+      A($("toast"), [{ opacity: 0, transform: "translateY(-20px)" }, { opacity: 1, transform: "none" }], { duration: 300, delay: T.toast, easing: e });
+      const bar = document.createElement("div"); bar.style.cssText = "position:absolute;left:16px;right:16px;bottom:6px;height:3px;border-radius:2px;background:#21b35f;transform-origin:left"; $("toast").appendChild(bar);
+      A(bar, [{ transform: "scaleX(1)" }, { transform: "scaleX(0)" }], { duration: T.toastOut - T.toast, delay: T.toast, easing: "linear" });
+      A($("toast"), [{ opacity: 1, transform: "none" }, { opacity: 0, transform: "translateY(-20px)" }], { duration: 240, delay: T.toastOut, easing: e });
+    },
+  },
+};
+
+const key = new URLSearchParams(location.search).get("p") || "calm";
+const P = PACKS[key];
+$("info").innerHTML = `<h1>${P.title}</h1><span class="tag">${P.tag}</span><p>${P.text}</p><ul>${P.list.map((l) => `<li><i class="ph ph-check-circle"></i>${l}</li>`).join("")}</ul><div class="meta">Длительность анимаций: ${P.ms}. При системной настройке «Уменьшить движение» все паки переключаются на спокойный.</div>`;
+
+window.ready = (async () => {
+  await document.fonts.ready;
+  P.build();
+  // координаты пальца считаются после раскладки
+  const scr = $("screen").getBoundingClientRect();
+  seek(T.press1); const r1 = $("add").getBoundingClientRect();
+  seek(T.press2 - 100); const r2 = $("item1").getBoundingClientRect();
+  seek(0);
+  finger(r1.left - scr.left + 160, r1.top - scr.top + 28, T.press1);
+  finger(r2.left - scr.left + 150, r2.top - scr.top + 37, T.press2);
+})();
+function seek(t) { anims.forEach((a) => (a.currentTime = t)); ticks.forEach((f) => f(t)); }
+window.seekOld = (t) => { anims.forEach((a) => (a.currentTime = t)); ticks.forEach((f) => f(t)); };
+window.seek = seek;
+window.END = T.end;
+</script>
+</body>
+</html>

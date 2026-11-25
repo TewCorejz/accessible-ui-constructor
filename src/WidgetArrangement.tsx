@@ -1,4 +1,4 @@
-import { useRef, useState, type ReactNode } from "react";
+import { useEffect, useRef, useState, type ReactNode } from "react";
 import {
   DndContext,
   DragOverlay,
@@ -38,11 +38,13 @@ function SortableWidget({
   total,
   keyboardDragging,
   columns,
+  fresh,
   onSelect,
   children,
 }: {
   widget: Item;
   columns: boolean;
+  fresh: boolean;
   title: string;
   editing: boolean;
   selected: boolean;
@@ -85,7 +87,7 @@ function SortableWidget({
         }
       }}
       onClick={() => editing && onSelect(widget.id)}
-      className={`workspace-widget ${widget.type} ${widget.wide ? "wide" : ""} ${columns && !widget.wide && widget.column ? `col-${widget.column}` : ""} ${editing && selected ? "selected" : ""} ${isDragging ? "widget-drag-placeholder" : ""}`}
+      className={`workspace-widget ${fresh ? "widget-enter" : ""} ${widget.type} ${widget.wide ? "wide" : ""} ${columns && !widget.wide && widget.column ? `col-${widget.column}` : ""} ${editing && selected ? "selected" : ""} ${isDragging ? "widget-drag-placeholder" : ""}`}
       data-widget-id={widget.id}
     >
       {editing && selected && (
@@ -136,6 +138,22 @@ export function WidgetArrangement<T extends Item>({
   children,
 }: Props<T>) {
   const [activeId, setActiveId] = useState<string | null>(null);
+  // Виджеты, которые только что добавили, — для анимации появления.
+  const knownIds = useRef<Set<string> | null>(null);
+  const [freshIds, setFreshIds] = useState<Set<string>>(new Set());
+  useEffect(() => {
+    const ids = new Set(widgets.map((w) => w.id));
+    if (knownIds.current) {
+      const added = [...ids].filter((id) => !knownIds.current!.has(id));
+      if (added.length) {
+        setFreshIds(new Set(added));
+        const timer = window.setTimeout(() => setFreshIds(new Set()), 700);
+        knownIds.current = ids;
+        return () => window.clearTimeout(timer);
+      }
+    }
+    knownIds.current = ids;
+  }, [widgets]);
   const [draft, setDraft] = useState<T[] | null>(null);
   const [keyboardDragging, setKeyboardDragging] = useState(false);
   const keyboardDraggingRef = useRef(false);
@@ -326,6 +344,7 @@ export function WidgetArrangement<T extends Item>({
               total={items.length}
               keyboardDragging={keyboardDragging}
               columns={columns}
+              fresh={freshIds.has(widget.id)}
               onSelect={onSelect}
             >
               {renderWidget(widget)}
