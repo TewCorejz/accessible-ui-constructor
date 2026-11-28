@@ -343,6 +343,15 @@ h1 {
   border-color: #208f43;
   box-shadow: 0 0 0 2px #e6f4e7;
 }
+.name-input-wrap.is-invalid,
+.name-input-wrap.is-invalid:focus-within {
+  border-color: #a13a35;
+  box-shadow: 0 0 0 2px #f5d9d4;
+}
+.field-error {
+  margin-top: 10px;
+  padding: 10px 14px;
+}
 .name-input-wrap input {
   width: 100%;
   min-width: 0;
