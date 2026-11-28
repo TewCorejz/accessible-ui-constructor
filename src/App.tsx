@@ -445,6 +445,8 @@ export default function App() {
     setDirty(true);
   };
   function addWidget(type: WidgetType) {
+    // Один виджет каждого типа: повторы только путают, особенно скринридер.
+    if (widgets.some((w) => w.type === type)) return;
     const id = `${type}-${Date.now()}`;
     updateWidgets([...widgets, { id, type, wide: type === "history" }]);
     setSelected(id);
@@ -722,12 +724,16 @@ export default function App() {
                   <p className="section-description">
                     Нажмите на виджет, чтобы
                     <br className="desktop-break" /> добавить его в интерфейс.
+                    <br className="desktop-break" /> Каждый виджет можно добавить один раз.
                   </p>
                   <div className="catalog">
-                    {visibleCatalog.map((w) => (
+                    {visibleCatalog.map((w) => {
+                      const used = widgets.some((item) => item.type === w.type);
+                      return (
                       <button
                         className="catalog-card"
                         key={w.type}
+                        disabled={used}
                         onClick={() => addWidget(w.type)}
                       >
                         <span className={`catalog-icon ${w.color}`}>
@@ -736,11 +742,16 @@ export default function App() {
                         <span className="catalog-text">
                           <strong>{w.title}</strong>
                           <span className="visually-hidden">. </span>
-                          <span>{w.description}</span>
+                          <span>{used ? "Уже на экране" : w.description}</span>
                         </span>
-                        <Plus size={20} className="catalog-plus" />
+                        {used ? (
+                          <Check size={20} className="catalog-plus" />
+                        ) : (
+                          <Plus size={20} className="catalog-plus" />
+                        )}
                       </button>
-                    ))}
+                      );
+                    })}
                   </div>
                   <div className="library-tip">
                     <Info size={19} />
