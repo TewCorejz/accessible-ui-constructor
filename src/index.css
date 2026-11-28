@@ -4838,3 +4838,12 @@ h2 {
     transform: translate(-50%, 24px);
   }
 }
+
+/* Виджет этого типа уже на экране — в каталоге показываем его неактивным. */
+.catalog-card:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+.catalog-card:disabled:hover {
+  transform: none;
+}

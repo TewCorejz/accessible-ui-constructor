@@ -28,10 +28,16 @@
     "appearance": {
       "$ref": "#/$defs/appearance"
     },
+    "qrCodes": {
+      "type": "array",
+      "maxItems": 20,
+      "description": "Свои QR-коды пользователя для виджета studentQr («Мои QR-коды»). Необязательно; сейчас поддерживается мобильным приложением.",
+      "items": { "$ref": "#/$defs/qrCode" }
+    },
     "widgets": {
       "type": "array",
       "maxItems": 30,
-      "description": "Виджеты в порядке отображения: сверху вниз, слева направо.",
+      "description": "Виджеты в порядке отображения: сверху вниз, слева направо. Не больше одного виджета каждого типа; при импорте повторы отбрасываются, остаётся первый.",
       "items": { "$ref": "#/$defs/widget" }
     }
   },
@@ -60,6 +66,26 @@
         "secondary": {
           "oneOf": [{ "$ref": "#/$defs/color" }, { "type": "null" }],
           "description": "Дополнительный цвет: фон виджетов. null — цвет шаблона. Цвет текста подбирается автоматически."
+        }
+      }
+    },
+    "qrCode": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["name", "content"],
+      "properties": {
+        "id": { "type": "string", "minLength": 1, "maxLength": 100 },
+        "name": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 40,
+          "description": "Название кода, которое видит пользователь и читает скринридер."
+        },
+        "content": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 500,
+          "description": "Текст или ссылка, зашифрованные в QR-коде."
         }
       }
     },

@@ -175,8 +175,14 @@ export function validateConfig(data: unknown): ValidationResult {
     if (!isObject(a)) errors.push("Блок оформления (appearance) повреждён.");
     else {
       const size = a.fontSize;
-      if (!Number.isInteger(size) || (size as number) < MIN_FONT_SIZE || (size as number) > MAX_FONT_SIZE)
-        errors.push(`Размер текста должен быть целым числом от ${MIN_FONT_SIZE} до ${MAX_FONT_SIZE}.`);
+      if (
+        !Number.isInteger(size) ||
+        (size as number) < MIN_FONT_SIZE ||
+        (size as number) > MAX_FONT_SIZE
+      )
+        errors.push(
+          `Размер текста должен быть целым числом от ${MIN_FONT_SIZE} до ${MAX_FONT_SIZE}.`,
+        );
       for (const key of ["primary", "secondary"] as const) {
         const v = a[key];
         if (v !== undefined && v !== null && !isHexColor(v))
@@ -190,6 +196,24 @@ export function validateConfig(data: unknown): ValidationResult {
     }
   }
 
+  // Свои QR-коды (qrCodes) хранит мобильное приложение. Веб-версия их не показывает,
+  // но файл с ними считается корректным.
+  if (data.qrCodes !== undefined && data.qrCodes !== null) {
+    if (!Array.isArray(data.qrCodes)) errors.push("Список QR-кодов (qrCodes) повреждён.");
+    else if (data.qrCodes.length > 20) errors.push("QR-кодов больше 20.");
+    else
+      data.qrCodes.forEach((raw, i) => {
+        const n = i + 1;
+        if (!isObject(raw)) return errors.push(`QR-код ${n} повреждён.`);
+        const qName = typeof raw.name === "string" ? raw.name.trim() : "";
+        const content = typeof raw.content === "string" ? raw.content.trim() : "";
+        if (!qName || qName.length > 40)
+          return errors.push(`QR-код ${n}: название от 1 до 40 символов.`);
+        if (!content || content.length > 500)
+          return errors.push(`QR-код ${n}: содержимое от 1 до 500 символов.`);
+      });
+  }
+
   const widgets: ConfigWidget[] = [];
   if (!Array.isArray(data.widgets)) errors.push("Нет списка виджетов (widgets).");
   else if (data.widgets.length > 30) errors.push("Виджетов больше 30.");
@@ -199,7 +223,8 @@ export function validateConfig(data: unknown): ValidationResult {
       if (!isObject(raw)) return errors.push(`Виджет ${n} повреждён.`);
       if (!WIDGET_TYPES.includes(raw.type as ConfigWidget["type"]))
         return errors.push(`Виджет ${n}: неизвестный тип «${String(raw.type)}».`);
-      if (typeof raw.wide !== "boolean") return errors.push(`Виджет ${n}: не указана ширина (wide).`);
+      if (typeof raw.wide !== "boolean")
+        return errors.push(`Виджет ${n}: не указана ширина (wide).`);
       if (raw.column !== undefined && raw.column !== 1 && raw.column !== 2)
         return errors.push(`Виджет ${n}: колонка должна быть 1 или 2.`);
       widgets.push({
@@ -210,6 +235,12 @@ export function validateConfig(data: unknown): ValidationResult {
       });
     });
 
+  // Один виджет каждого типа: при повторах оставляем первый экземпляр.
+  const seen = new Set<string>();
+  const uniqueWidgets = widgets.filter((w) =>
+    seen.has(w.type) ? false : (seen.add(w.type), true),
+  );
+
   if (errors.length) return { ok: false, errors };
   return {
     ok: true,
@@ -218,7 +249,7 @@ export function validateConfig(data: unknown): ValidationResult {
       name: (name as string).trim().slice(0, 80),
       theme: theme as InterfaceConfig["theme"],
       ...(appearance ? { appearance } : {}),
-      widgets,
+      widgets: uniqueWidgets,
     },
   };
 }
