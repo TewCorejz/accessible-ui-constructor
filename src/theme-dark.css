@@ -117,6 +117,10 @@ html[data-theme="dark"] .name-input-wrap > svg:not(:is(.contrast, .preset-contra
 html[data-theme="dark"] .name-input-wrap:focus-within:not(:is(.contrast, .preset-contrast) *):not(:is(.contrast, .preset-contrast)) {
     border-color: #50d87b
 }
+html[data-theme="dark"] .name-input-wrap.is-invalid:not(:is(.contrast, .preset-contrast) *):not(:is(.contrast, .preset-contrast)),
+html[data-theme="dark"] .name-input-wrap.is-invalid:focus-within:not(:is(.contrast, .preset-contrast) *):not(:is(.contrast, .preset-contrast)) {
+    border-color: #ca635e
+}
 html[data-theme="dark"] .name-input-wrap input:not(:is(.contrast, .preset-contrast) *):not(:is(.contrast, .preset-contrast)) {
     color: #c0cbc4
 }

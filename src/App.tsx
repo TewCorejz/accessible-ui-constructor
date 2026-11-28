@@ -372,6 +372,15 @@ export default function App() {
   const [editing, setEditing] = useState(true);
   const [modal, setModal] = useState<"access" | "help" | "preview" | null>(null);
   const [deleteId, setDeleteId] = useState<string | null>(null);
+  // Переход (применить интерфейс, шаблон, импорт, «Новый интерфейс»), который ждёт ответа
+  // на вопрос о несохранённых изменениях.
+  const [pendingSwitch, setPendingSwitch] = useState<{
+    proceed: () => void;
+    afterSave: () => void;
+  } | null>(null);
+  const [nameErrorRaised, setNameError] = useState(false);
+  // Ошибка актуальна, только пока название пустое.
+  const nameError = nameErrorRaised && !name.trim();
   const [notice, setNotice] = useState("");
   const [largeText, setLargeText] = useState(stored?.largeText ?? false);
   const [highContrast, setHighContrast] = useState(stored?.highContrast ?? false);
@@ -455,8 +464,17 @@ export default function App() {
   function save() {
     if (!name.trim()) {
       setNotice("Введите название интерфейса");
-      return;
+      // Поле названия вверху страницы: показываем ошибку рядом с ним и переводим на него фокус.
+      setNameError(true);
+      // Поле может быть ещё не на экране (например, вопрос задан со страницы «Выбрать»).
+      window.setTimeout(() => {
+        const field = document.getElementById("interface-name");
+        field?.scrollIntoView({ block: "center", behavior: "smooth" });
+        field?.focus({ preventScroll: true });
+      }, 60);
+      return false;
     }
+    setNameError(false);
     const config = {
       id: activeId || `saved-${Date.now()}`,
       name: name.trim(),
@@ -472,17 +490,53 @@ export default function App() {
     setActiveId(config.id);
     setDirty(false);
     setNotice("Интерфейс сохранён. Он доступен в разделе «Выбрать».");
+    return true;
   }
-  function apply(config: Config) {
+  function applyNow(config: Config) {
+    const isSaved = saved.some((c) => c.id === config.id);
     setName(config.name);
     setWidgets(structuredClone(config.widgets));
     setTheme(config.theme);
     setAppearance(normalizeAppearance(config.appearance ?? DEFAULT_APPEARANCE));
-    setActiveId(saved.some((c) => c.id === config.id) ? config.id : null);
+    setActiveId(isSaved ? config.id : null);
     setSelected(config.widgets[0]?.id || "");
-    setDirty(false);
+    // Сохранённый интерфейс открывается «чистым»; шаблон и файл нигде не сохранены,
+    // поэтому до «Сохранить» они считаются несохранёнными.
+    setDirty(!isSaved);
     setPage("create");
     setNotice("Интерфейс применён. Можно настроить его под себя.");
+  }
+  /** Перед заменой текущего интерфейса спрашиваем, что делать с несохранёнными правками. */
+  function guardUnsaved(proceed: () => void, afterSave: () => void = proceed) {
+    if (!dirty) return proceed();
+    setPendingSwitch({ proceed, afterSave });
+  }
+  function apply(config: Config, onDone?: () => void) {
+    guardUnsaved(
+      () => {
+        applyNow(config);
+        onDone?.();
+      },
+      // Открытый интерфейс только что сохранён вместе с правками: повторно применять его
+      // старую копию нельзя — она откатит эти правки.
+      config.id === activeId
+        ? () => {
+            setPage("create");
+            onDone?.();
+          }
+        : undefined,
+    );
+  }
+  function startNew() {
+    guardUnsaved(() => {
+      setName("Новый интерфейс");
+      setWidgets([]);
+      setActiveId(null);
+      setTheme("default");
+      setAppearance(DEFAULT_APPEARANCE);
+      setDirty(true);
+      setPage("create");
+    });
   }
   async function download(format: string) {
     const config =
@@ -667,19 +721,27 @@ export default function App() {
                   <label id="name-label" htmlFor="interface-name">
                     Название интерфейса
                   </label>
-                  <div className="name-input-wrap">
+                  <div className={`name-input-wrap ${nameError ? "is-invalid" : ""}`}>
                     <LayoutGrid size={21} />
                     <input
                       id="interface-name"
                       value={name}
                       maxLength={80}
                       placeholder="Например, Мой удобный банк"
+                      aria-invalid={nameError || undefined}
+                      aria-describedby={nameError ? "interface-name-error" : undefined}
                       onChange={(e) => {
                         setName(e.target.value);
+                        setNameError(false);
                         setDirty(true);
                       }}
                     />
                   </div>
+                  {nameError && (
+                    <p id="interface-name-error" className="error-message field-error" role="alert">
+                      Введите название интерфейса.
+                    </p>
+                  )}
                 </div>
                 <span className={`save-status ${!dirty ? "is-saved" : ""}`}>
                   {dirty ? (
@@ -950,15 +1012,7 @@ export default function App() {
                 ))}
                 <button
                   className="new-interface"
-                  onClick={() => {
-                    setName("Новый интерфейс");
-                    setWidgets([]);
-                    setActiveId(null);
-                    setTheme("default");
-                    setAppearance(DEFAULT_APPEARANCE);
-                    setDirty(true);
-                    setPage("create");
-                  }}
+                  onClick={startNew}
                 >
                   <span>
                     <Plus size={28} />
@@ -1203,10 +1257,7 @@ export default function App() {
                   </div>
                   <button
                     className="button primary"
-                    onClick={() => {
-                      apply(imported);
-                      setImported(null);
-                    }}
+                    onClick={() => apply(imported, () => setImported(null))}
                   >
                     Применить
                     <ArrowRight size={18} />
@@ -1389,6 +1440,41 @@ export default function App() {
           </button>
         </Modal>
       )}
+      {pendingSwitch && (
+        <Modal title="Есть несохранённые изменения" close={() => setPendingSwitch(null)}>
+          <p className="modal-description">
+            Сохранить интерфейс «{name.trim() || "Без названия"}» перед переходом?
+          </p>
+          <div className="confirm-actions">
+            <button className="button secondary" onClick={() => setPendingSwitch(null)}>
+              Отмена
+            </button>
+            <button
+              className="button secondary danger"
+              onClick={() => {
+                const action = pendingSwitch.proceed;
+                setPendingSwitch(null);
+                action();
+              }}
+            >
+              Не сохранять
+            </button>
+            <button
+              className="button primary"
+              onClick={() => {
+                const action = pendingSwitch.afterSave;
+                setPendingSwitch(null);
+                // Без названия сохранить нельзя: остаёмся на странице и показываем ошибку.
+                if (save()) action();
+                else setPage("create");
+              }}
+            >
+              <Check size={18} />
+              Сохранить
+            </button>
+          </div>
+        </Modal>
+      )}
       {deleteId && (
         <Modal title="Удалить интерфейс?" close={() => setDeleteId(null)}>
           <p className="modal-description">
@@ -1403,7 +1489,11 @@ export default function App() {
               className="button delete-button"
               onClick={() => {
                 setSaved(saved.filter((c) => c.id !== deleteId));
-                if (activeId === deleteId) setActiveId(null);
+                if (activeId === deleteId) {
+                  setActiveId(null);
+                  // Открытый интерфейс больше нигде не сохранён.
+                  setDirty(true);
+                }
                 if (exportId === deleteId) setExportId("current");
                 setDeleteId(null);
                 setNotice("Интерфейс удалён");
